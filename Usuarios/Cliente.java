@@ -1,5 +1,5 @@
 
-package sources;
+package Usuarios;
 public class Cliente {
     
     private String nombre_empresa;

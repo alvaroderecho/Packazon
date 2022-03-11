@@ -1,4 +1,4 @@
-package sources.enums;
+package Productos;
 
 public enum ElementoProducto {
     ALMACEN,
