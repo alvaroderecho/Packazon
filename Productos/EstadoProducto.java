@@ -1,6 +1,6 @@
 package Productos;
 
-public enum ElementoProducto {
+public enum EstadoProducto {
     ALMACEN,
     REPARTO,
     ENTREGADO
