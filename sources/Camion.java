@@ -34,4 +34,16 @@ public class Camion {
     public void setEstropeado(boolean estropeado){
         this.estropeado = estropeado;
     }
+    public void setPesoMax(Integer p){
+        this.peso_max = p;
+    }
+    public Integer getPesoMax(){
+        return this.peso_max;
+    }
+    public TipoCamion getTipocCamion(){
+        return this.tipo;
+    }
+    public void setTipoCamion(TipoCamion t){
+        this.tipo = t;
+    }
 }
