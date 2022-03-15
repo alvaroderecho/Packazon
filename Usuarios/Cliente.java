@@ -109,6 +109,16 @@ public void EditarPerfil(){
 
 public Factura getFactura(Pedido p) {
 
+    
+                                    
+    Pedido NewPedido = new Pedido();
+    pedido.getFactura();
+
+   
+
 }
 */
+
+
+
 }
