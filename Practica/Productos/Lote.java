@@ -15,4 +15,28 @@ public class Lote {
         this.std = false;
     }
 
+    
+    public void addProductLote(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+        
+        if ((this.alim == true && tipo == TipoProducto.ESTANDAR) || (this.std == true && tipo == TipoProducto.ALIMENTARIO) ) {
+            /**Dentro de un mismo lote no se pueden juntar productos alimentarios con estándares */
+            return;
+        }
+        
+        Producto p = Pedido.createProducto(units, weight, identifier, secured, descri, vol, tipo);
+        if (p!=null) {
+
+            if (tipo == TipoProducto.FRAGIL)
+                /**Si el lote contiene un producto frágil, el lote será frágil */
+                this.fragil = true;
+
+            else if (tipo == TipoProducto.ALIMENTARIO)
+                this.alim = true;
+            else if (tipo == TipoProducto.ESTANDAR)
+                this.std = true;
+
+            this.prods.add(p);
+        }
+    }
+
 }

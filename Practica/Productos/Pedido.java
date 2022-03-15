@@ -53,8 +53,9 @@ public class Pedido {
         return this.estado_pedido;
     }
 
-    public void addProducto(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+    public static Producto createProducto(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
         Producto p;
+
         if (tipo == TipoProducto.ESTANDAR) 
             p = new Estandar(units, weight, identifier, secured, descri, vol);
         
@@ -73,7 +74,13 @@ public class Pedido {
         else
             p = new Liquido(units, weight, identifier, secured, descri, vol);
 
-        this.prods.add(p);
+        return p;
+    }
+
+    public void addProductoPedido(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+        Producto p = Pedido.createProducto(units, weight, identifier, secured, descri, vol, tipo);
+        if (p != null)
+            this.prods.add(p);
     }
 
     /**Getters y Setters */
