@@ -1,4 +1,5 @@
 package Usuarios;
+import Productos.EstadoPedido;
 import Productos.Pedido;
 
 
@@ -10,7 +11,7 @@ public class Cliente extends Cuenta{
     private String Email;
     private String Num_tarjeta;
 
-//constructor de la clase cliente
+
 public Cliente(String nombre_empresa, String Cif, String direc_fact, String email, String Num_tarjeta, String Nombre_usuario, String Contrasenia) {
     
         super(Nombre_usuario, Contrasenia);
@@ -89,32 +90,32 @@ public void setNumTarjeta(String Num_tarjeta) {
     this.Num_tarjeta = Num_tarjeta;
     return;
 }
-/*funcion que consulta el estado de un pedido realizado por un cliente
+//funcion que consulta el estado de un pedido realizado por un cliente
 public boolean consultarEstado(Pedido p) {
 
     if(p == null) return false;
 
+    if(p.estadoPedido() ==EstadoPedido.NO_ENTREGADO ) return false;
     return true;
-
 }
-*/
+
 
 //funcion que edita el nombre de usuario y contraseña
 public void EditarPerfil(){
-    
-   // super.SetContrasenia(Contrasenia);
+    super.SetNombreUsuario(Nombre_usuario);
+    super.SetContrasenia(Contrasenia);
     return;
-}
-/*funcion para obtener factura del pedido
 
-public Factura getFactura(Pedido p) {
+}
+
+//funcion para obtener factura del pedido
+/*public Factura getFactura(Pedido p) {
 
     
-                                    
-    Pedido NewPedido = new Pedido();
-    pedido.getFactura();
+   // p.getFactura();
 
-   
+
+   return
 
 }
 */

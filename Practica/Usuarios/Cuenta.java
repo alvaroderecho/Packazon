@@ -2,8 +2,8 @@ package Usuarios;
 
     public class Cuenta {
     
-    private String Nombre_usuario;
-    private String Contrasenia;
+    protected String Nombre_usuario;
+    protected String Contrasenia;
     
     //constructor de la clase cuenta
     public Cuenta(String Nombre_usuario, String Contrasenia) {

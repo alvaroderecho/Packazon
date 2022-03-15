@@ -2,7 +2,7 @@ package Usuarios;
 
 public class Factura {
 
-    double PrecioTotal;
+    Double PrecioTotal;
     String DireccEntrega;
     String DireccFact;
     String NumTarjeta;
