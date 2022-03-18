@@ -9,6 +9,8 @@ public class Lote {
 
     private List <Producto> prods = new ArrayList<Producto>();
 
+    private List <Lote> lotes = new ArrayList<Lote>();
+
     public Lote() {
         this.alim = false;
         this.fragil = false;
@@ -39,4 +41,8 @@ public class Lote {
         }
     }
 
+    public void addLoteLote() {
+        Lote l = new Lote();
+        this.lotes.add(l);
+    }
 }

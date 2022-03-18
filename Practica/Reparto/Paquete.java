@@ -60,26 +60,10 @@ public class Paquete {
         
         for (Producto pr:productos){
             p.addPeso(pr.getPeso());
-           
+        }
         return p.getPeso();
+    
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

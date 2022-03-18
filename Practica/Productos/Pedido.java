@@ -15,6 +15,8 @@ public class Pedido {
 
     private List<Producto> prods = new ArrayList<Producto>();
 
+    private List<Lote> lotes = new ArrayList<Lote>();
+
     public Pedido(String dir_entr, String num_tarj, boolean urgent) {
         this.direcc_entrega = dir_entr;
         this.num_tarjeta_cliente = num_tarj;
@@ -47,6 +49,12 @@ public class Pedido {
     public void finalizarPedido(){
         this.pedido_finalizado = true;
         this.fecha_pedido = new Date();
+        /*
+        *
+        *
+        *USAR TIPO MODIFIABLE_DATE
+        *
+        */
     }
 
     public EstadoPedido estadoPedido() {
@@ -99,5 +107,10 @@ public class Pedido {
 
     public String getNumTarjetaCliente() {
         return this.num_tarjeta_cliente;
+    }
+
+    public void addLote() {
+        Lote l = new Lote();
+        this.lotes.add(l);
     }
 }
