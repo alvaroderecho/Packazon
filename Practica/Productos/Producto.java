@@ -67,4 +67,8 @@ public abstract class Producto {
         return this.precio_extra;
     }
 
+    public void  cambiarEstadoProducto(EstadoProducto tipo) {
+        this.estado = tipo;
+    }
+
 }
