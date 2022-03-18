@@ -102,8 +102,8 @@ public boolean consultarEstado(Pedido p) {
 
 //funcion que edita el nombre de usuario y contraseña
 public void EditarPerfil(){
-    super.SetNombreUsuario(Nombre_usuario);
-    super.SetContrasenia(Contrasenia);
+    super.SetNombreUsuario(nombre_usuario);
+    super.SetContrasenia(contrasenia);
     return;
 
 }

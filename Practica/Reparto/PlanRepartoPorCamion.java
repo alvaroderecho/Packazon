@@ -1,15 +1,14 @@
 package Reparto;
-import java.util.*;
 
+import java.util.*;
 
 public class PlanRepartoPorCamion {
 
-//private Repartidor repartidor;
-private Camion camion;
-private List<Paquete> paquetes;
+    // private Repartidor repartidor;
+    private Camion camion;
+    private List<Paquete> paquetes;
 
-
-public PlanDeRepartoPorCamion planDeRepartoPorCamion(){
-    
-}
+    public PlanRepartoPorCamion planDeRepartoPorCamion() {
+        return null;
+    }
 }

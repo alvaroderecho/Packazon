@@ -1,35 +1,37 @@
 package Usuarios;
 
-    public class Cuenta {
+import java.text.Normalizer;
+
+public class Cuenta {
     
-    protected String Nombre_usuario;
-    protected String Contrasenia;
+    protected String nombre_usuario;
+    protected String contrasenia;
     
     //constructor de la clase cuenta
-    public Cuenta(String Nombre_usuario, String Contrasenia) {
+    public Cuenta(String Nombre_usuario, String Password) {
     
-        this.Nombre_usuario = Nombre_usuario;
-        this.Contrasenia = Contrasenia;
+        this.nombre_usuario = Nombre_usuario;
+        this.contrasenia = Password;
     }
 
     //funcion para añadir un nombre de usuario
-    public void SetNombreUsuario(String Nombre_usuario) {
-        if(Nombre_usuario==null) return;
-        this.Nombre_usuario = Nombre_usuario;
+    public void SetNombreUsuario(String Nombre) {
+        if(Nombre==null) return;
+        this.nombre_usuario = Nombre;
     }
 
      //funcion para añadir una contrasenia
-     public void SetContrasenia(String Contrasenia) {
-        if(Contrasenia==null) return;
-        this.Contrasenia = Contrasenia;
+     public void SetContrasenia(String Password) {
+        if(Password==null) return;
+        this.contrasenia = Password;
 
     }
 
 
 
 //funcion para acceder al sistema 
-public boolean loguearse(String Nombre_usuario, String Contrasenia){
-    if(this.Nombre_usuario !=Nombre_usuario ||  this.Contrasenia != Contrasenia) return false;
+public boolean loguearse(String Nombre, String Password){
+    if(this.nombre_usuario !=Nombre ||  this.contrasenia != Password) return false;
 
     return true;
 }

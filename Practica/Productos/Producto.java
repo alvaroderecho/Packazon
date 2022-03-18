@@ -1,9 +1,9 @@
 package Productos;
 
 public abstract class Producto {
-    private int unidades;
+    private Integer unidades;
     private double peso;
-    private int id;
+    private Integer id;
     private EstadoProducto estado;
     private boolean asegurado;
     private double precio_extra;
@@ -11,7 +11,7 @@ public abstract class Producto {
     private String descript;
 
 
-    public Producto(int units, double weight, int identifier, boolean secured, String descri, double vol) {
+    public Producto(Integer units, double weight, Integer identifier, boolean secured, String descri, double vol) {
         if (units <=0 || weight <=0 || id < 0)
             return;
         this.unidades = units;
@@ -43,11 +43,11 @@ public abstract class Producto {
 
 
     /**Getters y Setters */
-    public int getUnidades() {
+    public Integer getUnidades() {
         return this.unidades;
     }
 
-    public void setUnidades(int uni) {
+    public void setUnidades(Integer uni) {
         this.unidades = uni;
     }
 
