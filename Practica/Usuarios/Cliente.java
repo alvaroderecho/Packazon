@@ -109,16 +109,14 @@ public void EditarPerfil(){
 }
 
 //funcion para obtener factura del pedido
-/*public Factura getFactura(Pedido p) {
+public Factura getFactura(Pedido p) {
 
-    
-   // p.getFactura();
+    if(p == null) return null;
 
-
-   return
-
+    return p.getFactura();
 }
-*/
+
+
 
 
 
