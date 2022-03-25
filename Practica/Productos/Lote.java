@@ -3,18 +3,20 @@ package Productos;
 import java.util.*;
 
 public class Lote {
-    private boolean fragil;
-    private boolean alim;
-    private boolean std;
+    private boolean fragil = false;
+    private boolean alim = false;
+    private boolean std = false;
+
+    private Integer id;
+
+    private Integer n_lotes;
 
     private List <Producto> prods = new ArrayList<Producto>();
 
     private List <Lote> lotes = new ArrayList<Lote>();
 
-    public Lote() {
-        this.alim = false;
-        this.fragil = false;
-        this.std = false;
+    public Lote(Integer identifier) {
+        this.id = identifier;
     }
 
     
@@ -42,7 +44,21 @@ public class Lote {
     }
 
     public void addLoteLote() {
-        Lote l = new Lote();
+        Lote l = new Lote(id * 100 + n_lotes);
         this.lotes.add(l);
+        this.n_lotes++;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public Lote getLotebyId(Integer id_lote) {
+        for (Lote l: this.lotes) {
+            if (l.id == id_lote) {
+                return l;
+            }
+        }
+        return null;
     }
 }

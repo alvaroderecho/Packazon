@@ -6,7 +6,7 @@ public class VariablesGlobales {
      */
 
     private double max_volumen_prod;
-    private Integer max_cod_post;   /*Maximo codigos postales */
+    private Integer max_cod_post;           /*Maximo codigos postales */
     private Integer max_entregas_fallidas;
 
     private double descuento_100_prod;      /*Descuento que se aplica tras tener 100*/
@@ -14,7 +14,7 @@ public class VariablesGlobales {
     private double tasa_fragiles;
     private double tasa_asegurados;
 
-    VariablesGlobales(double volumen, Integer codpost, Integer entrega, double dcto, double alim, double frag, double aseg) {
+    public VariablesGlobales(double volumen, Integer codpost, Integer entrega, double dcto, double alim, double frag, double aseg) {
         this.max_volumen_prod = volumen;
         this.max_entregas_fallidas = entrega;
         this.max_cod_post = codpost;
@@ -29,7 +29,7 @@ public class VariablesGlobales {
         this.max_volumen_prod = max;
     }
 
-    public void set_max_entregas_fallidas(int max) {
+    public void set_max_entregas_fallidas(Integer max) {
         this.max_entregas_fallidas = max;
     }
 

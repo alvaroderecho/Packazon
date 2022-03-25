@@ -1,35 +1,38 @@
 package Productos;
 
 import java.util.*;
+
+import javax.print.attribute.IntegerSyntax;
+
 import Usuarios.*;
 
 public class Pedido {
 
+    private Integer id;
     private String direcc_entrega;
     private String num_tarjeta_cliente;
     private String direcc_fact;
     private Date fecha_pedido;
     private boolean urgente;
-    private EstadoPedido estado_pedido;
-    private boolean pedido_cobrado;
-    private boolean pedido_finalizado;
-    private double precio_total;
+    private EstadoPedido estado_pedido = EstadoPedido.NO_ENTREGADO;
+    private boolean pedido_cobrado = false;
+    private boolean pedido_finalizado = false;
+    private double precio_total = 0;
     private Factura factura_p;
+
+    private Integer ids_lotes = 1;
 
 
     private List<Producto> prods = new ArrayList<Producto>();
 
     private List<Lote> lotes = new ArrayList<Lote>();
 
-    public Pedido(String dir_entr, String num_tarj, boolean urgent, String dirrfact) {
+    public Pedido(String dir_entr, String num_tarj, boolean urgent, String dirrfact, Integer id) {
+        this.id = id;
         this.direcc_entrega = dir_entr;
         this.num_tarjeta_cliente = num_tarj;
         this.urgente = urgent;
         this.direcc_fact = dirrfact;
-        this.pedido_cobrado = false;
-        this.pedido_finalizado = false;
-        this.precio_total = 0;
-        this.estado_pedido = EstadoPedido.NO_ENTREGADO;
     }
 
 
@@ -119,11 +122,28 @@ public class Pedido {
     }
 
     public void addLote() {
-        Lote l = new Lote();
+        Lote l = new Lote(this.ids_lotes);
         this.lotes.add(l);
+        this.ids_lotes++;
     }
 
     public Factura getFactura() {
         return this.factura_p;
+    }
+
+    public Integer getID() {
+        return this.id;
+    }
+
+    public Lote getLotebyId(Integer id_lote) {
+        for (Lote l: this.lotes) {
+            if (l.getId() == id_lote) {
+                return l;
+            }
+            Lote ll = l.getLotebyId(id_lote);
+            if (ll!=null)
+                return ll;
+        }
+    return null;
     }
 }

@@ -3,8 +3,8 @@ import java.util.*;
 public class Camion {
 
     private String matricula;
-    private boolean alta;
-    private boolean estropeado;
+    private boolean alta = false;
+    private boolean estropeado = false;
     private Integer peso_max;
     private TipoCamion tipo;
     private List<Paquete> paquetes;
@@ -12,14 +12,11 @@ public class Camion {
  * constructor de la clase camión
  * @param matricula
  * @param alta
- * @param estropeado
  * @param peso_max
  * @param tipo
  */
-    public Camion (String matricula, boolean alta, boolean estropeado, Integer peso_max, TipoCamion tipo){
+    public Camion (String matricula, Integer peso_max, TipoCamion tipo){
         this.matricula = matricula;
-        this.alta = alta;
-        this.estropeado = estropeado;
         this.peso_max = peso_max;
         this.tipo = tipo;
         this.paquetes = new ArrayList<Paquete>();
@@ -37,14 +34,20 @@ public class Camion {
     public boolean getAlta (){
         return this.alta;
     }
-    public void setAlta(boolean alta){
-        this.alta = alta;
+    public void setAlta(){
+        this.alta = true;
+    }
+    public void setBaja(){
+        this.alta = false;
     }
     public boolean getEstropeado(){
         return this.estropeado;
     }
-    public void setEstropeado(boolean estropeado){
-        this.estropeado = estropeado;
+    public void setEstropeado(){
+        this.estropeado = true;
+    }
+    public void setNoEstropeado(){
+        this.estropeado = false;
     }
     public void setPesoMax(Integer p){
         this.peso_max = p;
