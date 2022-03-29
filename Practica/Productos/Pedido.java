@@ -1,10 +1,15 @@
 package Productos;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.print.attribute.IntegerSyntax;
 
 import Usuarios.*;
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
+import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 
 public class Pedido {
 
@@ -12,7 +17,7 @@ public class Pedido {
     private String direcc_entrega;
     private String num_tarjeta_cliente;
     private String direcc_fact;
-    private Date fecha_pedido;
+    private LocalDate fecha_pedido;
     private boolean urgente;
     private EstadoPedido estado_pedido = EstadoPedido.NO_ENTREGADO;
     private boolean pedido_cobrado = false;
@@ -21,7 +26,6 @@ public class Pedido {
     private Factura factura_p;
 
     private Integer ids_lotes = 1;
-
 
     private List<Producto> prods = new ArrayList<Producto>();
 
@@ -35,13 +39,12 @@ public class Pedido {
         this.direcc_fact = dirrfact;
     }
 
-
     public void calcularPrecioPedido() {
-        double precio_tot=0;
-        int unid_total=0;
-        for (Producto p: this.prods) {
-            precio_tot+=p.calcularPrecioProducto();
-            unid_total+=p.getUnidades();
+        double precio_tot = 0;
+        int unid_total = 0;
+        for (Producto p : this.prods) {
+            precio_tot += p.calcularPrecioProducto();
+            unid_total += p.getUnidades();
         }
 
         if (unid_total >= 100) {
@@ -52,43 +55,62 @@ public class Pedido {
         return;
     }
 
-    public void cobrarPedido(){
-        this.calcularPrecioPedido();
-        this.factura_p = new Factura(this.precio_total, this.direcc_entrega, this.direcc_fact,this.num_tarjeta_cliente);
+    public void cobrarPedido() {
+        this.calcularPrecioPedido(); /** Se guarda en this.precio_total */
+
+        if (!TeleChargeAndPaySystem.isValidCardNumber(this.num_tarjeta_cliente))
+            return;
+        try {
+            TeleChargeAndPaySystem.charge(this.num_tarjeta_cliente, "Pedido", this.precio_total);
+        } catch (InvalidCardNumberException i) {
+            // TODO: handle exception
+            // Incorrecto número de tarjeta
+        } catch (FailedInternetConnectionException f) {
+            // TODO: handle exception
+            // Conexión errónea
+        } catch (OrderRejectedException o) {
+            // TODO: handle exception
+            // Rechazada
+        }
+
+        this.factura_p = new Factura(this.precio_total, this.direcc_entrega, this.direcc_fact,
+                this.num_tarjeta_cliente);
         this.pedido_cobrado = true;
     }
 
-    public void finalizarPedido(){
+    public void finalizarPedido() {
+        if (!this.pedido_cobrado) {
+            return;
+        }
+
         this.pedido_finalizado = true;
-        this.fecha_pedido = new Date();
-        /*
-        *
-        *
-        *USAR TIPO MODIFIABLE_DATE
-        *
-        */
+
+        /** Fecha del pedido */
+        ModifiableDate.setToday();
+        this.fecha_pedido = ModifiableDate.getModifiableDate();
     }
 
     public EstadoPedido estadoPedido() {
         return this.estado_pedido;
     }
 
-    public static Producto createProducto(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+    public static Producto createProducto(int units, double weight, int identifier, boolean secured, String descri,
+            double vol, TipoProducto tipo) {
         Producto p;
 
-        if (tipo == TipoProducto.ESTANDAR) 
+        if (tipo == TipoProducto.ESTANDAR)
             p = new Estandar(units, weight, identifier, secured, descri, vol);
-        
-        else if (tipo == TipoProducto.FRAGIL) 
+
+        else if (tipo == TipoProducto.FRAGIL)
             p = new Fragil(units, weight, identifier, secured, descri, vol);
-        
-        else if (tipo == TipoProducto.ALIMENTARIO) 
+
+        else if (tipo == TipoProducto.ALIMENTARIO)
             p = new Alimentario(units, weight, identifier, secured, descri, vol);
-        
-        else if (tipo == TipoProducto.REFRIGERADO) 
+
+        else if (tipo == TipoProducto.REFRIGERADO)
             p = new Refrigerado(units, weight, identifier, secured, descri, vol);
-        
-        else if (tipo == TipoProducto.CONGELADO) 
+
+        else if (tipo == TipoProducto.CONGELADO)
             p = new Congelado(units, weight, identifier, secured, descri, vol);
 
         else
@@ -97,13 +119,14 @@ public class Pedido {
         return p;
     }
 
-    public void addProductoPedido(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+    public void addProductoPedido(int units, double weight, int identifier, boolean secured, String descri, double vol,
+            TipoProducto tipo) {
         Producto p = Pedido.createProducto(units, weight, identifier, secured, descri, vol, tipo);
         if (p != null)
             this.prods.add(p);
     }
 
-    /**Getters y Setters */
+    /** Getters y Setters */
 
     public void setDirecEntrega(String dir) {
         this.direcc_entrega = dir;
@@ -136,14 +159,14 @@ public class Pedido {
     }
 
     public Lote getLotebyId(Integer id_lote) {
-        for (Lote l: this.lotes) {
+        for (Lote l : this.lotes) {
             if (l.getId() == id_lote) {
                 return l;
             }
             Lote ll = l.getLotebyId(id_lote);
-            if (ll!=null)
+            if (ll != null)
                 return ll;
         }
-    return null;
+        return null;
     }
 }
