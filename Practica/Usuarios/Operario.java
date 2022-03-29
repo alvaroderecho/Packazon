@@ -118,13 +118,33 @@ public class Operario extends Cuenta{
         }
     }
 
+
+    /**REFERENTE A REPARTIDORES */
     public void registrarRepartidor(String num_telef) {
         if (num_telef != null) {
             Repartidor r = new Repartidor(num_telef);
             this.repartidores.add(r);
         }
     }
+
+    public Repartidor getRepartidorByTelef(String num_telef) {
+        for (Repartidor r: this.repartidores) {
+            if (r.getNumTelef() == num_telef)
+                return r;
+        }
+        return null;
+    }
+
+    public boolean consultarEstadoRepartidor(String num_telef) {
+        Repartidor r = getRepartidorByTelef(num_telef);
+        if (r!=null) {
+            return r.getAlta();
+        }
+        return false;
+    }
     
+
+    /**REFERENTE A PEDIDOS */
     public void darAltaPedido(String dir_entr, String num_tarj, boolean urgent, String dirrfact) {
         if (dir_entr != null && num_tarj != null && dirrfact != null) {
             Pedido p = new Pedido(dir_entr, num_tarj, urgent, dirrfact, this.n_pedido);
@@ -173,8 +193,9 @@ public class Operario extends Cuenta{
         }
     }
 
-    public void addProductLotePedido(Integer id_pedido, Integer id_lote) {
-        /**ACABAR */
+    public void addProductLotePedido(Integer id_pedido, Integer id_lote,  int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+        Lote l = getLotePedidoById(id_pedido, id_lote);
+        l.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
     }
 
 }

@@ -4,9 +4,9 @@ public abstract class Producto {
     private Integer unidades;
     private double peso;
     private Integer id;
-    private EstadoProducto estado;
+    private EstadoProducto estado = EstadoProducto.ALMACEN;
     private boolean asegurado;
-    private double precio_extra;
+    private double precio_extra = 0;
     private double volumen;
     private String descript;
 
@@ -18,10 +18,8 @@ public abstract class Producto {
         this.peso = weight;
         this.id = identifier;
         this.asegurado = secured;
-        this.precio_extra = 0;
         this.volumen = vol;
         this.descript = descri;
-        this.estado = EstadoProducto.ALMACEN;       /*Al incializar se encuentra en almacén*/
     }
 
 

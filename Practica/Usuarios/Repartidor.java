@@ -6,9 +6,9 @@ import Reparto.Paquete;
 import java.util.*;
 
 public class Repartidor {
-    String NumTelefono;
-    Boolean Alta = false;
-    List<Paquete> paquetes = new ArrayList<Paquete>();
+    private String NumTelefono;
+    private Boolean Alta = false;
+    private List<Paquete> paquetes = new ArrayList<Paquete>();
 
     // constructor de la clase repartidor
     public Repartidor(String NumTelefono) {
@@ -35,5 +35,13 @@ public class Repartidor {
 
     public void setBaja() {
         this.Alta = false;
+    }
+
+    public String getNumTelef() {
+        return this.NumTelefono;
+    }
+
+    public boolean getAlta() {
+        return this.Alta;
     }
 }
