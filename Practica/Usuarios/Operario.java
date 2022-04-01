@@ -145,9 +145,9 @@ public class Operario extends Cuenta{
     
 
     /**REFERENTE A PEDIDOS */
-    public void darAltaPedido(Cliente c, boolean urgent, String dirr_entrega) {
-        if (dirr_entrega != null && c!=null) {
-            Pedido p = new Pedido(c, urgent, this.n_pedido, dirr_entrega);
+    public void darAltaPedido(String dir_entr, String num_tarj, boolean urgent, String dirrfact) {
+        if (dir_entr != null && num_tarj != null && dirrfact != null) {
+            Pedido p = new Pedido(dir_entr, num_tarj, urgent, dirrfact, this.n_pedido);
             this.pedidos.add(p);
             this.n_pedido++;
         }

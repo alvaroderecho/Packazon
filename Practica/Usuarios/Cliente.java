@@ -48,6 +48,8 @@ public void setCif(String Cif) {
 
 //funcion que devuelve la direccion de facturacion
 public String getDirec_fact() {
+    
+
     return this.Direc_fact;
 }
 
@@ -75,8 +77,11 @@ public void setEmail(String Email) {
 
 //funcion que devuelve el numero de tarjeta
 public String getNumTarjeta() {
+    
+
     return this.Num_tarjeta;
 }
+
 
 //funcion para añadir un numero de tarjeta
 public void setNumTarjeta(String Num_tarjeta) {
@@ -94,8 +99,9 @@ public boolean consultarEstado(Pedido p) {
 }
 
 
+
 //funcion que edita el nombre de usuario y contraseña
-public void EditarPerfil(){
+public void EditarPerfil(String Nombre_usuario, String Contrasenia){
     super.SetNombreUsuario(nombre_usuario);
     super.SetContrasenia(contrasenia);
     return;

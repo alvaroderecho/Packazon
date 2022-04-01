@@ -27,6 +27,16 @@ public class Cuenta {
 
     }
 
+    //funcion que devuelve el nombre de un usuario
+    public String GetNombreUsuario() {
+        return this.nombre_usuario;
+    }
+
+    //funcion que devuelve la contraseña de un usuario
+    public String GetContrasenia() {
+        return this.contrasenia;
+    }
+
 
 
 //funcion para acceder al sistema 
@@ -35,9 +45,5 @@ public boolean loguearse(String Nombre, String Password){
 
     return true;
 }
-
-
-
-
 
 }
