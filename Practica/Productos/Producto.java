@@ -1,6 +1,9 @@
 package Productos;
 
-public abstract class Producto {
+import es.uam.eps.padsof.invoices.IInvoiceInfo;
+import es.uam.eps.padsof.invoices.IProductInfo;
+
+public abstract class Producto implements IProductInfo{
     private Integer unidades;
     private double peso;
     private Integer id;
@@ -22,8 +25,17 @@ public abstract class Producto {
         this.descript = descri;
     }
 
+    
+    public String getDescription() {
+        return this.descript;
+    }
 
-    public double calcularPrecioProducto() {
+    public String getPriceDetails() {
+        /**Poner ifs */
+        return this.unidades + "units" + this.precio_extra;
+    }
+
+    public double getPrice() {
         double precio_unidad = 0;
 
         /**Precio por unidad en función del peso */

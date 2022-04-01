@@ -6,17 +6,21 @@ import java.util.*;
 import javax.print.attribute.IntegerSyntax;
 
 import Usuarios.*;
+import es.uam.eps.padsof.invoices.IInvoiceInfo;
+import es.uam.eps.padsof.invoices.IProductInfo;
+import es.uam.eps.padsof.invoices.InvoiceSystem;
+import es.uam.eps.padsof.invoices.NonExistentFileException;
+import es.uam.eps.padsof.invoices.UnsupportedImageTypeException;
 import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
 import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 
-public class Pedido {
+public class Pedido implements IInvoiceInfo{
 
+    private Cliente c;
     private Integer id;
-    private String direcc_entrega;
-    private String num_tarjeta_cliente;
-    private String direcc_fact;
+    private String dirr_entreg;
     private LocalDate fecha_pedido;
     private boolean urgente;
     private EstadoPedido estado_pedido = EstadoPedido.NO_ENTREGADO;
@@ -24,6 +28,7 @@ public class Pedido {
     private boolean pedido_finalizado = false;
     private double precio_total = 0;
     private Factura factura_p;
+    private double discount = 0;
 
     private Integer ids_lotes = 1;
 
@@ -31,23 +36,22 @@ public class Pedido {
 
     private List<Lote> lotes = new ArrayList<Lote>();
 
-    public Pedido(String dir_entr, String num_tarj, boolean urgent, String dirrfact, Integer id) {
+    public Pedido(Cliente c, boolean urgent, int id, String dirr_entrega) {
         this.id = id;
-        this.direcc_entrega = dir_entr;
-        this.num_tarjeta_cliente = num_tarj;
         this.urgente = urgent;
-        this.direcc_fact = dirrfact;
+        this.dirr_entreg = dirr_entrega;
     }
 
     public void calcularPrecioPedido() {
         double precio_tot = 0;
         int unid_total = 0;
         for (Producto p : this.prods) {
-            precio_tot += p.calcularPrecioProducto();
+            precio_tot += p.getPrice();
             unid_total += p.getUnidades();
         }
 
         if (unid_total >= 100) {
+            this.discount = precio_tot * 0.10;
             precio_tot = 0.90 * precio_tot;
         }
 
@@ -58,23 +62,24 @@ public class Pedido {
     public void cobrarPedido() {
         this.calcularPrecioPedido(); /** Se guarda en this.precio_total */
 
-        if (!TeleChargeAndPaySystem.isValidCardNumber(this.num_tarjeta_cliente))
+        if (!TeleChargeAndPaySystem.isValidCardNumber(this.c.getNumTarjeta()))
             return;
         try {
-            TeleChargeAndPaySystem.charge(this.num_tarjeta_cliente, "Pedido", this.precio_total);
+            TeleChargeAndPaySystem.charge(this.c.getNumTarjeta(), "Pedido", this.precio_total);
         } catch (InvalidCardNumberException i) {
             // TODO: handle exception
+            i.printStackTrace();
             // Incorrecto número de tarjeta
         } catch (FailedInternetConnectionException f) {
             // TODO: handle exception
+            f.printStackTrace();
             // Conexión errónea
         } catch (OrderRejectedException o) {
             // TODO: handle exception
+            o.printStackTrace();
             // Rechazada
         }
 
-        this.factura_p = new Factura(this.precio_total, this.direcc_entrega, this.direcc_fact,
-                this.num_tarjeta_cliente);
         this.pedido_cobrado = true;
     }
 
@@ -83,11 +88,27 @@ public class Pedido {
             return;
         }
 
-        this.pedido_finalizado = true;
-
         /** Fecha del pedido */
         ModifiableDate.setToday();
         this.fecha_pedido = ModifiableDate.getModifiableDate();
+
+        /*Hacer factura */
+        this.factura_p = new Factura(this.precio_total, this.dirr_entreg, this.c.getDirec_fact(),
+                this.c.getNumTarjeta());
+             
+        try {
+            InvoiceSystem.createInvoice(this, "./");
+        }
+        catch(NonExistentFileException n) {
+            n.printStackTrace();
+        }
+        catch (UnsupportedImageTypeException u) {
+            u.printStackTrace();
+        }
+
+        this.pedido_finalizado = true;
+
+        
     }
 
     public EstadoPedido estadoPedido() {
@@ -128,20 +149,8 @@ public class Pedido {
 
     /** Getters y Setters */
 
-    public void setDirecEntrega(String dir) {
-        this.direcc_entrega = dir;
-    }
-
     public String getDirecEntrega() {
-        return this.direcc_entrega;
-    }
-
-    public void setNumTarjetaCliente(String num) {
-        this.num_tarjeta_cliente = num;
-    }
-
-    public String getNumTarjetaCliente() {
-        return this.num_tarjeta_cliente;
+        return this.dirr_entreg;
     }
 
     public void addLote() {
@@ -169,4 +178,25 @@ public class Pedido {
         }
         return null;
     }
+
+    /**INVOICE METHODS */
+
+    public String getCompanyLogo () { return "./logo.png"; }
+
+    public String getClientCif() { return this.c.getCif(); }
+
+    public String getCompanyName() { return this.c.getNombreEmpresa(); }
+
+    public double getDiscount() { return this.discount; }
+
+	public double getUrgent() { return 5.0; }
+
+	public String getOrderDate() { return this.fecha_pedido.toString(); }
+
+    public String getOrderIdentifier() { return String.valueOf(this.id); }
+
+    public double getPrice() { return this.precio_total; }
+
+	// public List<IProductInfo> getProducts() { return this.prods;	}
+
 }

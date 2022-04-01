@@ -24,9 +24,9 @@ public Cliente(String nombre_empresa, String Cif, String direc_fact, String emai
     }
 
 //funcion que devuelve el nombre de la empresa cliente
-public String getNombreEmpresa(Cliente c1) {
+public String getNombreEmpresa() {
     
-    return c1.Nombre_empresa;
+    return this.Nombre_empresa;
 }
 //funcion para ponerle nombre de empresa a un cliente
 public void setNombreEmpresa(String nombre) {
@@ -35,9 +35,9 @@ public void setNombreEmpresa(String nombre) {
     return;
 }
 //funcion que devuelve el Cif de la empresa cliente
-public String getCif(Cliente c1) {
+public String getCif() {
 
-    return c1.Cif;
+    return this.Cif;
 }
 //funcion para ponerle el cif a un cliente
 public void setCif(String Cif) {
@@ -47,10 +47,8 @@ public void setCif(String Cif) {
 }
 
 //funcion que devuelve la direccion de facturacion
-public String getDirec_fact(Cliente c1) {
-    if(c1==null) return null;
-
-    return c1.Direc_fact;
+public String getDirec_fact() {
+    return this.Direc_fact;
 }
 
 //funcion para añadir direccion de facturacion a un cliente
@@ -63,10 +61,8 @@ public void setDirec_fact(String Direc_fact) {
 }
 
 //funcion que devuelve el Email de la empresa
-public String getEmail(Cliente c1) {
-    if(c1==null) return null;
-
-    return c1.Email;
+public String getEmail() {
+    return this.Email;
 }
 
 //funcion para añadir un Email a un cliente
@@ -78,10 +74,8 @@ public void setEmail(String Email) {
 }
 
 //funcion que devuelve el numero de tarjeta
-public String getNumTarjeta(Cliente c1) {
-    if(c1==null) return null;
-
-    return c1.Num_tarjeta;
+public String getNumTarjeta() {
+    return this.Num_tarjeta;
 }
 
 //funcion para añadir un numero de tarjeta
