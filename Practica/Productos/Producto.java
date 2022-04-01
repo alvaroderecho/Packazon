@@ -4,7 +4,7 @@ import es.uam.eps.padsof.invoices.IInvoiceInfo;
 import es.uam.eps.padsof.invoices.IProductInfo;
 
 public abstract class Producto implements IProductInfo{
-    private Integer unidades;
+    private int unidades;
     private double peso;
     private Integer id;
     private EstadoProducto estado = EstadoProducto.ALMACEN;
@@ -14,7 +14,7 @@ public abstract class Producto implements IProductInfo{
     private String descript;
 
 
-    public Producto(Integer units, double weight, Integer identifier, boolean secured, String descri, double vol) {
+    public Producto(int units, double weight, int identifier, boolean secured, String descri, double vol) {
         if (units <=0 || weight <=0 || id < 0)
             return;
         this.unidades = units;
@@ -79,6 +79,10 @@ public abstract class Producto implements IProductInfo{
 
     public void  cambiarEstadoProducto(EstadoProducto tipo) {
         this.estado = tipo;
+    }
+
+    public EstadoProducto getEstadoProducto(){
+        return this.estado;
     }
 
 }
