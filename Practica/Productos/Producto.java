@@ -56,7 +56,10 @@ public abstract class Producto implements IProductInfo{
     public int getUnidades() {
         return this.unidades;
     }
-
+    
+    public int getId(){
+        return this.id;
+    }
     public void setUnidades(int uni) {
         this.unidades = uni;
     }

@@ -9,7 +9,7 @@ public class Lote {
 
     private int id;
 
-    private int n_lotes;
+    private int n_lotes = 0;
 
     private List <Producto> prods = new ArrayList<Producto>();
 
@@ -18,7 +18,14 @@ public class Lote {
     public Lote(int identifier) {
         this.id = identifier;
     }
-
+    public Producto getProductobyId(int id){
+        for (Producto p : this.prods) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
     
     public void addProductLote(int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
         

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Repartidor {
     private String NumTelefono;
-    private Boolean Alta = false;
+    private Boolean Alta = true;
     private List<Paquete> paquetes = new ArrayList<Paquete>();
 
     // constructor de la clase repartidor

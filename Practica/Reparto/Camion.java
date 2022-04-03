@@ -3,7 +3,7 @@ import java.util.*;
 public class Camion {
 
     private String matricula;
-    private boolean alta = false;
+    private boolean alta = true;
     private boolean estropeado = false;
     private int peso_max;
     private TipoCamion tipo;

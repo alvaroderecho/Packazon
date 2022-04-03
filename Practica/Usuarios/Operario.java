@@ -20,6 +20,12 @@ public class Operario extends Cuenta{
         super(nombre_usuario, password);
     }
 
+    public VariablesGlobales getVar(){
+        return this.var;
+    }
+    public int get_n_pedido(){
+        return this.n_pedido;
+    }
     public void modificar_max_codpost(int max) {
         if (max >0) {
             this.var.set_max_cod_post(max);
@@ -134,6 +140,19 @@ public class Operario extends Cuenta{
         }
         return null;
     }
+    public void darAltaRepartidor(String num_telef) {
+        Repartidor r = getRepartidorByTelef(num_telef);
+        if (r!= null) {
+            r.setAlta();
+        }
+    }
+
+    public void darBajaRepartidor(String num_telef) {
+        Repartidor r = getRepartidorByTelef(num_telef);
+        if (r!= null) {
+            r.setBaja();
+        }
+    }
 
     public boolean consultarEstadoRepartidor(String num_telef) {
         Repartidor r = getRepartidorByTelef(num_telef);
@@ -145,15 +164,18 @@ public class Operario extends Cuenta{
     
 
     /**REFERENTE A PEDIDOS */
-    public void darAltaPedido(String dir_entr, String num_tarj, boolean urgent, String dirrfact) {
-        if (dir_entr != null && num_tarj != null && dirrfact != null) {
-            Pedido p = new Pedido(dir_entr, num_tarj, urgent, dirrfact, this.n_pedido);
+    public void darAltaPedido(String dir_entr,Cliente c, boolean urgent) {
+
+        if (dir_entr != null && c != null) {
+            Pedido p = new Pedido(urgent,this.n_pedido,dir_entr);
+            p.set_cliente(c);
             this.pedidos.add(p);
             this.n_pedido++;
+            
         }
     }
 
-    private Pedido getPedidoById(int id) {
+    public Pedido getPedidoById(int id) {
         if (id >= 0)  {
             for (Pedido p: this.pedidos) {
                 if (p.getID() == id) {
@@ -178,7 +200,7 @@ public class Operario extends Cuenta{
         }
     }
 
-    private Lote getLotePedidoById(int id_pedido, int id_lote) {
+    public Lote getLotePedidoById(int id_pedido, int id_lote) {
         Pedido p = getPedidoById(id_pedido);
         if (p != null) {
             return p.getLotebyId(id_lote);

@@ -17,7 +17,7 @@ public class TestRepartidor {
     @Test
     public void constructorRepartidor2(){
         r = new Repartidor("900000000");
-        assertEquals(false, r.getAlta());
+        assertEquals(true, r.getAlta());
     }
     @Test
     public void MarcarPaqueteEntregado(){

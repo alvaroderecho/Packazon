@@ -36,13 +36,17 @@ public class Pedido implements IInvoiceInfo{
 
     private List<Lote> lotes = new ArrayList<Lote>();
 
-    public Pedido(Cliente c, boolean urgent, int id, String dirr_entrega) {
+    public Pedido(boolean urgent, int id, String dirr_entrega) {
         this.id = id;
         this.urgente = urgent;
         this.dirr_entreg = dirr_entrega;
-        this.c = c;
     }
-
+    public void set_cliente(Cliente c){
+        this.c  = c;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public void calcularPrecioPedido() {
         double precio_tot = 0;
         int unid_total = 0;
@@ -153,7 +157,9 @@ public class Pedido implements IInvoiceInfo{
     public String getDirecEntrega() {
         return this.dirr_entreg;
     }
-
+    public List<Producto> getProductos(){
+        return this.prods;
+    }
     public void addLote() {
         Lote l = new Lote(this.ids_lotes);
         this.lotes.add(l);
@@ -176,6 +182,14 @@ public class Pedido implements IInvoiceInfo{
             Lote ll = l.getLotebyId(id_lote);
             if (ll != null)
                 return ll;
+        }
+        return null;
+    }
+    public Producto getProductobyId(int id){
+        for (Producto p : this.prods) {
+            if (p.getId() == id) {
+                return p;
+            }
         }
         return null;
     }

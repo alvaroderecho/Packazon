@@ -43,7 +43,7 @@ public class TestCliente {
     @Test 
     public void consultarEstado() {
         c = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        p = new Pedido (Cliente.c,false,1,"UAM");
+        p = new Pedido (false,1,"UAM");
         
 
         assertEquals(false, c.consultarEstado(p));

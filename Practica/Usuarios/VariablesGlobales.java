@@ -52,4 +52,16 @@ public class VariablesGlobales {
     public void set_tasa_aseg(double max) {
         this.tasa_asegurados = max;
     }
+    public int get_max_cod_post(){
+        return this.max_cod_post;
+    }
+    public double get_tasa_aseg(){
+        return this.tasa_asegurados;
+    }
+    public double get_tasa_frag(){
+        return this.tasa_fragiles;
+    }
+    public double get_tasa_alim(){
+        return this.tasa_alimentarios;
+    }
 }
