@@ -11,10 +11,10 @@ public class Paquete {
     private boolean entregado; 
     private String destino;
     private double peso;
-    private Integer num_entregas_fallido;
+    private int num_entregas_fallido;
     private List<Producto> productos;
     
-    public Paquete (boolean entregado, String destino, double peso,Integer num_entregas_fallidas){
+    public Paquete (boolean entregado, String destino, double peso,int num_entregas_fallidas){
         this.entregado = entregado;
         this.destino = destino;
         this.num_entregas_fallido = num_entregas_fallidas;
@@ -34,7 +34,7 @@ public class Paquete {
         return this.peso;
     }
 
-    public Integer getNumEntregasFallidas(){
+    public int getNumEntregasFallidas(){
         return this.num_entregas_fallido;
     }
 
@@ -56,7 +56,7 @@ public class Paquete {
         this.peso += p;
     }
 
-    public void setNumEntregasFallidas(Integer n){
+    public void setNumEntregasFallidas(int n){
         this.num_entregas_fallido = n;
     }
     

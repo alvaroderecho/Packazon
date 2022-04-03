@@ -1,7 +1,7 @@
-package Tests_Junit;
+package TestsJunit;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
+import Usuarios.Cliente;
 
 public class TestClienteNoRegistrado {
 

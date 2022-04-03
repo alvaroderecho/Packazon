@@ -5,7 +5,7 @@ public class Camion {
     private String matricula;
     private boolean alta = false;
     private boolean estropeado = false;
-    private Integer peso_max;
+    private int peso_max;
     private TipoCamion tipo;
     private List<Paquete> paquetes;
 /**
@@ -15,7 +15,7 @@ public class Camion {
  * @param peso_max
  * @param tipo
  */
-    public Camion (String matricula, Integer peso_max, TipoCamion tipo){
+    public Camion (String matricula, int peso_max, TipoCamion tipo){
         this.matricula = matricula;
         this.peso_max = peso_max;
         this.tipo = tipo;
@@ -49,10 +49,10 @@ public class Camion {
     public void setNoEstropeado(){
         this.estropeado = false;
     }
-    public void setPesoMax(Integer p){
+    public void setPesoMax(int p){
         this.peso_max = p;
     }
-    public Integer getPesoMax(){
+    public int getPesoMax(){
         return this.peso_max;
     }
     public TipoCamion getTipocCamion(){

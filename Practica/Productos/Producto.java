@@ -6,7 +6,7 @@ import es.uam.eps.padsof.invoices.IProductInfo;
 public abstract class Producto implements IProductInfo{
     private int unidades;
     private double peso;
-    private Integer id;
+    private int id;
     private EstadoProducto estado = EstadoProducto.ALMACEN;
     private boolean asegurado;
     private double precio_extra = 0;
@@ -53,11 +53,11 @@ public abstract class Producto implements IProductInfo{
 
 
     /**Getters y Setters */
-    public Integer getUnidades() {
+    public int getUnidades() {
         return this.unidades;
     }
 
-    public void setUnidades(Integer uni) {
+    public void setUnidades(int uni) {
         this.unidades = uni;
     }
 

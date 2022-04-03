@@ -13,21 +13,21 @@ public class Operario extends Cuenta{
     private List<Repartidor> repartidores = new ArrayList<Repartidor>();
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
-    private Integer n_pedido = 0;
+    private int n_pedido = 0;
 
     
     public Operario(String nombre_usuario, String password) {
         super(nombre_usuario, password);
     }
 
-    public void modificar_max_codpost(Integer max) {
+    public void modificar_max_codpost(int max) {
         if (max >0) {
             this.var.set_max_cod_post(max);
         }
         /**update */
     }
 
-    public void modificar_max_entregas_fallidas(Integer max) {
+    public void modificar_max_entregas_fallidas(int max) {
         if (max >=0)
         this.var.set_max_entregas_fallidas(max);
     }
@@ -54,7 +54,7 @@ public class Operario extends Cuenta{
         this.var.set_tasa_aseg(max);
     }
 
-    public void registrar_camion(String matricula, Integer peso_max, TipoCamion tipo) {
+    public void registrar_camion(String matricula, int peso_max, TipoCamion tipo) {
         if (matricula != null && peso_max >= 0) {
             Camion c = new Camion(matricula, peso_max, tipo);
             this.camiones.add(c);
@@ -153,7 +153,7 @@ public class Operario extends Cuenta{
         }
     }
 
-    private Pedido getPedidoById(Integer id) {
+    private Pedido getPedidoById(int id) {
         if (id >= 0)  {
             for (Pedido p: this.pedidos) {
                 if (p.getID() == id) {
@@ -164,21 +164,21 @@ public class Operario extends Cuenta{
         return null;
     }
 
-    public void addProductoPedido(Integer id_pedido, int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+    public void addProductoPedido(int id_pedido, int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
         Pedido p = getPedidoById(id_pedido);
         if (p!= null) {
             p.addProductoPedido(units, weight, identifier, secured, descri, vol, tipo);
         }
     }
 
-    public void  addLotePedido(Integer id_pedido) {
+    public void  addLotePedido(int id_pedido) {
         Pedido p = getPedidoById(id_pedido);
         if (p!=null) {
             p.addLote();
         }
     }
 
-    private Lote getLotePedidoById(Integer id_pedido, Integer id_lote) {
+    private Lote getLotePedidoById(int id_pedido, int id_lote) {
         Pedido p = getPedidoById(id_pedido);
         if (p != null) {
             return p.getLotebyId(id_lote);
@@ -186,14 +186,14 @@ public class Operario extends Cuenta{
         return null;
     }
 
-    public void addLoteLotePedido(Integer id_pedido, Integer id_lote) {
+    public void addLoteLotePedido(int id_pedido, int id_lote) {
         Lote l = getLotePedidoById(id_pedido, id_lote);
         if (l!=null) {
             l.addLoteLote();
         }
     }
 
-    public void addProductLotePedido(Integer id_pedido, Integer id_lote,  int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
+    public void addProductLotePedido(int id_pedido, int id_lote,  int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
         Lote l = getLotePedidoById(id_pedido, id_lote);
         l.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
     }

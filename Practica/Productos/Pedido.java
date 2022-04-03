@@ -3,8 +3,8 @@ package Productos;
 import java.time.LocalDate;
 import java.util.*;
 
+//import javax.print.attribute.intSyntax;
 import javax.print.attribute.IntegerSyntax;
-
 import Usuarios.*;
 import es.uam.eps.padsof.invoices.IInvoiceInfo;
 import es.uam.eps.padsof.invoices.IProductInfo;
@@ -19,7 +19,7 @@ import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 public class Pedido implements IInvoiceInfo{
 
     private Cliente c;
-    private Integer id;
+    private int id;
     private String dirr_entreg;
     private LocalDate fecha_pedido;
     private boolean urgente;
@@ -30,7 +30,7 @@ public class Pedido implements IInvoiceInfo{
     private Factura factura_p;
     private double discount = 0;
 
-    private Integer ids_lotes = 1;
+    private int ids_lotes = 1;
 
     private List<Producto> prods = new ArrayList<Producto>();
 
@@ -40,6 +40,7 @@ public class Pedido implements IInvoiceInfo{
         this.id = id;
         this.urgente = urgent;
         this.dirr_entreg = dirr_entrega;
+        this.c = c;
     }
 
     public void calcularPrecioPedido() {
@@ -163,11 +164,11 @@ public class Pedido implements IInvoiceInfo{
         return this.factura_p;
     }
 
-    public Integer getID() {
+    public int getID() {
         return this.id;
     }
 
-    public Lote getLotebyId(Integer id_lote) {
+    public Lote getLotebyId(int id_lote) {
         for (Lote l : this.lotes) {
             if (l.getId() == id_lote) {
                 return l;

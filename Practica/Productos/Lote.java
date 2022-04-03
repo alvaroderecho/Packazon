@@ -7,15 +7,15 @@ public class Lote {
     private boolean alim = false;
     private boolean std = false;
 
-    private Integer id;
+    private int id;
 
-    private Integer n_lotes;
+    private int n_lotes;
 
     private List <Producto> prods = new ArrayList<Producto>();
 
     private List <Lote> lotes = new ArrayList<Lote>();
 
-    public Lote(Integer identifier) {
+    public Lote(int identifier) {
         this.id = identifier;
     }
 
@@ -49,11 +49,11 @@ public class Lote {
         this.n_lotes++;
     }
 
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public Lote getLotebyId(Integer id_lote) {
+    public Lote getLotebyId(int id_lote) {
         for (Lote l: this.lotes) {
             if (l.id == id_lote) {
                 return l;

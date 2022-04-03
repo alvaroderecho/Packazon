@@ -34,7 +34,7 @@ public class TestRepartidor {
     public void MarcarPaqueteNoEntregado(){
         Paquete p = new Paquete(false, "Avenida Valdelasfuentes", 30, 0);
         r = new Repartidor("900000000");
-        Integer nuevasEntregas = 1;
+        int nuevasEntregas = 1;
 
         r.MarcarPaqueteNoEntregado(p);
         assertEquals(false, p.getEntregado());

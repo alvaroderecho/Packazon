@@ -1,9 +1,8 @@
-package Tests_Junit;
+package TestsJunit;
 import Productos.Pedido;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
-
+import Usuarios.Cliente;
 
 
 public class TestCliente {
@@ -44,7 +43,7 @@ public class TestCliente {
     @Test 
     public void consultarEstado() {
         c = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        p = new Pedido ("calle","2314",true,"calleeee",11343);
+        p = new Pedido (Cliente.c,false,1,"UAM");
         
 
         assertEquals(false, c.consultarEstado(p));

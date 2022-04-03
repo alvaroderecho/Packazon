@@ -1,7 +1,7 @@
-package Tests_Junit;
+package TestsJunit;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
+import Usuarios.Cuenta;
 public class TestCuenta {
     Cuenta c;
     @Test
