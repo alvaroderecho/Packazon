@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Productos/TeleChargeAndPaySystem8.jar",
+        "Productos/invoicesystem.jar"
+    ]
+}
