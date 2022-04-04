@@ -13,24 +13,22 @@ import Productos.Producto;
  */
 public class Paquete {
 
-    private boolean entregado; 
+    private boolean entregado = false; 
+    private boolean fallido = false; //Max entregas fallidas realizadas
     private String destino;
     private double peso;
-    private int num_entregas_fallido;
-    private List<Producto> productos;
+    private int num_entregas_fallido = 0;
+    private List<Producto> productos = new ArrayList<Producto>();
     /**
      * Constructor
-     * @param entregado
      * @param destino
      * @param peso
-     * @param num_entregas_fallidas
+     * @param prods
      */
-    public Paquete (boolean entregado, String destino, double peso,int num_entregas_fallidas){
-        this.entregado = entregado;
+    public Paquete (String destino, double peso, List<Producto> prods){
         this.destino = destino;
-        this.num_entregas_fallido = num_entregas_fallidas;
         this.peso = peso;
-        this.productos = new ArrayList<Producto>();
+        this.productos = prods;
     }
     /**
      * 
@@ -90,13 +88,6 @@ public class Paquete {
     }
     /**
      * 
-     * @param p
-     */
-    public void addPeso(double p){
-        this.peso += p;
-    }
-    /**
-     * 
      * @param n
      */
     public void setNumEntregasFallidas(int n){
@@ -123,14 +114,9 @@ public class Paquete {
      * @param p
      * @return
      */
-    public double calcularPeso (Paquete p){
-        
-        for (Producto pr:productos){
-            p.addPeso(pr.getPeso());
-        }
-        return p.getPeso();
-    
-    }
 
+    public boolean getFallido() {
+        return this.fallido;
+    }
 
 }

@@ -28,7 +28,7 @@ public abstract class Producto implements IProductInfo{
      * @param vol
      */
     public Producto(int units, double weight, int identifier, boolean secured, String descri, double vol) {
-        if (units <=0 || weight <=0 || id < 0)
+        if (units <=0 || weight <=0 || id < 0 || descri == null)
             return;
         this.unidades = units;
         this.peso = weight;
@@ -136,6 +136,22 @@ public abstract class Producto implements IProductInfo{
      */
     public EstadoProducto getEstadoProducto(){
         return this.estado;
+    }
+
+    /**
+     * devuelve el volumen
+     * @return
+     */
+    public double getVolumen() {
+        return this.volumen;
+    }
+
+    /**
+     * devuelve si está asegurado
+     * @return
+     */
+    public boolean getAsegurado() {
+        return this.asegurado;
     }
 
 }

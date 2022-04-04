@@ -1,6 +1,6 @@
 package Usuarios;
-import Productos.EstadoPedido;
-import Productos.Pedido;
+import Productos.*;
+import java.util.*;
 
 /**
  * Clase cliente
@@ -15,6 +15,8 @@ public class Cliente extends Cuenta{
     private String Direc_fact;
     private String Email;
     private String Num_tarjeta;
+    private List <Pedido> pedidos = new ArrayList<Pedido>(); 
+
 
 /**
  * Constructor
@@ -137,12 +139,32 @@ public void setNumTarjeta(String Num_tarjeta) {
  * @param p
  * @return
  */
-public boolean consultarEstado(Pedido p) {
+public EstadoPedido consultarEstado(Pedido p) {
 
-    if(p == null) return false;
+    if(p == null) return EstadoPedido.NO_ENTREGADO;
 
-    if(p.estadoPedido() ==EstadoPedido.NO_ENTREGADO ) return false;
-    return true;
+    for (Pedido ped: this.pedidos) {
+        if (ped == p) {
+            return ped.estadoPedido();
+        }
+    }
+    return EstadoPedido.NO_ENTREGADO;
+}
+
+public EstadoProducto consultarEstadoProducto(Pedido p, Producto pr) {
+
+    if(p == null || pr == null) return EstadoProducto.ALMACEN;
+
+    if(p.estadoPedido() == EstadoPedido.ENTREGADO ) return EstadoProducto.ENTREGADO;
+
+    else {
+        for (Producto pro: p.getProductos()) {
+            if (pro == pr) {
+                return pro.getEstadoProducto();
+            }
+        }
+    }
+    return EstadoProducto.ALMACEN;
 }
 
 
@@ -171,4 +193,14 @@ public Factura getFactura(Pedido p) {
     return p.getFactura();
 }
 
+
+/**
+ * añade un pedido al array
+ * @param p
+ */
+public void addPedido(Pedido p) {
+    if (p!=null) {
+        this.pedidos.add(p);
+    }
+}
 }

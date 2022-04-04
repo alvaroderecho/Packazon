@@ -2,10 +2,12 @@ package TestsJunit;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import Productos.EstadoProducto;
-import Productos.Producto;
+
+import Productos.*;
 import Reparto.Paquete;
 import Usuarios.Repartidor;
+
+import  java.util.*;
 public class TestRepartidor {
     private Repartidor r;
     
@@ -21,7 +23,9 @@ public class TestRepartidor {
     }
     @Test
     public void MarcarPaqueteEntregado(){
-        Paquete p = new Paquete(false, "Avenida Valdelasfuentes", 30, 0);
+        List<Producto> prods = new ArrayList<Producto>();
+        prods.add(Pedido.createProducto(5, 10, 1, false, "hola", 20, TipoProducto.ALIMENTARIO));
+        Paquete p = new Paquete("Avenida Valdelasfuente", 50, prods);
         r = new Repartidor("900000000");
 
         r.MarcarPaqueteEntregado(p);
@@ -32,7 +36,9 @@ public class TestRepartidor {
     }
     @Test
     public void MarcarPaqueteNoEntregado(){
-        Paquete p = new Paquete(false, "Avenida Valdelasfuentes", 30, 0);
+        List<Producto> prods = new ArrayList<Producto>();
+        prods.add(Pedido.createProducto(5, 10, 1, false, "hola", 20, TipoProducto.ALIMENTARIO));
+        Paquete p = new Paquete("Avenida Valdelasfuente", 50, prods);
         r = new Repartidor("900000000");
         int nuevasEntregas = 1;
 

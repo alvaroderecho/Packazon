@@ -86,6 +86,15 @@ public class Lote {
     public int getId() {
         return this.id;
     }
+
+    /**
+     * devuelve si el lote es fragil
+     * @return
+     */
+    public boolean getFragil() {
+        return this.fragil;
+    }
+
     /**
      * Busca un lote segun un id en el array 
      * @param id_lote

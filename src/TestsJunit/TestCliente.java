@@ -3,6 +3,7 @@ import Productos.Pedido;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import Usuarios.Cliente;
+import Productos.EstadoPedido;
 
 
 public class TestCliente {
@@ -44,9 +45,9 @@ public class TestCliente {
     public void consultarEstado() {
         c = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
         p = new Pedido (false,1,"UAM");
-        
+        c.addPedido(p);        
 
-        assertEquals(false, c.consultarEstado(p));
+        assertEquals(EstadoPedido.NO_ENTREGADO, c.consultarEstado(p));
     }
 
    /* @Test

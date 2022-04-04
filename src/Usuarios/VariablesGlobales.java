@@ -11,109 +11,64 @@ public class VariablesGlobales {
      * STATIC
      */
 
-    private double max_volumen_prod;
-    private int max_cod_post;           /*Maximo codigos postales */
-    private int max_entregas_fallidas;
+    private static double max_volumen_prod; /*Indeterminado */
+    private static int max_cod_post;           /*Maximo codigos postales */
+    private static int max_entregas_fallidas = 3;
 
-    private double descuento_100_prod;      /*Descuento que se aplica tras tener 100*/
-    private double tasa_alimentarios;
-    private double tasa_fragiles;
-    private double tasa_asegurados;
-    /**
-     * Constructor
-     * @param volumen
-     * @param codpost
-     * @param entrega
-     * @param dcto
-     * @param alim
-     * @param frag
-     * @param aseg
-     */
-    public VariablesGlobales(double volumen, int codpost, int entrega, double dcto, double alim, double frag, double aseg) {
-        this.max_volumen_prod = volumen;
-        this.max_entregas_fallidas = entrega;
-        this.max_cod_post = codpost;
-        this.descuento_100_prod = dcto;
-        this.tasa_alimentarios = alim;
-        this.tasa_asegurados = frag;
-        this.tasa_asegurados = aseg;
+    private static double descuento_100_prod = 0.10;      /*Descuento que se aplica tras tener 100*/
+    private static double tasa_alimentarios = 2.0;
+    private static double tasa_fragiles = 2.0;
+    private static double tasa_asegurados = 5.0;
+
+    public VariablesGlobales() {}
+
+
+    void set_max_volumen_prod(double max) {
+        VariablesGlobales.max_volumen_prod = max;
     }
 
-    /**
-     * 
-     * @param max
-     */
-    public void set_max_volumen_prod(double max) {
-        this.max_volumen_prod = max;
+    void set_max_entregas_fallidas(int max) {
+        VariablesGlobales.max_entregas_fallidas = max;
     }
-    /**
-     * 
-     * @param max
-     */
-    public void set_max_entregas_fallidas(int max) {
-        this.max_entregas_fallidas = max;
+
+    void set_max_cod_post(int max) {
+        VariablesGlobales.max_cod_post = max;
     }
-    /**
-     * 
-     * @param max
-     */
-    public void set_max_cod_post(int max) {
-        this.max_cod_post = max;
+    
+    void set_descuento(double max) {
+        VariablesGlobales.descuento_100_prod = max;
     }
-    /**
-     * 
-     * @param max
-     */
-    public void set_descuento(double max) {
-        this.descuento_100_prod = max;
+
+    void set_tasa_alim(double max) {
+        VariablesGlobales.tasa_alimentarios= max;
     }
-    /**
-     * 
-     * @param max
-     */
-    public void set_tasa_alim(double max) {
-        this.tasa_alimentarios = max;
+
+    void set_tasa_frag(double max) {
+        VariablesGlobales.tasa_fragiles = max;
     }
-    /**
-     * 
-     * @param max
-     */
-    public void set_tasa_frag(double max) {
-        this.tasa_fragiles = max;
+
+    void set_tasa_aseg(double max) {
+        VariablesGlobales.tasa_asegurados = max;
     }
-    /**
-     * 
-     * @param max
-     */
-    public void set_tasa_aseg(double max) {
-        this.tasa_asegurados = max;
+    public static int getMaxCodPost(){
+        return VariablesGlobales.max_cod_post;
     }
-    /**
-     * 
-     * @return
-     */
-    public int get_max_cod_post(){
-        return this.max_cod_post;
+    public static double getTasaAseg(){
+        return VariablesGlobales.tasa_asegurados;
     }
-    /**
-     * 
-     * @return
-     */
-    public double get_tasa_aseg(){
-        return this.tasa_asegurados;
+    public static double getTasaFrag(){
+        return VariablesGlobales.tasa_fragiles;
     }
-    /**
-     * 
-     * @return
-     */
-    public double get_tasa_frag(){
-        return this.tasa_fragiles;
+    public static double getTasaAlim(){
+        return VariablesGlobales.tasa_alimentarios;
     }
-    /**
-     * 
-     * @return
-     */
-    public double get_tasa_alim(){
-        return this.tasa_alimentarios;
+    public static double getMaxVolum() {
+        return VariablesGlobales.max_volumen_prod;
+    }
+    public static double getDescuento() {
+        return VariablesGlobales.descuento_100_prod;
+    }
+    public static int getEntregasFallidas() {
+        return VariablesGlobales.max_entregas_fallidas;
     }
 }

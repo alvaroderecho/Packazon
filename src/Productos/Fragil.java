@@ -5,6 +5,7 @@ package Productos;
  * @author Alvaro Derecho
  * @author Salah
  */
+import Usuarios.VariablesGlobales;
 
 public class Fragil extends Producto{
 
@@ -19,9 +20,9 @@ public class Fragil extends Producto{
      */
     public Fragil(int units, double weight, int identifier, boolean secured,String descri, double vol) {
         super(units, weight, identifier, secured, descri, vol);
-        this.setPrecioExtra(2);
+        this.setPrecioExtra(VariablesGlobales.getTasaFrag());
 
         if (secured)        /**Si está asegurado */
-            this.setPrecioExtra(5);
+            this.setPrecioExtra(VariablesGlobales.getTasaAseg());
     }
 }

@@ -1,7 +1,6 @@
 package Usuarios;
 
 import Reparto.*;
-import Sistema.*;
 import java.util.*;
 
 import Productos.*;
@@ -17,6 +16,8 @@ public class Operario extends Cuenta{
     private List<Camion> camiones = new ArrayList<Camion>();
     private List<Repartidor> repartidores = new ArrayList<Repartidor>();
     private List<Pedido> pedidos = new ArrayList<Pedido>();
+    private List<Paquete> paquetes = new ArrayList<Paquete>();
+
 
     private int n_pedido = 0;
 
@@ -335,6 +336,17 @@ public class Operario extends Cuenta{
     public void addProductLotePedido(int id_pedido, int id_lote,  int units, double weight, int identifier, boolean secured, String descri, double vol, TipoProducto tipo) {
         Lote l = getLotePedidoById(id_pedido, id_lote);
         l.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
+    }
+
+    public void realizarEmpaquetado() {
+        String direccion;
+        for (Pedido p : this.pedidos) {
+            direccion = p.getDirecEntrega();
+            if (p.getPesoTotal() < 60) {
+                Paquete pa = new Paquete(p.getDirecEntrega(), p.getPesoTotal(), p.getProductos());
+                this.paquetes.add(pa);
+            }
+        }
     }
 
 }

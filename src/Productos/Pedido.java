@@ -137,7 +137,7 @@ public class Pedido implements IInvoiceInfo{
         }
 
         this.pedido_finalizado = true;
-
+        this.c.addPedido(this);
         
     }
     /**
@@ -162,24 +162,36 @@ public class Pedido implements IInvoiceInfo{
             double vol, TipoProducto tipo) {
         Producto p;
 
-        if (tipo == TipoProducto.ESTANDAR)
+        if (tipo == TipoProducto.ESTANDAR) {
+            if (weight >= 30)
+                return null;
             p = new Estandar(units, weight, identifier, secured, descri, vol);
-
-        else if (tipo == TipoProducto.FRAGIL)
+        }
+        else if (tipo == TipoProducto.FRAGIL) {
+            if (weight >= 20)
+                return null;
             p = new Fragil(units, weight, identifier, secured, descri, vol);
-
-        else if (tipo == TipoProducto.ALIMENTARIO)
+        }
+        else if (tipo == TipoProducto.ALIMENTARIO) {
+            if (weight >= 30)
+                return null;
             p = new Alimentario(units, weight, identifier, secured, descri, vol);
-
-        else if (tipo == TipoProducto.REFRIGERADO)
+        }
+        else if (tipo == TipoProducto.REFRIGERADO) {
+            if (weight >= 30)
+                return null;
             p = new Refrigerado(units, weight, identifier, secured, descri, vol);
-
-        else if (tipo == TipoProducto.CONGELADO)
+        }
+        else if (tipo == TipoProducto.CONGELADO) {
+            if (weight >= 30)
+                return null;
             p = new Congelado(units, weight, identifier, secured, descri, vol);
-
-        else
+        }
+        else {
+            if (weight >= 30)
+                return null;
             p = new Liquido(units, weight, identifier, secured, descri, vol);
-
+        }
         return p;
     }
     /**
@@ -200,6 +212,24 @@ public class Pedido implements IInvoiceInfo{
     }
 
     /** Getters y Setters */
+
+    /**
+     * devuelve si es urgente
+     * @return
+     */
+    public boolean getUrgente() {
+        return this.urgente;
+    }
+
+    /**
+     * devuelve si se ha finalizado
+     * @return
+     */
+    public boolean getFinalizado() {
+        return this.pedido_finalizado;
+    }
+
+
     /**
      * devuelve la direccion de entrega
      * @return
@@ -266,6 +296,15 @@ public class Pedido implements IInvoiceInfo{
         return null;
     }
 
+
+    public double getPesoTotal() {
+        double pesototal = 0;
+        for (Producto p: this.prods) {
+            pesototal+=p.getPeso();
+        }
+        return pesototal;
+    }
+
     /**INVOICE METHODS */
 
     public String getCompanyLogo () { return "./logo.png"; }
@@ -285,5 +324,6 @@ public class Pedido implements IInvoiceInfo{
     public double getPrice() { return this.precio_total; }
 
 	// public List<IProductInfo> getProducts() { return this.prods;	}
+    //NO NOS HA FUNCIONADO
 
 }
