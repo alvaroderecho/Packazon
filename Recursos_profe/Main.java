@@ -18,7 +18,7 @@ class Product implements IProductInfo {	// Just an example implementation
 class Invoice implements IInvoiceInfo { // Just an example implementation 
 	public String getClientCif() { return "ES-00877893X"; }
 	public String getCompanyName() { return "This is the company name"; }
-	public String getCompanyLogo () { return "./resources/logo.jpg"; } // jpg, gif and png formats are supported	
+	public String getCompanyLogo () { return "./logo.png"; } // jpg, gif and png formats are supported	
 	public double getDiscount() { return 0; }
 	public double getUrgent() { return 5.0; }
 	public String getOrderDate() { return "March 2nd 2022"; }
@@ -31,7 +31,7 @@ public class Main {
 	public static void main(String[] args) throws NonExistentFileException, UnsupportedImageTypeException {
 		InvoiceSystem.createInvoice( 
 				new Invoice (),			    
-				"./tmp/" // Output folder
+				"./" // Output folder
 			  );    
 	}
 }
