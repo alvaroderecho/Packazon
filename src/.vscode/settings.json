@@ -4,6 +4,8 @@
         "Productos/TeleChargeAndPaySystem8.jar",
         "Productos/invoicesystem.jar",
         "/home/dere/Documentos/UNI-20210930T085204Z-001/UNI/Segundo_curso/Segundo_cuatri/Proyecto/Packazon/lib/junit-4.13.2.jar",
-        "/home/dere/Documentos/UNI-20210930T085204Z-001/UNI/Segundo_curso/Segundo_cuatri/Proyecto/Packazon/lib/hamcrest-core-1.3.jar"
+        "/home/dere/Documentos/UNI-20210930T085204Z-001/UNI/Segundo_curso/Segundo_cuatri/Proyecto/Packazon/lib/hamcrest-core-1.3.jar",
+        "/home/dere/Documentos/UNI-20210930T085204Z-001/UNI/Segundo_curso/Segundo_cuatri/Proyecto/Packazon/lib/TeleChargeAndPaySystem8.jar",
+        "/home/dere/Documentos/UNI-20210930T085204Z-001/UNI/Segundo_curso/Segundo_cuatri/Proyecto/Packazon/lib/invoicesystem.jar"
     ]
 }
