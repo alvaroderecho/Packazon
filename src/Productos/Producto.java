@@ -70,7 +70,13 @@ public abstract class Producto implements IProductInfo{
             precio_unidad = 0.60;
         }
 
-        return this.unidades * (this.precio_extra + precio_unidad);
+        if (unidades >= 100) {
+            return this.unidades * (this.precio_extra + precio_unidad) * 0.9;
+        }
+        else {
+            return this.unidades * (this.precio_extra + precio_unidad);
+        }
+        
     }
 
 
