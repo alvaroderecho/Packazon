@@ -1,7 +1,7 @@
 package Usuarios;
 import Productos.*;
 import java.util.*;
-
+import Sistema.Sistema;
 /**
  * Clase cliente
  * @author Joseba Arranz
@@ -36,7 +36,7 @@ public Cliente(String nombre_empresa, String Cif, String direc_fact, String emai
         this.Direc_fact = direc_fact;
         this.Email = email;
         this.Num_tarjeta = Num_tarjeta;
-        
+        Sistema.addCliente(this);
     }
 
 /**

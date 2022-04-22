@@ -11,7 +11,17 @@ import java.util.*;
  * @author Alvaro Derecho
  * @author Salah
  */
-public class Sistema {
-    private VariablesGlobales variables;    /**Se carga en fichero */
-    private List<Cuenta> cuentas = new ArrayList<Cuenta>();
+public final class Sistema {
+    private static VariablesGlobales variables;    /**Se carga en fichero */
+    private static List<Cliente> cuentas = new ArrayList<Cliente>();
+
+    public static void addCliente(Cliente c) {
+        if (c!= null)
+            Sistema.cuentas.add(c);
+    }
+
+    public static List<Cliente> getClientes() {
+        return Sistema.cuentas;
+    }
+
 }

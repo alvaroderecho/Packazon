@@ -17,6 +17,7 @@ public abstract class Producto implements IProductInfo{
     private double precio_extra = 0;
     private double volumen;
     private String descript;
+    private double precio_total = 0;
 
     /**
      * Constructor
@@ -28,7 +29,7 @@ public abstract class Producto implements IProductInfo{
      * @param vol
      */
     public Producto(int units, double weight, int identifier, boolean secured, String descri, double vol) {
-        if (units <=0 || weight <=0 || id < 0 || descri == null)
+        if (units <=0 || weight <=0 || id < 0 || descri == null || vol <=0)
             return;
         this.unidades = units;
         this.peso = weight;
@@ -36,6 +37,7 @@ public abstract class Producto implements IProductInfo{
         this.asegurado = secured;
         this.volumen = vol;
         this.descript = descri;
+        this.precio_total = getPrice();
     }
 
     /**
@@ -115,6 +117,7 @@ public abstract class Producto implements IProductInfo{
      */
     public void setPrecioExtra(double precio) {
         this.precio_extra = precio;
+        this.precio_total = getPrice();
     }
     /**
      * devuelve el precio extra de un producto
@@ -152,6 +155,15 @@ public abstract class Producto implements IProductInfo{
      */
     public boolean getAsegurado() {
         return this.asegurado;
+    }
+
+    public double getPrecio() {
+        return this.precio_total;
+    }
+
+    @Override
+    public String toString() {
+        return "Unidades: " + this.unidades + " , id: " + this.id + " ,description: " + this.descript + " ,peso: " + this.peso + " ,volumen: " + this.volumen + " , precio total: " + this.precio_total + " ";
     }
 
 }

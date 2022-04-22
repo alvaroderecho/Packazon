@@ -56,65 +56,65 @@ public class TestOperario {
         flag = op.consultarEstadoRepartidor("1234567890");
         assertEquals(false, flag);
     }
-    @Test
-    public void darAltaPedido(){
-        op = new Operario("PADSOF", "1234");
-        cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        int id_pedido = op.get_n_pedido();
-        op.darAltaPedido("Escuela politecnica", cliente, true);
-        pedido = new Pedido(true, id_pedido,"Escuela politecnica" );
-        assertEquals(pedido.getDirecEntrega(), op.getPedidoById(id_pedido).getDirecEntrega());
-    }
-    @Test
-    public void addProductoPedido(){
-        op = new Operario("PADSOF", "1234");
-        cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        int id_pedido = op.get_n_pedido();
-        op.darAltaPedido("Escuela politecnica", cliente, true);
-        op.addProductoPedido(id_pedido, 3, 5, 1, false, "PADSOF1", 10, TipoProducto.ESTANDAR);
-        producto = new Estandar(3, 5, 1, false, "PADSOF1", 10);
+    // @Test
+    // public void darAltaPedido(){
+    //     op = new Operario("PADSOF", "1234");
+    //     cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
+    //     int id_pedido = op.get_n_pedido();
+    //     op.darAltaPedido("Escuela politecnica", cliente, true);
+    //     pedido = new Pedido(true, id_pedido,"Escuela politecnica" );
+    //     assertEquals(pedido.getDirecEntrega(), op.getPedidoById(id_pedido).getDirecEntrega());
+    // }
+    // @Test
+    // public void addProductoPedido(){
+    //     op = new Operario("PADSOF", "1234");
+    //     cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
+    //     int id_pedido = op.get_n_pedido();
+    //     op.darAltaPedido("Escuela politecnica", cliente, true);
+    //     op.addProductoPedido(id_pedido, 3, 5, 1, false, "PADSOF1", 10, TipoProducto.ESTANDAR);
+    //     producto = new Estandar(3, 5, 1, false, "PADSOF1", 10);
 
-        assertEquals(producto.getDescription(), op.getPedidoById(id_pedido).getProductobyId(1).getDescription());
-    }
+    //     assertEquals(producto.getDescription(), op.getPedidoById(id_pedido).getProductobyId(1).getDescription());
+    // }
 
-    @Test
-    public void addLotePedido(){
-        op = new Operario("PADSOF", "1234");
-        cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        int id_pedido = op.get_n_pedido();
-        op.darAltaPedido("Escuela politecnica", cliente, true);
-        lote = new Lote(1);
-        op.addLotePedido(id_pedido);
-        assertEquals(lote.getId(), op.getLotePedidoById(id_pedido, 1).getId());
-    }
+    // @Test
+    // public void addLotePedido(){
+    //     op = new Operario("PADSOF", "1234");
+    //     cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
+    //     int id_pedido = op.get_n_pedido();
+    //     op.darAltaPedido("Escuela politecnica", cliente, true);
+    //     lote = new Lote(1);
+    //     op.addLotePedido(id_pedido);
+    //     assertEquals(lote.getId(), op.getLotePedidoById(id_pedido, 1).getId());
+    // }
 
-    @Test
-    public void addProductLote(){
-        op = new Operario("PADSOF", "1234");
-        cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        int id_pedido = op.get_n_pedido();
-        op.darAltaPedido("Escuela politecnica", cliente, true);
-        lote = new Lote(1);
-        op.addLotePedido(id_pedido);
-        int id_lote = op.getLotePedidoById(id_pedido, 1).getId();
-        op.addProductLotePedido(id_pedido, id_lote, 3, 5, 1, false, "PADSOF1", 10, TipoProducto.ESTANDAR);
-        producto = new Estandar(3, 5, 1, false, "PADSOF1", 10);
+    // @Test
+    // public void addProductLote(){
+    //     op = new Operario("PADSOF", "1234");
+    //     cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
+    //     int id_pedido = op.get_n_pedido();
+    //     op.darAltaPedido("Escuela politecnica", cliente, true);
+    //     lote = new Lote(1);
+    //     op.addLotePedido(id_pedido);
+    //     int id_lote = op.getLotePedidoById(id_pedido, 1).getId();
+    //     op.addProductLotePedido(id_pedido, id_lote, 3, 5, 1, false, "PADSOF1", 10, TipoProducto.ESTANDAR);
+    //     producto = new Estandar(3, 5, 1, false, "PADSOF1", 10);
 
-        assertEquals(producto.getId(), op.getLotePedidoById(id_pedido, id_lote).getProductobyId(1).getId());
-    }
+    //     assertEquals(producto.getId(), op.getLotePedidoById(id_pedido, id_lote).getProductobyId(1).getId());
+    // }
 
-    @Test 
-    public void addLoteLote(){
-        op = new Operario("PADSOF", "1234");
-        cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
-        int id_pedido = op.get_n_pedido();
-        op.darAltaPedido("Escuela politecnica", cliente, true);
-        lote = new Lote((1*100)+0);
-        op.addLotePedido(id_pedido);
-        op.addLoteLotePedido(id_pedido, op.getLotePedidoById(id_pedido, 1).getId());
-        int id_lote = op.getLotePedidoById(id_pedido, (1*100)+0).getId();
-        assertEquals(lote.getId(), op.getLotePedidoById(id_pedido, id_lote).getId());
-    }
+    // @Test 
+    // public void addLoteLote(){
+    //     op = new Operario("PADSOF", "1234");
+    //     cliente = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
+    //     int id_pedido = op.get_n_pedido();
+    //     op.darAltaPedido("Escuela politecnica", cliente, true);
+    //     lote = new Lote((1*100)+0);
+    //     op.addLotePedido(id_pedido);
+    //     op.addLoteLotePedido(id_pedido, op.getLotePedidoById(id_pedido, 1).getId());
+    //     int id_lote = op.getLotePedidoById(id_pedido, (1*100)+0).getId();
+    //     assertEquals(lote.getId(), op.getLotePedidoById(id_pedido, id_lote).getId());
+    // }
 
     
 }

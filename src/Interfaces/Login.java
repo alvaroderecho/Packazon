@@ -10,7 +10,7 @@ public class Login {
         frame.setVisible(true);
         frame.setBounds(10, 10, 370, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
- 
+        // frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
+
     } 
 }

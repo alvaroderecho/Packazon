@@ -18,11 +18,12 @@ public class Fragil extends Producto{
      * @param descri
      * @param vol
      */
-    public Fragil(int units, double weight, int identifier, boolean secured,String descri, double vol) {
+    public Fragil(int units, double weight, int identifier, boolean secured, String descri, double vol) {
         super(units, weight, identifier, secured, descri, vol);
-        this.setPrecioExtra(VariablesGlobales.getTasaFrag());
-
         if (secured)        /**Si está asegurado */
             this.setPrecioExtra(VariablesGlobales.getTasaAseg());
+        else {
+            this.setPrecioExtra(VariablesGlobales.getTasaFrag());
+        }
     }
 }
