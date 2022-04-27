@@ -1,4 +1,4 @@
-package Interfaces;
+package Interfaces.vistas;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -113,27 +113,30 @@ public class ProductPanel extends JPanel implements ActionListener{
 	}
 
 	private void addActionEvent() {
-		opcion1.addActionListener(this);
-		opcion2.addActionListener(this);
-		opcion3.addActionListener(this);
-		opcion4.addActionListener(this);
-		opcion5.addActionListener(this);
-		opcion6.addActionListener(this);
-		clear_description.addActionListener(this);
+		opcion1.addActionListener(event -> hideAsegurado());
+		opcion2.addActionListener(event -> hideAsegurado());
+		opcion3.addActionListener(event -> hideAsegurado());
+		opcion4.addActionListener(event -> hideAsegurado());
+		opcion5.addActionListener(event -> hideAsegurado());
+		opcion6.addActionListener(event -> showAsegurado());
+		clear_description.addActionListener(event -> clearDescription());
 		boton.addActionListener(this);
+	}
+
+	private void hideAsegurado() {
+		asegurado.setVisible(false);
+	}
+
+	private void showAsegurado() {
+		asegurado.setVisible(true);
+	}
+
+	private void clearDescription() {
+		description.setText("");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == opcion1 || e.getSource() == opcion2 || e.getSource() == opcion3 || e.getSource() == opcion4 || e.getSource() == opcion5) {
-			asegurado.setVisible(false);
-		}
-		if (e.getSource() == opcion6) {
-			asegurado.setVisible(true);
-		}
-		if (e.getSource() == clear_description) {
-			description.setText("");
-		}
 		if (e.getSource() == boton) {
 			String salida = "Producto ";
 			TipoProducto tp = TipoProducto.ESTANDAR;
