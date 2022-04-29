@@ -21,7 +21,7 @@ public class Operario extends Cuenta {
     private List<Repartidor> repartidores = new ArrayList<Repartidor>();
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     private List<Paquete> paquetes = new ArrayList<Paquete>();
-
+    private List<Cliente> clientes= new ArrayList<Cliente>();
     private static int n_pedido = 0;
     private static int n_producto = 0;
 
@@ -49,7 +49,7 @@ public class Operario extends Cuenta {
      * @return
      */
     public int get_n_pedido() {
-        return this.n_pedido;
+        return Operario.n_pedido;
     }
 
     /**
@@ -306,10 +306,10 @@ public class Operario extends Cuenta {
         if (dir_entr != null && CIF != null) {
             Cliente c = getClientebyCIF(CIF);
             if (c != null) {
-                Pedido p = new Pedido(urgent, this.n_pedido, dir_entr);
+                Pedido p = new Pedido(urgent, Operario.n_pedido, dir_entr);
                 p.set_cliente(c);
                 this.pedidos.add(p);
-                this.n_pedido++;
+                Operario.n_pedido++;
             }
         }
     }
@@ -391,6 +391,10 @@ public class Operario extends Cuenta {
             l.addLoteLote();
         }
     }
+    public  void addCliente(Cliente c) {
+        if (c!= null)
+            this.clientes.add(c);
+    }
 
     /**
      * Busca un lote dentro de un pedido y le añade un producto
@@ -411,15 +415,319 @@ public class Operario extends Cuenta {
         l.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
     }
 
+    public void addProductoLoteLotePedido(int id_pedido, int id_lote,int id_lote_interno, int units, double weight, int identifier,
+    boolean secured, String descri, double vol, TipoProducto tipo){
+        Lote l = getLotePedidoById(id_pedido, id_lote);
+        Lote in = l.getLotebyId(id_lote_interno);
+        in.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
+    }
+    /**
+     * Algoritmo que realiza el empaquetado de los productos en al almacen
+     */
     public void realizarEmpaquetado() {
         String direccion;
+        int flag_na = 1, flag_a = 1, flag_peso_correcto = 0,flag_r = 1,flag_c = 1;
+        int indice_p;
+        List<Paquete> paquetes_lote = new ArrayList<Paquete>();
+        List<Producto> producto = new ArrayList<Producto>();
+        List<Producto> producto_fragil = new ArrayList<Producto>();
+        List<Producto> productos_alimentarios = new ArrayList<Producto>();
+        List<Producto> productos_alimentarios_cogelados = new ArrayList<Producto>();
+        List<Producto> productos_alimentarios_refrigerados = new ArrayList<Producto>();
+        double peso = 0, peso_alimentarios = 0,peso_alimentarios_congelados = 0,peso_alimentarios_refrigerados = 0;
         for (Pedido p : this.pedidos) {
+            peso = 0;
             direccion = p.getDirecEntrega();
-            if (p.getPesoTotal() < 60) {
-                Paquete pa = new Paquete(p.getDirecEntrega(), p.getPesoTotal(), p.getProductos());
-                this.paquetes.add(pa);
+            for (Producto pr : p.getProductos()) {
+                if (pr.isFragil()) {
+                    if (pr.calcularPesoTotal() <= 60) {
+                        producto_fragil.add(pr);
+                        Paquete paquete_fragil = new Paquete(direccion, pr.getPeso(), producto_fragil,
+                                TipoPaquete.FRAGIL);
+                        producto_fragil.clear();
+                        this.paquetes.add(paquete_fragil);
+                    }
+                }
+
+                else if (pr.isAlimentario()) {
+                    /*si el producto es alimentario y congelado*/ 
+                    if (pr.isCongelado()){
+                        indice_p = this.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO_CONGELADO, direccion, pr.calcularPesoTotal());
+                        if (indice_p != -1) {
+                        
+                            this.paquetes.get(indice_p).addProductoPaquete(pr);
+                        } else {
+                            peso_alimentarios_congelados += pr.calcularPesoTotal();
+                            if (peso_alimentarios_congelados < 60) {
+                                productos_alimentarios_cogelados.add(pr);
+                                flag_c = 0;
+                                flag_peso_correcto = 1;
+                            } else if (peso_alimentarios_congelados == 60) {
+                                Paquete paquete_alimentario_congelado = new Paquete(direccion, peso_alimentarios_congelados,
+                                        productos_alimentarios, TipoPaquete.ALIMENTARIO_CONGELADO);
+                                productos_alimentarios_cogelados.clear();
+                                this.paquetes.add(paquete_alimentario_congelado);
+                                
+                                peso_alimentarios_congelados = 0;
+                                flag_c = 1;
+                                flag_peso_correcto = 0;
+                            } else if (peso_alimentarios_congelados > 60 & flag_peso_correcto == 1) {
+                                peso_alimentarios_congelados = peso_alimentarios_congelados - pr.calcularPesoTotal();
+                                Paquete paquete_alimentario_congelado = new Paquete(direccion, peso_alimentarios_congelados,
+                                        productos_alimentarios_cogelados, TipoPaquete.ALIMENTARIO_CONGELADO);
+                                productos_alimentarios_cogelados.clear();
+                                this.paquetes.add(paquete_alimentario_congelado);
+                                
+                                peso_alimentarios_congelados = 0;
+                                productos_alimentarios_cogelados.add(pr);
+                                flag_c = 1;
+                                flag_peso_correcto = 0;
+                                peso_alimentarios_congelados += pr.calcularPesoTotal();
+                            }
+                        }
+                    }
+                    else if (pr.isRefrigerado()){
+                        indice_p = this.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO_REFRIGERADO, direccion, pr.calcularPesoTotal());
+                        if (indice_p != -1) {
+                        
+                            this.paquetes.get(indice_p).addProductoPaquete(pr);
+                        } else {
+                            peso_alimentarios_refrigerados += pr.calcularPesoTotal();
+                            if (peso_alimentarios_refrigerados < 60) {
+                                productos_alimentarios_refrigerados.add(pr);
+                                flag_r = 0;
+                                flag_peso_correcto = 1;
+                            } else if (peso_alimentarios_refrigerados == 60) {
+                                Paquete paquete_alimentario_refrigerado = new Paquete(direccion, peso_alimentarios_refrigerados ,
+                                        productos_alimentarios_refrigerados, TipoPaquete.ALIMENTARIO_REFRIGERADO);
+                                productos_alimentarios_refrigerados.clear();
+                                this.paquetes.add(paquete_alimentario_refrigerado);
+                                
+                                peso_alimentarios_refrigerados = 0;
+                                flag_r = 1;
+                                flag_peso_correcto = 0;
+                            } else if (peso_alimentarios_refrigerados > 60 & flag_peso_correcto == 1) {
+                                peso_alimentarios_refrigerados = peso_alimentarios_refrigerados - pr.calcularPesoTotal();
+                                Paquete paquete_alimentario_refrigerado = new Paquete(direccion, peso_alimentarios_refrigerados,
+                                        productos_alimentarios_refrigerados, TipoPaquete.ALIMENTARIO_REFRIGERADO);
+                                productos_alimentarios_refrigerados.clear();
+                                this.paquetes.add(paquete_alimentario_refrigerado);
+                                
+                                peso_alimentarios_refrigerados = 0;
+                                productos_alimentarios_refrigerados.add(pr);
+                                flag_r = 1;
+                                flag_peso_correcto = 0;
+                                peso_alimentarios_refrigerados += pr.calcularPesoTotal();
+                            }
+                        }
+                    }
+                    else {
+                    indice_p = this.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO, direccion, pr.calcularPesoTotal());
+                    if (indice_p != -1) {
+                        
+                        this.paquetes.get(indice_p).addProductoPaquete(pr);
+                    } else {
+                        peso_alimentarios += pr.calcularPesoTotal();
+                        if (peso_alimentarios < 60) {
+                            productos_alimentarios.add(pr);
+                            flag_a = 0;
+                            flag_peso_correcto = 1;
+                        } else if (peso_alimentarios == 60) {
+                            Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios,
+                                    productos_alimentarios, TipoPaquete.ALIMENTARIO);
+                            productos_alimentarios.clear();
+                            this.paquetes.add(paquete_alimentario);
+                            
+                            peso_alimentarios = 0;
+                            flag_a = 1;
+                            flag_peso_correcto = 0;
+                        } else if (peso_alimentarios > 60 & flag_peso_correcto == 1) {
+                            peso_alimentarios = peso_alimentarios - pr.calcularPesoTotal();
+                            Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios,
+                                    productos_alimentarios, TipoPaquete.ALIMENTARIO);
+                            productos_alimentarios.clear();
+                            this.paquetes.add(paquete_alimentario);
+                            
+                            peso_alimentarios = 0;
+                            productos_alimentarios.add(pr);
+                            flag_a = 1;
+                            flag_peso_correcto = 0;
+                            peso_alimentarios += pr.calcularPesoTotal();
+                        }
+                    }
+                }
+
+                }
+
+                else if (pr.isAlimentario() == false) {
+                    indice_p = this.buscarPaqueteConHueco(TipoPaquete.NOALIMENTARIO, direccion, pr.calcularPesoTotal());
+                    if (indice_p != -1) {
+                        this.paquetes.get(indice_p).addProductoPaquete(pr);
+                        flag_na = 1;
+                    } else {
+                        peso += pr.calcularPesoTotal();
+                        if (peso < 60) {
+                            producto.add(pr);
+                            flag_na = 0;
+                            flag_peso_correcto = 1;
+                        }
+
+                        else if (peso == 60) {
+                            Paquete paquete = new Paquete(direccion, peso, producto, TipoPaquete.NOALIMENTARIO);
+                            producto.clear();
+                            this.paquetes.add(paquete);
+                            peso = 0;
+                            flag_na = 1;
+                            flag_peso_correcto = 0;
+                        } else if (peso > 60 & flag_peso_correcto == 1) {
+                            peso = peso - pr.calcularPesoTotal();
+                            Paquete paquete = new Paquete(direccion, peso, producto, TipoPaquete.NOALIMENTARIO);
+                            producto.clear();
+                            this.paquetes.add(paquete);
+                            peso = 0;
+                            flag_na = 1;
+                            flag_peso_correcto = 0;
+                            producto.add(pr);
+                            peso += pr.calcularPesoTotal();
+
+                        }
+                    }
+                }
+
             }
+            if (flag_na == 0) {
+                Paquete paquete = new Paquete(direccion, peso, producto, TipoPaquete.NOALIMENTARIO);
+                producto.clear();
+                this.paquetes.add(paquete);
+                peso = 0;
+            }
+            if (flag_a == 0) {
+                Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios, productos_alimentarios,
+                        TipoPaquete.ALIMENTARIO);
+                productos_alimentarios.clear();
+                this.paquetes.add(paquete_alimentario);
+                peso_alimentarios = 0;
+            }
+            if (flag_r == 0) {
+                Paquete paquete_alimentario_refrigerado = new Paquete(direccion, peso_alimentarios_refrigerados, productos_alimentarios_refrigerados,
+                        TipoPaquete.ALIMENTARIO_REFRIGERADO);
+                productos_alimentarios_refrigerados.clear();
+                this.paquetes.add(paquete_alimentario_refrigerado);
+                peso_alimentarios_refrigerados = 0;
+            }
+            if (flag_c == 0) {
+                Paquete paquete_alimentario_conglelados = new Paquete(direccion, peso_alimentarios_congelados, productos_alimentarios_cogelados,
+                        TipoPaquete.ALIMENTARIO_CONGELADO);
+                productos_alimentarios_cogelados.clear();
+                this.paquetes.add(paquete_alimentario_conglelados);
+                peso_alimentarios_congelados = 0;
+            }
+            for (Lote l : p.getLotes()) {
+                paquetes_lote = l.crearPaquetesLote(direccion);
+                this.paquetes.addAll(paquetes_lote);
+                paquetes_lote.clear();
+            }
+
         }
+        this.pedidos.clear();
+    }
+    /**
+     * Busca un paquete en el array de paquetes que tenga hueco y que cumpla las condiciones impuestas
+     * @param tipo
+     * @param direccion
+     * @param peso
+     * @return
+     */
+    public int buscarPaqueteConHueco(TipoPaquete tipo, String direccion, double peso) {
+        int indice = 0;
+        for (Paquete pa : this.paquetes) {
+            if (pa.getTipoPaquete() == tipo && pa.getDestino() == direccion && pa.getPesoRestante() >= peso) {
+                return indice;
+            }
+            indice++;
+        }
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Lista paquetes:" + this.paquetes.toString() +"\n" + "Plan de Reparto:" + this.camiones.toString();
+    }
+
+    public void planDeReparto(){
+        int index_c = 0;
+
+        for (Paquete p : this.paquetes){
+
+            if (p.getTipoPaquete() == TipoPaquete.ALIMENTARIO_CONGELADO){
+                index_c = buscarCamionCongeladoConHueco(p.getPeso());
+                if (index_c != -1){
+                    this.camiones.get(index_c).addPaqueteCamion(p);
+                }
+            }
+            else if(p.getTipoPaquete() == TipoPaquete.ALIMENTARIO_REFRIGERADO){
+                index_c = buscarCamionRefrigeradoConHueco(p.getPeso());
+                if (index_c != -1){
+                    this.camiones.get(index_c).addPaqueteCamion(p);
+                }
+            }
+            else{
+                index_c = buscarCamionEstandarConHueco(p.getPeso());
+                if (index_c != -1){
+                    this.camiones.get(index_c).addPaqueteCamion(p);
+                }
+            }
+
+
+
+
+
+        }
+    }
+
+    public int buscarCamionCongeladoConHueco(double peso){
+        int indice = 0;
+
+        for (Camion c: this.camiones){
+            if (c.getTipocCamion() == TipoCamion.CONGELADOS && c.getPesoRestante() >= peso){
+                return indice;
+            }
+            indice++;
+        }
+        return -1;
+    }
+    public int buscarCamionRefrigeradoConHueco(double peso){
+        int indice = 0;
+
+        for (Camion c: this.camiones){
+            if (c.getTipocCamion() == TipoCamion.REFRIGERADOS  && c.getPesoRestante() >= peso){
+                return indice;
+            }
+            indice++;
+        }
+        return -1;
+    }
+    public int buscarCamionEstandarConHueco(double peso){
+        int indice = 0;
+
+        for (Camion c: this.camiones){
+            if (c.getTipocCamion() == TipoCamion.ESTANDAR  && c.getPesoRestante() >= peso){
+                return indice;
+            }
+            indice++;
+        }
+        return -1;
+    }
+    public int buscarCamionEspecialConHueco(double peso){
+        int indice = 0;
+
+        for (Camion c: this.camiones){
+            if (c.getTipocCamion() == TipoCamion.ESPECIAL  && c.getPesoRestante() >= peso){
+                return indice;
+            }
+            indice++;
+        }
+        return -1;
     }
 
 }

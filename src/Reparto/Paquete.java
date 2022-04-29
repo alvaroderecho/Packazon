@@ -17,6 +17,7 @@ public class Paquete {
     private boolean fallido = false; //Max entregas fallidas realizadas
     private String destino;
     private double peso;
+    private TipoPaquete tipo;
     private int num_entregas_fallido = 0;
     private List<Producto> productos = new ArrayList<Producto>();
     /**
@@ -25,10 +26,11 @@ public class Paquete {
      * @param peso
      * @param prods
      */
-    public Paquete (String destino, double peso, List<Producto> prods){
+    public Paquete (String destino, double peso, List<Producto> prods, TipoPaquete tipo){
         this.destino = destino;
         this.peso = peso;
-        this.productos = prods;
+        this.productos.addAll(prods);
+        this.tipo = tipo;
     }
     /**
      * 
@@ -117,6 +119,37 @@ public class Paquete {
 
     public boolean getFallido() {
         return this.fallido;
+    }
+
+    /**
+     * Añade un producto a un paquete
+     * @param p
+     */
+    public void addProductoPaquete(Producto p){
+        this.productos.add(p);
+    }
+    /**
+     * Devuelve el peso restante del paquete
+     * @return peso restante
+     */
+    public double getPesoRestante(){
+        double peso_restante = 0;
+        
+        peso_restante = 60 - this.peso;
+
+        return peso_restante;
+    }
+    /**
+     * Devuelve el tipo de paquete
+     * @return
+     */
+    public TipoPaquete getTipoPaquete(){
+        return this.tipo;
+    }
+
+    @Override
+    public String toString(){
+        return "Paquete:" + this.productos.toString();
     }
 
 }
