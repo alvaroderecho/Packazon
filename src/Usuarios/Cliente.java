@@ -29,7 +29,6 @@ public class Cliente extends Cuenta{
  * @param Contrasenia
  */
 public Cliente(String nombre_empresa, String Cif, String direc_fact, String email, String Num_tarjeta, String Nombre_usuario, String Contrasenia) {
-    
         super(Nombre_usuario, Contrasenia);
         this.Nombre_empresa = nombre_empresa;
         this.Cif = Cif;

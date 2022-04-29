@@ -19,7 +19,7 @@ import java.util.List;
  * @author Alvaro Derecho
  * @author Salah
  */
-public  class Sistema implements Serializable{
+public class Sistema implements Serializable{
 
 
     private static Sistema sist = null;
@@ -96,6 +96,7 @@ public  class Sistema implements Serializable{
 
     public Status rmvCuenta(Cuenta c){
         //compruebo que la cuenta exista y que no sea null
+        if(Sistema.cuentas.isEmpty()) return Status.ERROR;
         if(Sistema.cuentas.contains(c) == false || c == null ) return Status.ERROR;
         //borro la cuenta del array de cuentas
 		Sistema.cuentas.remove(c); 
@@ -116,6 +117,7 @@ public  class Sistema implements Serializable{
     public static Status rmvOperario(Operario o){
 
         //compruebo que el operario exista y que no sea null
+        if(Sistema.operarios.isEmpty()) return Status.ERROR;
         if(Sistema.operarios.contains(o) == false || o == null ) return Status.ERROR;
         //borro la cuenta del array de cuentas
 		Sistema.cuentas.remove(o); 
@@ -126,7 +128,6 @@ public  class Sistema implements Serializable{
     public static Status addCliente(Cliente c) {
 
         //Compruebo que el cliente no exista y que sea correcto
-        if(Sistema.clientes.isEmpty()) return Status.ERROR;
         if(Sistema.clientes.contains(c)|| c==null) return Status.ERROR;
 
         Sistema.clientes.add(c);
@@ -136,6 +137,7 @@ public  class Sistema implements Serializable{
     public static Status rmvCliente(Cliente c){
 
         //compruebo que el cliente exista y que no sea null
+        if(Sistema.clientes.isEmpty()) return Status.ERROR;
         if(Sistema.clientes.contains(c) == false || c == null ) return Status.ERROR;
         //borro la cuenta del array de clientes
 		Sistema.cuentas.remove(c); 
@@ -143,7 +145,7 @@ public  class Sistema implements Serializable{
 
     }
 
-    public static  ArrayList<Cliente> getClientes() {
+    public static List<Cliente> getClientes() {
 
         return Sistema.clientes;
 
@@ -159,6 +161,7 @@ public  class Sistema implements Serializable{
     public Status rmvPedido(Pedido p){
 
         //compruebo que el pedido no exista y que no sea null
+        if(Sistema.pedidos.isEmpty()) return Status.ERROR;
         if(Sistema.pedidos.contains(p) == false || p == null ) return Status.ERROR;
         //borro la cuenta del array de clientes
 		Sistema.pedidos.remove(p); 
@@ -179,6 +182,7 @@ public  class Sistema implements Serializable{
     public Status rmvRepartidor(Repartidor r){
 
         //compruebo que el repartidor exista y que no sea null
+        if(Sistema.repartidores.isEmpty()) return Status.ERROR;
         if(Sistema.repartidores.contains(r) == false|| r == null) return Status.ERROR;
 
         Sistema.repartidores.remove(r);
@@ -199,6 +203,7 @@ public  class Sistema implements Serializable{
     public Status rmvCamion(Camion c) {
 
         //compruebo que el camion este en la lista y que no sea null
+        if(Sistema.camiones.isEmpty()) return Status.ERROR;
         if(Sistema.camiones.contains(c) ==false|| c == null) return Status.ERROR;
 
         Sistema.camiones.remove(c);

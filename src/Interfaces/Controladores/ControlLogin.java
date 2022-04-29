@@ -2,6 +2,9 @@ package Interfaces.Controladores;
 
 import java.awt.event.*;
 import Interfaces.vistas.*;
+import Sistema.Sistema;
+import java.util.List;
+import Usuarios.*;
 
 public class ControlLogin implements ActionListener {
 
@@ -22,12 +25,19 @@ public class ControlLogin implements ActionListener {
 		String password = vista.getPassword();
 		if (e.getSource() == vista.getLoginButton()) {
 			if (tipoCuenta.equals("Cliente")) {
-				this.frame.mostrarPanel("clientePanel");
+				/**SOMOS UN CLIENTE */
+				List<Cliente> clientes = Sistema.getClientes();
+				for (Cliente c: clientes) {
+					if (usuario.equals(c.GetNombreUsuario()) && password.equals(c.GetContrasenia()))
+						this.frame.mostrarPanel("clientePanel");
+				}
 				return;
 			} else if (tipoCuenta.equals("Repartidor")) {
+				/**SOMOS UN REPARTIDOR */
 				this.frame.mostrarPanel("repartidorPanel");
 				return;
 			} else {
+				/**SOMOS UN OPERARIO */
 				if (usuario.equals("operario") && password.equals("12345"))
 					this.frame.mostrarPanel("operarioPanel");
 				return;

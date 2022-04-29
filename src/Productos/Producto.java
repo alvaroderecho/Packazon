@@ -181,13 +181,13 @@ public abstract class Producto implements IProductInfo{
     public boolean isRefrigerado(){
         return false;
     }
-    /*@Override
+    @Override
     public String toString() {
         return "Unidades: " + this.unidades + " , id: " + this.id + " ,description: " + this.descript + " ,peso: " + this.peso + " ,volumen: " + this.volumen + " , precio total: " + this.precio_total + " ";
-    }*/
-    @Override
-    public String toString(){
-        return this.descript;
     }
+    // @Override
+    // public String toString(){
+    //     return this.descript;
+    // }
 
 }

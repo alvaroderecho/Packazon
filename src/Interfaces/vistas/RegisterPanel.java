@@ -25,11 +25,20 @@ public class RegisterPanel extends JPanel{
     final private JLabel CIF = new JLabel("CIF");
     final private JTextField CIFcampo = new JTextField("XXXYYYZZZA", 8);
     final private JLabel numTarjeta = new JLabel("Número de tarjeta");
-    final private JTextField tarjetaCampo = new JTextField("XXXX-YYYY-ZZZZ-WWWW", 12);
-
+    final private JTextField tarjetaCampo = new JTextField("XXXX-YYYY-ZZZZ-WWWW", 15);
+    final private JLabel dirrFact = new JLabel("Dirr de facturación");
+    final private JTextField factCampo = new JTextField("Av de la Sierra", 12);
+    final private JLabel email = new JLabel("Correo");
+    final private JTextField emailCampo = new JTextField("packazon@gmail.com", 18);
+    final private JButton botonVolver = new JButton("Volver");
 
     final JPanel userPanel = new JPanel();
     final JPanel passPanelValidar = new JPanel();
+    final JPanel nombrePanel = new JPanel();
+    final JPanel tarjetaPanel = new JPanel();
+    final JPanel factPanel = new JPanel();
+    final JPanel emailPanel = new JPanel();
+
 
 	private JLabel packazon;
 
@@ -48,7 +57,7 @@ public class RegisterPanel extends JPanel{
 
      
     public void setLayoutManager() {
-		setLayout(new GridLayout(7, 1, 0, 0));
+		setLayout(new GridLayout(9, 1, 0, 0));
     }
 
     public void setLocationAndSize() {
@@ -71,9 +80,30 @@ public class RegisterPanel extends JPanel{
             passPanelValidar.add(showPasswordValida);
         this.add(userPanel);
         this.add(passPanelValidar);
+        /**nombre de empresa */
+        nombrePanel.add(nombreEmpresa);
+        nombrePanel.add(empresaCampo);
+        /**CIF */
+        nombrePanel.add(CIF);
+        nombrePanel.add(CIFcampo);
+        this.add(nombrePanel);
+        /**Dirección de Facturación */
+        factPanel.add(dirrFact);
+        factPanel.add(factCampo);
+        this.add(factPanel);
+        /**email */
+        emailPanel.add(email);
+        emailPanel.add(emailCampo);
+        this.add(emailPanel);
+        /**num tarjeta */
+        tarjetaPanel.add(numTarjeta);
+        tarjetaPanel.add(tarjetaCampo);
+        this.add(tarjetaPanel);
+       
         /**Botón de registrarse */
         registerPanel.add(resetButton);
         registerPanel.add(register);
+        registerPanel.add(botonVolver);
         this.add(registerPanel);
     }
 
@@ -107,11 +137,47 @@ public class RegisterPanel extends JPanel{
 
     public void setControlador(ActionListener c) {  
 		register.addActionListener(c);
+        botonVolver.addActionListener(c);
 	}
  
     public JButton getRegisterButton() {
         return this.register;
     }
 
-    
+    /**GETTERS */
+    public String getUser() {
+        return userTextField.getText();
+    }
+
+    public String getPassword() {
+        return new String(passwordField.getPassword());
+    }
+
+    public String getPasswordValidated() {
+        return new String(passwordFieldValidar.getPassword());
+    }
+
+    public String getEmpresa() {
+        return empresaCampo.getText();
+    }
+
+    public String getCIF() {
+        return CIFcampo.getText();
+    }
+
+    public String getFact() {
+        return factCampo.getText();
+    }
+
+    public String getEmail() {
+        return emailCampo.getText();
+    }
+
+    public String getTarjeta() {
+        return tarjetaCampo.getText();
+    }
+
+    public JButton getBackButton() {
+        return botonVolver;
+    }
 }
