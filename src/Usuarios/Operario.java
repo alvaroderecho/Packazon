@@ -279,7 +279,7 @@ public class Operario extends Cuenta {
     }
 
     public Cliente getClientebyCIF(String CIF) {
-        for (Cliente c : Sistema.getClientes()) {
+        for (Cliente c : this.getClientes()) {
             if (c.getCif() == CIF) {
                 return c;
             }
@@ -651,7 +651,7 @@ public class Operario extends Cuenta {
 
     @Override
     public String toString() {
-        return "Lista paquetes:" + this.paquetes.toString() +"\n" + "Plan de Reparto:" + this.camiones.toString();
+        return "\n" + "Lista paquetes:" + this.paquetes.toString() +"\n" + "Plan de Reparto:" + this.camiones.toString();
     }
 
     public void planDeReparto(){
@@ -728,6 +728,10 @@ public class Operario extends Cuenta {
             indice++;
         }
         return -1;
+    }
+
+    public List<Cliente> getClientes(){
+        return this.clientes;
     }
 
 }

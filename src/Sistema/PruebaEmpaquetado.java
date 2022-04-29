@@ -12,22 +12,17 @@ public class PruebaEmpaquetado {
         Operario op = new Operario("Joseba", "1234");
         Cliente c = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
         op.addCliente(c);
-        System.out.println("hasta aqui va bien");
         op.registrar_camion("1", 1000, TipoCamion.CONGELADOS);
         op.registrar_camion("2", 1000, TipoCamion.ESTANDAR);
         op.registrar_camion("3", 1000, TipoCamion.REFRIGERADOS);
-        System.out.println("Se registran los camiones");
         op.darAltaCamion("1");
         op.darAltaCamion("2");
         op.darAltaCamion("3");
-        System.out.println("Se dan de alta los camiones");
         op.darAltaPedido("UAM", "53853085", false);
-        System.out.println("Se dan de alta el pedido");
-        System.out.println(op.getPedidoById(0).toString());
-        //op.darAltaPedido("UAM", "53853085", false);
+        op.darAltaPedido("UAM", "53853085", false);
         op.addLotePedido(0);
        
-        /*op.addLoteLotePedido(0, 1);
+        op.addLoteLotePedido(0, 1);
         op.addProductLotePedido(0,1, 1, 20, 1, false, "producto3", 10, TipoProducto.ALIMENTARIO);
         op.addProductLotePedido(0,1, 1, 20, 1, false, "producto4", 10, TipoProducto.ALIMENTARIO);
         op.addProductoLoteLotePedido(0, 1, 100,  1, 20, 1, false, "producto5", 10, TipoProducto.ESTANDAR);
@@ -44,6 +39,6 @@ public class PruebaEmpaquetado {
         op.realizarEmpaquetado();
         System.out.println(op.toString());
         op.planDeReparto();
-        System.out.println(op.toString());*/
+        System.out.println(op.toString());
     }
 }
