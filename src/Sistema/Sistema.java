@@ -25,35 +25,34 @@ public  class Sistema implements Serializable{
     private static Sistema sist = null;
 
     //cuentas disponibles
-    private ArrayList<Cuenta> cuentas;
-    
+    private static ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 
     //array de los operarios
-    private ArrayList<Operario> operarios;
+    private static ArrayList<Operario> operarios = new ArrayList<Operario>();
 
     //array de los clientes
-    private ArrayList<Cliente> clientes;
+    private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
     //array de los pedidos
-    private ArrayList<Pedido> pedidos;
+    private static ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
     //array de los repartidores
-    private ArrayList<Repartidor> repartidores;
+    private static ArrayList<Repartidor> repartidores = new ArrayList<Repartidor>();
 
     //array de camiones 
-    private ArrayList<Camion> camiones;
+    private static ArrayList<Camion> camiones =  new ArrayList<Camion>();
 
     //array de lotes
-    private ArrayList<Lote> lotes;
+    private static ArrayList<Lote> lotes= new ArrayList<Lote>();
 
     //array de paquetes
-    private ArrayList<Paquete> paquetes;
+    private static ArrayList<Paquete> paquetes = new ArrayList<Paquete>();
 
-    private ArrayList<Factura> facturas;
+    private static ArrayList<Factura> facturas  = new ArrayList<Factura>();
 
-    private ArrayList<Producto> productos;
+    private static ArrayList<Producto> productos  = new ArrayList<Producto>();
 
-    private ArrayList<PlanRepartoPorCamion> planRepartoPorCamion;
+    private static ArrayList<PlanRepartoPorCamion> planRepartoPorCamion;
 
 
 
@@ -61,18 +60,6 @@ public  class Sistema implements Serializable{
      * Constructor de la clase sistema
      */
     private Sistema() {
-        
-        this.operarios = new ArrayList<Operario>();
-        this.clientes = new ArrayList<Cliente>();
-        this.cuentas = new ArrayList<Cuenta>();
-        this.pedidos = new ArrayList<Pedido>();
-        this.camiones = new ArrayList<Camion>();
-        this.lotes = new ArrayList<Lote>();
-        this.paquetes = new ArrayList<Paquete>();
-        this.facturas = new ArrayList<Factura>();
-        this.productos = new ArrayList<Producto>();
-
-
 
     }
 
@@ -80,13 +67,13 @@ public  class Sistema implements Serializable{
 
         if(sist ==null) {
             sist = new Sistema();
-            try {
-                sist.cargaPrograma();
-            }
-            catch(Exception e) {
-                System.out.println("Error leyendo la clase de sistema. Creando nueva clase de sistema...");
+             try {
+                 sist.cargaPrograma();
+             }
+             catch(Exception e) {
+                 System.out.println("Error leyendo la clase de sistema. Creando nueva clase de sistema...");
 
-            }
+             }
 
         }
         return sist;
@@ -98,9 +85,9 @@ public  class Sistema implements Serializable{
 	public Status addCuenta(Cuenta c){
 
         //compruebo que la cuenta no exista ya o que sea null
-        if(this.cuentas.contains(c) == true || c == null ) return Status.ERROR;
+        if(Sistema.cuentas.contains(c) == true || c == null ) return Status.ERROR;
         //se añade la cuenta al array de cuentas
-        this.cuentas.add(c);
+        Sistema.cuentas.add(c);
         return Status.OK;
 
     }
@@ -109,9 +96,9 @@ public  class Sistema implements Serializable{
 
     public Status rmvCuenta(Cuenta c){
         //compruebo que la cuenta exista y que no sea null
-        if(this.cuentas.contains(c) == false || c == null ) return Status.ERROR;
+        if(Sistema.cuentas.contains(c) == false || c == null ) return Status.ERROR;
         //borro la cuenta del array de cuentas
-		this.cuentas.remove(c); 
+		Sistema.cuentas.remove(c); 
 		return Status.OK;
     }
 
@@ -119,45 +106,52 @@ public  class Sistema implements Serializable{
 
     public Status addOperario(Operario o) {
 
-        if(this.operarios.contains(o)==true || o == null) return Status.ERROR;
+        if(Sistema.operarios.contains(o)==true || o == null) return Status.ERROR;
         //añado operario al array de operarios
-        this.operarios.add(o);
+        Sistema.operarios.add(o);
         return Status.OK;
 
     }
 
-    public Status rmvOperario(Operario o){
+    public static Status rmvOperario(Operario o){
 
         //compruebo que el operario exista y que no sea null
-        if(this.operarios.contains(o) == false || o == null ) return Status.ERROR;
+        if(Sistema.operarios.contains(o) == false || o == null ) return Status.ERROR;
         //borro la cuenta del array de cuentas
-		this.cuentas.remove(o); 
+		Sistema.cuentas.remove(o); 
 		return Status.OK;
 
     }
     
-    public Status addCliente(Cliente c) {
+    public static Status addCliente(Cliente c) {
 
         //Compruebo que el cliente no exista y que sea correcto
-        if(this.clientes.contains(c)==true|| c==null) return Status.ERROR;
+        if(Sistema.clientes.isEmpty()) return Status.ERROR;
+        if(Sistema.clientes.contains(c)|| c==null) return Status.ERROR;
 
-        this.clientes.add(c);
+        Sistema.clientes.add(c);
         return Status.OK;
     }
 
-    public Status rmvCliente(Cliente c){
+    public static Status rmvCliente(Cliente c){
 
         //compruebo que el cliente exista y que no sea null
-        if(this.clientes.contains(c) == false || c == null ) return Status.ERROR;
+        if(Sistema.clientes.contains(c) == false || c == null ) return Status.ERROR;
         //borro la cuenta del array de clientes
-		this.cuentas.remove(c); 
+		Sistema.cuentas.remove(c); 
 		return Status.OK;
+
+    }
+
+    public static  ArrayList<Cliente> getClientes() {
+
+        return Sistema.clientes;
 
     }
     public Status addPedido(Pedido p ){
         //compruebo que el pedido no este ya y que sea correcto
-        if(this.pedidos.contains(p) ==true||p == null) return Status.ERROR;
-        this.pedidos.add(p);
+        if(Sistema.pedidos.contains(p) ==true||p == null) return Status.ERROR;
+        Sistema.pedidos.add(p);
         return Status.OK;
 
     }
@@ -165,9 +159,9 @@ public  class Sistema implements Serializable{
     public Status rmvPedido(Pedido p){
 
         //compruebo que el pedido no exista y que no sea null
-        if(this.pedidos.contains(p) == false || p == null ) return Status.ERROR;
+        if(Sistema.pedidos.contains(p) == false || p == null ) return Status.ERROR;
         //borro la cuenta del array de clientes
-		this.pedidos.remove(p); 
+		Sistema.pedidos.remove(p); 
 		return Status.OK;
 
     }
@@ -175,9 +169,9 @@ public  class Sistema implements Serializable{
     public Status addRepartidor(Repartidor r){
 
         //compruebo que el repartidor no exista y que no sea null
-        if(this.repartidores.contains(r) == true|| r == null) return Status.ERROR;
+        if(Sistema.repartidores.contains(r) == true|| r == null) return Status.ERROR;
         
-        this.repartidores.add(r);
+        Sistema.repartidores.add(r);
         return Status.OK;
 
     }
@@ -185,9 +179,9 @@ public  class Sistema implements Serializable{
     public Status rmvRepartidor(Repartidor r){
 
         //compruebo que el repartidor exista y que no sea null
-        if(this.repartidores.contains(r) == false|| r == null) return Status.ERROR;
+        if(Sistema.repartidores.contains(r) == false|| r == null) return Status.ERROR;
 
-        this.repartidores.remove(r);
+        Sistema.repartidores.remove(r);
         return Status.OK;
 
     }
@@ -195,9 +189,9 @@ public  class Sistema implements Serializable{
     public Status addCamion(Camion c){
 
         //compruebo que el camion no este en la lista
-        if(this.camiones.contains(c)==true|| c == null) return Status.ERROR;
+        if(Sistema.camiones.contains(c)==true|| c == null) return Status.ERROR;
 
-        this.camiones.add(c);
+        Sistema.camiones.add(c);
         return Status.OK;
 
     }
@@ -205,9 +199,9 @@ public  class Sistema implements Serializable{
     public Status rmvCamion(Camion c) {
 
         //compruebo que el camion este en la lista y que no sea null
-        if(this.camiones.contains(c) ==false|| c == null) return Status.ERROR;
+        if(Sistema.camiones.contains(c) ==false|| c == null) return Status.ERROR;
 
-        this.camiones.remove(c);
+        Sistema.camiones.remove(c);
         return Status.OK;
 
     }
@@ -215,9 +209,9 @@ public  class Sistema implements Serializable{
     public Status addLote(Lote l) {
 
         //compruebo que el lote no este ya en el array de lotes
-        if(this.lotes.contains(l) == true || l == null) return Status.ERROR;
+        if(Sistema.lotes.contains(l) == true || l == null) return Status.ERROR;
 
-             this.lotes.add(l);
+             Sistema.lotes.add(l);
             return Status.OK;
         
     }
@@ -225,77 +219,77 @@ public  class Sistema implements Serializable{
 
     public Status rmvLote(Lote l) {
 
-        if(this.lotes.contains(l) == false || l == null) return Status.ERROR;
+        if(Sistema.lotes.contains(l) == false || l == null) return Status.ERROR;
 
-        this.lotes.remove(l);
+        Sistema.lotes.remove(l);
         return Status.OK;
 
     }
 
     public Status addPaquete(Paquete pa) {
 
-        if(this.paquetes.contains(pa)==true || pa == null) return Status.ERROR;
+        if(Sistema.paquetes.contains(pa)==true || pa == null) return Status.ERROR;
 
-        this.paquetes.add(pa);
+        Sistema.paquetes.add(pa);
         return Status.OK;
     }
 
     public Status rmvPaquete(Paquete p) {
 
-        if(this.lotes.contains(p) == false || p == null) return Status.ERROR;
+        if(Sistema.lotes.contains(p) == false || p == null) return Status.ERROR;
 
-        this.lotes.remove(p);
+        Sistema.lotes.remove(p);
         return Status.OK;
 
     }
 
     public Status addFactura(Factura f) {
 
-        if(this.facturas.contains(f)==true || f == null) return Status.ERROR;
+        if(Sistema.facturas.contains(f)==true || f == null) return Status.ERROR;
 
-        this.facturas.add(f);
+        Sistema.facturas.add(f);
         return Status.OK;
     }
 
     public Status rmvFactura(Factura f) {
 
-        if(this.facturas.contains(f) == false || f == null) return Status.ERROR;
+        if(Sistema.facturas.contains(f) == false || f == null) return Status.ERROR;
 
-        this.facturas.remove(f);
+        Sistema.facturas.remove(f);
         return Status.OK;
 
     }
 
     public Status addProducto(Producto p) {
 
-        if(this.productos.contains(p)==true || p == null) return Status.ERROR;
+        if(Sistema.productos.contains(p)==true || p == null) return Status.ERROR;
 
-        this.productos.add(p);
+        Sistema.productos.add(p);
         return Status.OK;
     }
 
     public Status rmvProducto(Producto p) {
 
-        if(this.productos.contains(p) == false || p == null) return Status.ERROR;
+        if(Sistema.productos.contains(p) == false || p == null) return Status.ERROR;
 
-        this.productos.remove(p);
+        Sistema.productos.remove(p);
         return Status.OK;
 
     }
 
     public Status addPlanDeReparto(PlanRepartoPorCamion pl) {
 
-        if(this.planRepartoPorCamion.contains(pl)==true || pl == null) return Status.ERROR;
+        if(Sistema.planRepartoPorCamion.contains(pl)==true || pl == null) return Status.ERROR;
 
-        this.planRepartoPorCamion.add(pl);
+        Sistema.planRepartoPorCamion.add(pl);
         return Status.OK;
     }
 
     public Status rmvPlanDeReparto(PlanRepartoPorCamion pl) {
 
-        if(this.planRepartoPorCamion.contains(pl)==true || pl== null) return Status.ERROR;
+        if(Sistema.planRepartoPorCamion.contains(pl)==true || pl== null) return Status.ERROR;
 
-        this.planRepartoPorCamion.add(pl);
+        Sistema.planRepartoPorCamion.add(pl);
         return Status.OK;
     }
 
@@ -308,7 +302,7 @@ public  class Sistema implements Serializable{
     public void guardaPrograma(){
 
 		try{
-			FileOutputStream f = new FileOutputStream("./data/system.data");
+			FileOutputStream f = new FileOutputStream("src/Sistema/system.data");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 			o.writeObject(Sistema.sist);
 			o.close();
@@ -322,7 +316,7 @@ public  class Sistema implements Serializable{
 	 */
 	public void cargaPrograma() throws Exception{
 		
-		FileInputStream f = new FileInputStream("./data/system.data");
+		FileInputStream f = new FileInputStream("src/Sistema/system.data");
 		ObjectInputStream o = new ObjectInputStream(f);
 		Sistema.sist = (Sistema)o.readObject();
 		o.close();
@@ -330,16 +324,16 @@ public  class Sistema implements Serializable{
 	}
 
     public static void vaciarSistema() {
-		Sistema sistem = Sistema.getInstance();
-		sistem.camiones.clear();
-		sistem.clientes.clear();
-		sistem.cuentas.clear();
-		sistem.facturas.clear();
-		sistem.lotes.clear();
-		sistem.operarios.clear();
-        sistem.paquetes.clear();
-		sistem.pedidos.clear();
-        sistem.repartidores.clear();
+	    Sistema.getInstance();
+		Sistema.camiones.clear();
+		Sistema.clientes.clear();
+		Sistema.cuentas.clear();
+		Sistema.facturas.clear();
+		Sistema.lotes.clear();
+		Sistema.operarios.clear();
+        Sistema.paquetes.clear();
+		Sistema.pedidos.clear();
+        Sistema.repartidores.clear();
 	}
 
 

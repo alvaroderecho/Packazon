@@ -5,6 +5,7 @@ import Productos.*;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  * Clase que demuestra la funcionalidad básica de la aplicacion
@@ -100,7 +101,7 @@ public  class Main {
 
 
         //crear un paquete
-        Paquete pq = new Paquete("calle ..", 20, productos);
+        Paquete pq = new Paquete("calle ..", 20, productos,TipoPaquete.NOALIMENTARIO);
         sist.addPaquete(pq);
         System.out.println("Creando un paquete...");
          //se crea pedido
@@ -130,8 +131,8 @@ public  class Main {
         sist.addCamion(ca3);
 
 
-         PlanRepartoPorCamion pl = new PlanRepartoPorCamion();
-         sist.addPlanDeReparto(pl);
+        //  PlanRepartoPorCamion pl = new PlanRepartoPorCamion();
+        //  sist.addPlanDeReparto(pl);
 
 
 
