@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import Productos.Pedido;
-
 public class PedidoPanel extends JPanel{
     JLabel packazon;
   	final private JLabel direcc_Destino = new JLabel("Dirección de destino: ");
@@ -16,7 +14,8 @@ public class PedidoPanel extends JPanel{
     final private JLabel Urgente = new JLabel("Urgente: ");
     final private JCheckBox esUrgente = new JCheckBox();
     final private JPanel urgentPannel = new JPanel();
-    final private JButton boton = new JButton("Añadir Producto");
+    final private JButton botonAddProduct = new JButton("Añadir Producto");
+    final private JButton botonAddLote = new JButton("Añadir Lote");
     final private JPanel button = new JPanel();
     final private JPanel cliente = new JPanel();
     final private JButton finalizarPedido = new JButton("Finalizar Pedido");
@@ -56,7 +55,8 @@ public class PedidoPanel extends JPanel{
       urgentPannel.add(Urgente);
       urgentPannel.add(esUrgente);
       this.add(urgentPannel);
-      button.add(boton);
+      button.add(botonAddProduct);
+      button.add(botonAddLote);
       this.add(button);
 
       /**Botones */
@@ -67,7 +67,7 @@ public class PedidoPanel extends JPanel{
     }
 
     public void setControlador(ActionListener c) {  
-      boton.addActionListener(c);
+      botonAddProduct.addActionListener(c);
       finalizarPedido.addActionListener(c);
       botonVolver.addActionListener(c);
     }
@@ -80,13 +80,12 @@ public class PedidoPanel extends JPanel{
       return this.finalizarPedido;
     }
 
-    public static void main(String[] args) {
-    JFrame jf = new JFrame();
-		PedidoPanel pf = new PedidoPanel();
-    jf.add(pf);
-    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    jf.setSize(475, 500);
-    jf.setTitle("Añadir Pedido");
-    jf.setVisible(true);
-	}
+    public JButton getAddProduct() {
+      return this.botonAddProduct;
+    }
+
+    public JButton getAddLote() {
+      return this.botonAddLote;
+    }
+	
 }

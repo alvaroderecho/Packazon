@@ -15,12 +15,15 @@ public class Ventana extends JFrame {
 	private OperarioPanel operarioPanel = new OperarioPanel();
 	private PedidoPanel pedidoPanel = new PedidoPanel();
 	private ProductPanel productPanel = new ProductPanel();
+	private RegisterPanel registerPanel = new RegisterPanel();
 	
 	private ControlLogin contLogin;
 	private ControlCliente contCliente;
 	private ControlRepartidor contRepartidor;
 	private ControlOperario contOperario;
 	private ControlPedido contPedido;
+	private ControlProduct contProduct;
+	private ControlRegister contRegister;
 
 	private JPanel contentPane;
 	
@@ -39,6 +42,7 @@ public class Ventana extends JFrame {
 		contentPane.add(operarioPanel, "operarioPanel");
 		contentPane.add(pedidoPanel, "pedidoPanel");
 		contentPane.add(productPanel, "productPanel");
+		contentPane.add(registerPanel, "registerPanel");
 	}
 
 	public void setControlador(Controlador controlador) {
@@ -52,6 +56,10 @@ public class Ventana extends JFrame {
 		operarioPanel.setControlador(contOperario);
 		this.contPedido = controlador.getControloPedido();
 		pedidoPanel.setControlador(contPedido);
+		this.contProduct = controlador.getControlProduct();
+		productPanel.setControlador(contProduct);
+		this.contRegister = controlador.getControlRegister();
+		registerPanel.setControlador(contRegister);
 	}
 
 	public LoginPanel getGetVistaLoginPanel() {
@@ -76,6 +84,10 @@ public class Ventana extends JFrame {
 
 	public ProductPanel getGetVistaProductPanel() {
 		return this.productPanel;
+	}
+
+	public RegisterPanel getGetVistaRegisterPanel() {
+		return this.registerPanel;
 	}
 	
 	public void mostrarPanel(String carta) {

@@ -5,12 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import Productos.Pedido;
-import Productos.Producto;
-import Productos.TipoProducto;
-
-
-public class ProductPanel extends JPanel implements ActionListener{
+public class ProductPanel extends JPanel{
 	final private JLabel descripcion = new JLabel("Descripción: ");
 	final private JTextField description = new JTextField("roja y brillante", 17);
 	final private JButton clear_description = new JButton("CLR");
@@ -41,12 +36,18 @@ public class ProductPanel extends JPanel implements ActionListener{
 	final private JPanel jOpcion4 = new JPanel();
 	final private JPanel jOpcion5 = new JPanel();
 
+	private JLabel packazon;
 
 	public ProductPanel() {
+		createPic();
 		setLayoutManager();
 		setLocationAndSize();
 		addComponents();
 		addActionEvent();
+	}
+
+	private void createPic() {
+		packazon = Ventana.createPic();
 	}
 
 	private void setLayoutManager() {
@@ -100,6 +101,7 @@ public class ProductPanel extends JPanel implements ActionListener{
 		jOpcion4.add(opcion4);
 		jOpcion5.add(opcion5);
 
+		this.add(packazon);
 		this.add(desc);
 		this.add(jOpcion1);
 		this.add(jOpcion2);
@@ -120,7 +122,6 @@ public class ProductPanel extends JPanel implements ActionListener{
 		opcion5.addActionListener(event -> hideAsegurado());
 		opcion6.addActionListener(event -> showAsegurado());
 		clear_description.addActionListener(event -> clearDescription());
-		boton.addActionListener(this);
 	}
 
 	private void hideAsegurado() {
@@ -135,53 +136,55 @@ public class ProductPanel extends JPanel implements ActionListener{
 		description.setText("");
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == boton) {
-			String salida = "Producto ";
-			TipoProducto tp = TipoProducto.ESTANDAR;
-			if (opcion1.isSelected()) {
-				salida += opcion1.getText();
-				tp = TipoProducto.ESTANDAR;
-			}
-			if (opcion2.isSelected()) {
-				salida +=opcion2.getText();
-				tp = TipoProducto.FRAGIL;
-			}
-			if (opcion3.isSelected()) {
-				salida +=opcion3.getText();
-				tp = TipoProducto.ALIMENTARIO;;
-			}
-			if (opcion4.isSelected()) {
-				salida +=opcion4.getText();
-				tp = TipoProducto.REFRIGERADO;
-			}
-			if (opcion5.isSelected()) {
-				salida +=opcion5.getText();
-				tp = TipoProducto.CONGELADO;
-			}
-			if (opcion6.isSelected()) {
-				Boolean asegu = asegurado.isSelected();
-				salida += opcion6.getText();
-				if (asegu)
-					salida += " asegurado";
-				tp = TipoProducto.LIQUIDO;
-			}
-			Producto p = Pedido.createProducto((int)spinn.getValue(), (double)spinn_weight.getValue(), 1, asegurado.isSelected(), description.getText(), (double)spinn_volum.getValue(), tp);		
-			JOptionPane.showMessageDialog(this, p.toString() + salida);
-			
-		}
+	public void setControlador(ActionListener c) {  
+		boton.addActionListener(c);
 	}
 
-	public static void main(String[] args) {
-		
-		ProductPanel pf = new ProductPanel();
-		PedidoPanel pp = new PedidoPanel();
-		JFrame jf = new JFrame();
-			jf.add(pf);
-			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			jf.setSize(475, 500);
-			jf.setTitle("Añadir Producto");
-			jf.setVisible(true);
+	public JButton getBotonAddProduct() {
+		return this.boton;
+	}
+
+	public JRadioButton getOpcion1() {
+		return this.opcion1;
+	}
+
+	public JRadioButton getOpcion2() {
+		return this.opcion2;
+	}
+
+	public JRadioButton getOpcion3() {
+		return this.opcion3;
+	}
+
+	public JRadioButton getOpcion4() {
+		return this.opcion4;
+	}
+
+	public JRadioButton getOpcion5() {
+		return this.opcion5;
+	}
+
+	public JRadioButton getOpcion6() {
+		return this.opcion6;
+	}
+
+	public JCheckBox getAsegurado() {
+		return this.asegurado;
+	}
+
+	public JTextField getDescription() {
+		return this.description;
+	}
+
+	public JSpinner getUnidades() {
+		return this.spinn;
+	}
+
+	public JSpinner getPeso() {
+		return this.spinn_weight;
+	}
+
+	public JSpinner getVolumen() {
+		return this.spinn_volum;
 	}
 }

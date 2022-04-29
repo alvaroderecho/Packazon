@@ -3,9 +3,6 @@ package Interfaces.vistas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.border.EmptyBorder;
  
 public class LoginPanel extends JPanel{
@@ -109,7 +106,16 @@ public class LoginPanel extends JPanel{
  
 	public void setControlador(ActionListener c) {  
 		loginButton.addActionListener(c);
+        botonRegister.addActionListener(c);
 	}
+
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
+    public JButton getRegisterButton() {
+        return botonRegister;
+    }
 
     public String getTipoCuenta() {
         return (String)combo.getSelectedItem();

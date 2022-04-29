@@ -3,7 +3,6 @@ package Interfaces.Controladores;
 import java.awt.event.*;
 import Interfaces.vistas.*;
 
-
 public class ControlPedido implements ActionListener{
     private PedidoPanel vista;
 	private Ventana frame;
@@ -19,6 +18,8 @@ public class ControlPedido implements ActionListener{
             this.frame.mostrarPanel("operarioPanel"); 
         else if (e.getSource() == vista.getEndPedido()) {
             this.frame.mostrarPanel("operarioPanel"); 
-        }
+        } else if (e.getSource() == vista.getAddProduct()) {
+            this.frame.mostrarPanel("productPanel");
+        } 
     }
 }

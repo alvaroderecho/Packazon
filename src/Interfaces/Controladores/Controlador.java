@@ -9,6 +9,8 @@ public class Controlador {
 	private ControlRepartidor contRepartidor;
 	private ControlOperario contOperario;
 	private ControlPedido contPedido;
+	private ControlProduct contProduct;
+	private ControlRegister contRegister;
 
 	private Ventana frame;
 
@@ -19,6 +21,8 @@ public class Controlador {
 		this.contRepartidor = new ControlRepartidor(frame);
 		this.contOperario = new ControlOperario(frame);
 		this.contPedido = new ControlPedido(frame);
+		this.contProduct = new ControlProduct(frame);
+		this.contRegister = new ControlRegister(frame);
 	}
 
 	public ControlLogin getControlLogin() {
@@ -39,5 +43,13 @@ public class Controlador {
 
 	public ControlPedido getControloPedido() {
 		return this.contPedido;
+	}
+
+	public ControlProduct getControlProduct() {
+		return this.contProduct;
+	}
+
+	public ControlRegister getControlRegister() {
+		return this.contRegister;
 	}
 }

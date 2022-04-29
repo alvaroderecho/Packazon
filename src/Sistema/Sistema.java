@@ -11,17 +11,17 @@ import java.util.*;
  * @author Alvaro Derecho
  * @author Salah
  */
-public final class Sistema {
+public final class Sistema {        /**final significa que no puede haber clases que hereden de Sistema */
     private static VariablesGlobales variables;    /**Se carga en fichero */
-    private static List<Cliente> cuentas = new ArrayList<Cliente>();
+    private static List<Cliente> clientes = new ArrayList<Cliente>();
 
     public static void addCliente(Cliente c) {
         if (c!= null)
-            Sistema.cuentas.add(c);
+            Sistema.clientes.add(c);
     }
 
     public static List<Cliente> getClientes() {
-        return Sistema.cuentas;
+        return Sistema.clientes;
     }
 
 }
