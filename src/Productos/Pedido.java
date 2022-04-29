@@ -282,6 +282,10 @@ public class Pedido implements IInvoiceInfo{
         }
         return null;
     }
+    @Override
+    public String toString(){
+        return "Pedido " + this.id + this.prods.toString();
+    }
     /**
      * Busca un producto en la lista según el id y lo devuelve
      * @param id
@@ -295,7 +299,9 @@ public class Pedido implements IInvoiceInfo{
         }
         return null;
     }
-
+    public List<Lote> getLotes(){
+        return this.lotes;
+    }
 
     public double getPesoTotal() {
         double pesototal = 0;

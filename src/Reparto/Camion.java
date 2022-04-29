@@ -107,4 +107,25 @@ public class Camion {
     public void setTipoCamion(TipoCamion t){
         this.tipo = t;
     }
+    public int getPesoActual(){
+        int peso = 0;
+        for (Paquete p: paquetes){
+            peso += p.getPeso();
+        }
+        return peso;
+    }
+
+    public int getPesoRestante(){
+        int peso_restante = this.peso_max - this.getPesoActual();
+        return peso_restante;
+    }
+
+    public void addPaqueteCamion(Paquete p){
+        this.paquetes.add(p);
+    }
+
+    @Override
+    public String toString(){
+        return "Camion "+this.getMatricula().toString() + this.paquetes.toString();
+    }
 }

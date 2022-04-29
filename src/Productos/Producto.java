@@ -110,6 +110,9 @@ public abstract class Producto implements IProductInfo{
     public double getPeso() {
         return this.peso;
     }
+    public double calcularPesoTotal(){
+        return this.peso*this.unidades;
+    }
     /**
      * Añade el peso de un producto
      * @param weight
@@ -166,10 +169,25 @@ public abstract class Producto implements IProductInfo{
     public double getPrecio() {
         return this.precio_total;
     }
-
-    @Override
+    public boolean isFragil(){
+        return false;
+    }
+    public boolean isAlimentario(){
+        return false;
+    }
+    public boolean isCongelado(){
+        return false;
+    }
+    public boolean isRefrigerado(){
+        return false;
+    }
+    /*@Override
     public String toString() {
         return "Unidades: " + this.unidades + " , id: " + this.id + " ,description: " + this.descript + " ,peso: " + this.peso + " ,volumen: " + this.volumen + " , precio total: " + this.precio_total + " ";
+    }*/
+    @Override
+    public String toString(){
+        return this.descript;
     }
 
 }

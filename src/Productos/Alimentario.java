@@ -20,4 +20,15 @@ public class Alimentario extends Producto{
         super(units, weight, identifier, secured, descri, vol);
         this.setPrecioExtra(VariablesGlobales.getTasaAlim());
     }
+    @Override
+    public boolean isAlimentario(){
+        return true;
+    }
+    public boolean isCongelado(){
+        return false;
+    }
+    public boolean isRefrigerado(){
+        return false;
+    }
+
 }

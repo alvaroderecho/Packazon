@@ -1,5 +1,6 @@
 package Productos;
-
+import Reparto.Paquete;
+import Reparto.TipoPaquete;
 import java.util.*;
 /**
  * Clase Lotes
@@ -107,5 +108,100 @@ public class Lote {
             }
         }
         return null;
+    }
+    public List<Paquete> crearPaquetesLote(String direccion){
+        List<Paquete> paquetes = new ArrayList<Paquete>();
+        List<Paquete> paquetes_lote_interno = new ArrayList<Paquete>();
+        double peso = 0,peso_alimentarios = 0;
+        int flag_a = 1,flag_na = 1,flag_peso_correcto = 0;
+        
+        List<Producto> productos_alimentarios = new ArrayList<Producto>();
+        List<Producto> productos_no_alimentarios = new ArrayList<Producto>();
+        for (Producto pr:this.prods){
+            
+         if (pr.isAlimentario()){
+            
+            peso_alimentarios+=pr.calcularPesoTotal();
+            if (peso_alimentarios <= 60){
+                productos_alimentarios.add(pr);
+                flag_a = 0;
+                flag_peso_correcto = 1;
+            }
+            if (peso_alimentarios == 60){
+                Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios, productos_alimentarios,TipoPaquete.ALIMENTARIO);
+                productos_alimentarios.clear();
+                paquetes.add(paquete_alimentario);
+                peso_alimentarios = 0;
+                flag_a = 1;
+                flag_peso_correcto = 0;
+            }
+            else if (peso_alimentarios > 60 & flag_peso_correcto == 1){
+                peso_alimentarios = peso_alimentarios - pr.calcularPesoTotal();
+                Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios, productos_alimentarios,TipoPaquete.ALIMENTARIO);
+                productos_alimentarios.clear();
+                paquetes.add(paquete_alimentario);
+                peso_alimentarios = 0;
+                productos_alimentarios.add(pr);
+                flag_a = 1;
+                flag_peso_correcto = 0;
+                peso_alimentarios += pr.calcularPesoTotal();
+            }
+        
+            
+        }
+
+        else if (pr.isAlimentario() == false){
+            
+            
+            peso += pr.calcularPesoTotal();
+            if(peso<=60){
+            productos_no_alimentarios.add(pr);
+            flag_na = 0;
+            flag_peso_correcto = 1;
+            }    
+            
+            if (peso == 60){
+                Paquete paquete = new Paquete(direccion, peso,productos_no_alimentarios,TipoPaquete.NOALIMENTARIO);
+                productos_no_alimentarios.clear();
+                paquetes.add(paquete);
+                peso = 0;
+                flag_na = 1;
+                flag_peso_correcto = 0;
+            }
+            else if (peso > 60 & flag_peso_correcto == 1){
+                peso = peso - pr.calcularPesoTotal();
+                Paquete paquete = new Paquete(direccion, peso,productos_no_alimentarios,TipoPaquete.NOALIMENTARIO);
+                productos_no_alimentarios.clear();
+                paquetes.add(paquete);
+                peso = 0;
+                flag_na = 1;
+                flag_peso_correcto = 0;
+                productos_no_alimentarios.add(pr);
+                peso += pr.calcularPesoTotal();
+
+            }
+        
+        }
+    }
+        if (flag_na == 0){
+            Paquete paquete = new Paquete(direccion, peso,productos_no_alimentarios,TipoPaquete.NOALIMENTARIO);
+                    productos_no_alimentarios.clear();
+                    paquetes.add(paquete);
+                    peso = 0;
+            }
+            if (flag_a == 0){
+            Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios, productos_alimentarios,TipoPaquete.ALIMENTARIO);
+                    productos_alimentarios.clear();
+                    paquetes.add(paquete_alimentario);
+                    peso_alimentarios = 0;
+            }    
+        for (Lote lo:this.lotes){
+                paquetes_lote_interno = lo.crearPaquetesLote(direccion);
+                paquetes.addAll(paquetes_lote_interno);
+                paquetes_lote_interno.clear();
+        }
+
+
+        return paquetes;
     }
 }
