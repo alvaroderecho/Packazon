@@ -20,6 +20,8 @@ public class ControlOperario implements ActionListener{
         } 
         else if (e.getSource() == vista.getAddPedidoButton()) {
             this.frame.mostrarPanel("pedidoPanel");
+        } else if (e.getSource() == vista.getTasasButton()) {
+            this.frame.mostrarPanel("tasasPanel");
         }
     }
 

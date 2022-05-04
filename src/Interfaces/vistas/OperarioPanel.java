@@ -81,6 +81,11 @@ public class OperarioPanel extends JPanel{
     public void setControlador(ActionListener c) {  
 		botonVolver.addActionListener(c);
         botonPedido.addActionListener(c);
+        botonCamiones.addActionListener(c);
+        botonEstadisticas.addActionListener(c);
+        botonRepartidores.addActionListener(c);
+        botonReparto.addActionListener(c);
+        botonTasas.addActionListener(c);
 	}
 
     public JButton getBackButton() {
@@ -89,5 +94,25 @@ public class OperarioPanel extends JPanel{
 
     public JButton getAddPedidoButton() {
         return botonPedido;
+    }
+
+    public JButton getTasasButton() {
+        return botonTasas;
+    }
+
+    public JButton getPlanReparto() {
+        return botonReparto;
+    }
+
+    public JButton getCamiones() {
+        return botonCamiones;
+    }
+
+    public JButton getRepartidores() {
+        return botonRepartidores;
+    }
+
+    public JButton getEstadisticas() {
+        return botonEstadisticas;
     }
 }

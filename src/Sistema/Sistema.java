@@ -129,6 +129,9 @@ public class Sistema implements Serializable{
 
         //Compruebo que el cliente no exista y que sea correcto
         if(Sistema.clientes.contains(c)|| c==null) return Status.ERROR;
+        for (Cliente cli: Sistema.clientes) {
+            if (cli.getCif() == c.getCif()) return Status.ERROR;
+        }
 
         Sistema.clientes.add(c);
         return Status.OK;
