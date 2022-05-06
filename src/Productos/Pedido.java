@@ -312,21 +312,45 @@ public class Pedido implements IInvoiceInfo{
     }
 
     /**INVOICE METHODS */
-
+    /**
+     * Devuelve el logo de la compañía
+     * @return
+     */
     public String getCompanyLogo () { return "./logo.png"; }
-
+    /**
+     * Devuelve el CIF del cliente
+     * @return
+     */
     public String getClientCif() { return this.c.getCif(); }
-
+    /**
+     * Devuelve el nombre de la compañía
+     * @return
+     */
     public String getCompanyName() { return this.c.getNombreEmpresa(); }
-
+    /**
+     * Devuelve el descuento aplicado
+     * @return
+     */
     public double getDiscount() { return this.discount; }
-
+    /**
+     * Devuelve el suplemento en caso de pedido urgente
+     * @return
+     */
 	public double getUrgent() { return 5.0; }
-
+    /**
+     * Devuelve la fecha del pedido
+     * @return
+     */
 	public String getOrderDate() { return this.fecha_pedido.toString(); }
-
+    /**
+     * Devuelve el id del pedido
+     * @return
+     */
     public String getOrderIdentifier() { return String.valueOf(this.id); }
-
+    /**
+     * Devuelve el precio del pedido
+     * @return
+     */
     public double getPrice() { return this.precio_total; }
 
 	//public List<IProductInfo> getProducts() { return this.prods;	}
