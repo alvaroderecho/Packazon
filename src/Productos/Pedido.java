@@ -23,7 +23,7 @@ import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
  */
 public class Pedido implements IInvoiceInfo{
 
-    private Cliente c;
+    private Cliente c = new Cliente("packazon", "53434", "calle clio", "amaz@gmail.com", "4423 333 2234 2342", "user", "contra");
     private int id;
     private String dirr_entreg;
     private LocalDate fecha_pedido;
