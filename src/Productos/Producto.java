@@ -165,22 +165,45 @@ public abstract class Producto implements IProductInfo{
     public boolean getAsegurado() {
         return this.asegurado;
     }
-
+    /** 
+     * Devuelve el precio del producto
+     * @return
+     */
     public double getPrecio() {
         return this.precio_total;
     }
+    /**
+     * Devuelve si el producto es fragil
+     * @return
+     */
     public boolean isFragil(){
         return false;
     }
+    /**
+     * Devuelve si el producto es alimentario
+     * @return
+     */
     public boolean isAlimentario(){
         return false;
     }
+    /**
+     * Devuelve si el producto es congelado
+     * @return
+     */
     public boolean isCongelado(){
         return false;
     }
+    /**
+     * Devuelve si el producto es refrigerado
+     * @return
+     */
     public boolean isRefrigerado(){
         return false;
     }
+    /**
+     * Devuelve la string a imprimir
+     * @return
+     */
     @Override
     public String toString() {
         return "Unidades: " + this.unidades + " , id: " + this.id + " ,description: " + this.descript + " ,peso: " + this.peso + " ,volumen: " + this.volumen + " , precio total: " + this.precio_total + " ";
