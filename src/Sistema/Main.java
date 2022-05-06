@@ -142,7 +142,6 @@ public  class Main {
         Cliente cl = new Cliente("Converse", "5434", "calle constitucion", "converse@gmail.com", "5434", "converse_sa", "contra1234");
 		System.out.println("Creando un cliente...");
         sist.addCliente(cl);
-        cl.EditarPerfil("NuevoConverse", "contra4321");
         System.out.println("Consultando el estado dl pedido");
         cl.consultarEstado(p);
         cl.consultarEstadoProducto(p, fr);

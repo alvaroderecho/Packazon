@@ -173,9 +173,13 @@ public EstadoProducto consultarEstadoProducto(Pedido p, Producto pr) {
  * @param Nombre_usuario
  * @param Contrasenia
  */
-public void EditarPerfil(String Nombre_usuario, String Contrasenia){
-    super.SetNombreUsuario(nombre_usuario);
-    super.SetContrasenia(contrasenia);
+public void EditarPerfil(String nombre_empresa, String direc_fact, String email, String num_tarjeta, String Nombre_usuario, String Contrasenia){
+    SetNombreUsuario(Nombre_usuario);
+    SetContrasenia(Contrasenia);
+    this.Nombre_empresa = nombre_empresa;
+    this.Direc_fact = direc_fact;
+    this.Email = email;
+    this.Num_tarjeta = num_tarjeta;
     return;
 
 }

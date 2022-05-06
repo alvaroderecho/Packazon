@@ -28,8 +28,10 @@ public class ControlLogin implements ActionListener {
 				/**SOMOS UN CLIENTE */
 				List<Cliente> clientes = Sistema.getClientes();
 				for (Cliente c: clientes) {
-					if (usuario.equals(c.GetNombreUsuario()) && password.equals(c.GetContrasenia()))
+					if (usuario.equals(c.GetNombreUsuario()) && password.equals(c.GetContrasenia())) {
+						this.frame.getGetVistaClientePanel().setCliente(c);
 						this.frame.mostrarPanel("clientePanel");
+					}
 				}
 				return;
 			} else if (tipoCuenta.equals("Repartidor")) {

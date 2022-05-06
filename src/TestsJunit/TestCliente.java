@@ -33,7 +33,6 @@ public class TestCliente {
 
     c = new Cliente("Packazon","53853085", "calle constitucion", "salah@gmail.com", "2000 3333 4444 5555","SalahSenhaji","contrasena1234");
 
-    c.EditarPerfil("SalahSenhaji", "contrasena1234");
     assertEquals(c.GetNombreUsuario(), "SalahSenhaji");
     assertEquals(c.GetContrasenia(), "contrasena1234");
 

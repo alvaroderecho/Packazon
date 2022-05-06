@@ -5,21 +5,27 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.jar.JarEntry;
+
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
-
+import Usuarios.Cliente;
 
 public class ClientePanel extends JPanel{
-	JLabel packazon;
-	JLabel cliente;
-    final JPanel packTitle = new JPanel();
-    final JPanel clienteTitle = new JPanel();
+	private JLabel packazon;
+	private JLabel cliente;
+    final private JPanel packTitle = new JPanel();
+    final private JPanel clienteTitle = new JPanel();
+    private JLabel nombreCliente = new JLabel();
+    private JPanel nombrPanel = new JPanel();
     final private JButton botonPedidos = new JButton("Ver estado de mis pedidos");
-    final JPanel panelBtnPedidos = new JPanel();
+    final private JPanel panelBtnPedidos = new JPanel();
     final private JButton botonPerfil = new JButton("Editar mi perfil");
-    final JPanel panelBtnPerfil = new JPanel();
+    final private JPanel panelBtnPerfil = new JPanel();
     final private JButton botonVolver = new JButton("Volver");  /*Mismo eventListener en todos los q vuelvan */
-    final JPanel panelBtnVolver = new JPanel();
+    final private JPanel panelBtnVolver = new JPanel();
+
+    Cliente capo;
 
     public ClientePanel() {
         createPic();
@@ -27,6 +33,15 @@ public class ClientePanel extends JPanel{
         setLocationAndSize();
         addComponents();
 
+    }
+
+    public void setCliente(Cliente c) {
+        capo = c;
+        nombreCliente.setText("Nombre: " + c.getNombreEmpresa());
+    }
+
+    public Cliente getCliente() {
+        return capo;
     }
     
     public void createPic() {
@@ -51,11 +66,13 @@ public class ClientePanel extends JPanel{
     private void addComponents() {
         packTitle.add(packazon);
         clienteTitle.add(cliente);
+        nombrPanel.add(nombreCliente);
         panelBtnPerfil.add(botonPerfil);
         panelBtnPedidos.add(botonPedidos);
         panelBtnVolver.add(botonVolver);
         this.add(packTitle);
         this.add(clienteTitle);
+        this.add(nombrPanel);
         this.add(panelBtnPerfil);
         this.add(panelBtnPedidos);
         this.add(panelBtnVolver);
@@ -63,10 +80,20 @@ public class ClientePanel extends JPanel{
 
     public void setControlador(ActionListener c) {  
 		botonVolver.addActionListener(c);
+        botonPedidos.addActionListener(c);
+        botonPerfil.addActionListener(c);
 	}
 
     public JButton getBackButton() {
         return botonVolver;
+    }
+
+    public JButton getPedidosButton() {
+        return botonPedidos;
+    }
+
+    public JButton getPerfilButton() {
+        return botonPerfil;
     }
  
 }

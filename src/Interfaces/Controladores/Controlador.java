@@ -12,6 +12,7 @@ public class Controlador {
 	private ControlProduct contProduct;
 	private ControlRegister contRegister;
 	private ControlTasas contTasas;
+	private ControlEditarPerfil contEditarPerfil;
 
 	private Ventana frame;
 
@@ -25,6 +26,7 @@ public class Controlador {
 		this.contProduct = new ControlProduct(frame);
 		this.contRegister = new ControlRegister(frame);
 		this.contTasas = new ControlTasas(frame);
+		this.contEditarPerfil = new ControlEditarPerfil(frame);
 	}
 
 	public ControlLogin getControlLogin() {
@@ -57,5 +59,9 @@ public class Controlador {
 
 	public ControlTasas getControlTasas() {
 		return this.contTasas;
+	}
+
+	public ControlEditarPerfil getControlEditarPerfil() {
+		return this.contEditarPerfil;
 	}
 }

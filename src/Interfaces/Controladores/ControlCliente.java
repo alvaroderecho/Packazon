@@ -18,6 +18,9 @@ public class ControlCliente implements ActionListener{
         if (e.getSource() == vista.getBackButton()) {
             this.frame.getGetVistaLoginPanel().clearButton();
             this.frame.mostrarPanel("loginPanel"); 
+        } else if (e.getSource() == vista.getPerfilButton()) {
+            this.frame.getGetVistEditarPerfilPanel().setCiente(vista.getCliente());
+            this.frame.mostrarPanel("editarPerfilPanel"); 
         }
     }
 }
