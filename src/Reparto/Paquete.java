@@ -146,7 +146,10 @@ public class Paquete {
     public TipoPaquete getTipoPaquete(){
         return this.tipo;
     }
-
+    /**
+     * Devuelve el array a imprimir
+     * @return 
+     */
     @Override
     public String toString(){
         return "Paquete:" + this.productos.toString();

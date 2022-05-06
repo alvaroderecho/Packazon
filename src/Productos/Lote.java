@@ -109,6 +109,11 @@ public class Lote {
         }
         return null;
     }
+    /**
+     * Crea los paquetes de un lote
+     * @param direccion
+     * @return
+     */
     public List<Paquete> crearPaquetesLote(String direccion){
         List<Paquete> paquetes = new ArrayList<Paquete>();
         List<Paquete> paquetes_lote_interno = new ArrayList<Paquete>();

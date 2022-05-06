@@ -106,7 +106,11 @@ public class Camion {
      */
     public void setTipoCamion(TipoCamion t){
         this.tipo = t;
-    }
+    } 
+    /**
+     * Devuelve el peso de todos los paquetes del camion
+     * @return
+     */
     public int getPesoActual(){
         int peso = 0;
         for (Paquete p: paquetes){
@@ -114,16 +118,25 @@ public class Camion {
         }
         return peso;
     }
-
+    /**
+     * Devuelve el peso restante del camion
+     * @return
+     */
     public int getPesoRestante(){
         int peso_restante = this.peso_max - this.getPesoActual();
         return peso_restante;
     }
-
+    /**
+     * Añade un paquete al camion
+     * @param p
+     */
     public void addPaqueteCamion(Paquete p){
         this.paquetes.add(p);
     }
-
+    /**
+     * Devuelve la string a imprimir
+     * @return
+     */
     @Override
     public String toString(){
         return "Camion "+this.getMatricula().toString() + this.paquetes.toString();

@@ -26,6 +26,10 @@ public class Fragil extends Producto{
             this.setPrecioExtra(VariablesGlobales.getTasaFrag());
         }
     }
+    /**
+     * Devuelve si es fragil
+     * @return
+     */
     @Override
     public boolean isFragil(){
         return true;

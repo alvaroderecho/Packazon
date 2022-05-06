@@ -381,6 +381,10 @@ public class Operario extends Cuenta {
             l.addLoteLote();
         }
     }
+    /**
+     * Añade un cliente
+     * @param c
+     */
     public  void addCliente(Cliente c) {
         if (c!= null)
             this.clientes.add(c);
@@ -404,7 +408,19 @@ public class Operario extends Cuenta {
         Lote l = getLotePedidoById(id_pedido, id_lote);
         l.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
     }
-
+    /**
+     * Añade un producto a un lote dentro de otro lote dentro de un pedido
+     * @param id_pedido
+     * @param id_lote
+     * @param id_lote_interno
+     * @param units
+     * @param weight
+     * @param identifier
+     * @param secured
+     * @param descri
+     * @param vol
+     * @param tipo
+     */
     public void addProductoLoteLotePedido(int id_pedido, int id_lote,int id_lote_interno, int units, double weight, int identifier,
     boolean secured, String descri, double vol, TipoProducto tipo){
         Lote l = getLotePedidoById(id_pedido, id_lote);
@@ -638,12 +654,17 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
-
+    /**
+     * Devuelve la string a imprimir
+     * @return 
+     */
     @Override
     public String toString() {
         return "\n" + "Lista paquetes:" + this.paquetes.toString() +"\n" + "Plan de Reparto:" + this.camiones.toString();
     }
-
+    /**
+     * Algoritmo que realiza el plan de reparto
+     */
     public void planDeReparto(){
         int index_c = 0;
 
@@ -674,7 +695,11 @@ public class Operario extends Cuenta {
 
         }
     }
-
+    /**
+     * Busca un camion congelado con hueco
+     * @param peso
+     * @return
+     */
     public int buscarCamionCongeladoConHueco(double peso){
         int indice = 0;
 
@@ -686,6 +711,11 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
+    /**
+     * Busca un camión refrigerado con hueco
+     * @param peso
+     * @return
+     */
     public int buscarCamionRefrigeradoConHueco(double peso){
         int indice = 0;
 
@@ -697,6 +727,11 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
+    /**
+     * Busca un camion estandar con hueco
+     * @param peso
+     * @return
+     */
     public int buscarCamionEstandarConHueco(double peso){
         int indice = 0;
 
@@ -708,6 +743,11 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
+    /**
+     * Busca un camion especial con hueco
+     * @param peso
+     * @return
+     */
     public int buscarCamionEspecialConHueco(double peso){
         int indice = 0;
 
@@ -719,7 +759,10 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
-
+    /**
+     * Devuelve la lista de clientes
+     * @return
+     */
     public List<Cliente> getClientes(){
         return this.clientes;
     }

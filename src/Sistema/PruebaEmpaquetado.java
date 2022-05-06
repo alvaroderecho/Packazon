@@ -5,7 +5,12 @@ import Productos.TipoProducto;
 import Reparto.TipoCamion;
 import Usuarios.Cliente;
 import Usuarios.Operario;
-
+/**
+ * Prueba de empaquetado y plan de reparto
+ * @author Joseba
+ * @author Alvaro
+ * @author Salah
+ */
 public class PruebaEmpaquetado {
     public static void main(String[] args){
         System.out.println("hasta aqui va bien");

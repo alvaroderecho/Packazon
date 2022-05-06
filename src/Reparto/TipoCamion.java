@@ -7,7 +7,11 @@ package Reparto;
  */
 public enum TipoCamion {
     ESTANDAR, ESPECIAL, CONGELADOS, REFRIGERADOS;
-
+    /**
+     * Devuelve un valor segun el tipo
+     * @param num
+     * @return
+     */
     public static TipoCamion getValor(int num) {
         if (num==0) return ESTANDAR;
         else if (num == 1) return ESPECIAL;
