@@ -161,6 +161,8 @@ public  class Main {
         re.MarcarPaqueteEntregado(pq);
         System.out.println("El paquete ha sido entregado correctamente");
         
+        cl.getFactura(p);
+        System.out.println("La factura se ha generado correctamente");
 
 
 
