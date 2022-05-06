@@ -16,7 +16,6 @@ import Productos.*;
  */
 public class Operario extends Cuenta {
 
-    private VariablesGlobales var;
     private List<Camion> camiones = new ArrayList<Camion>();
     private List<Repartidor> repartidores = new ArrayList<Repartidor>();
     private List<Pedido> pedidos = new ArrayList<Pedido>();
@@ -36,15 +35,6 @@ public class Operario extends Cuenta {
     }
 
     /**
-     * Devuelve el atributo de las variables globales
-     * 
-     * @return
-     */
-    public VariablesGlobales getVar() {
-        return this.var;
-    }
-
-    /**
      * 
      * @return
      */
@@ -57,9 +47,9 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_max_codpost(int max) {
+    public static void modificar_max_codpost(int max) {
         if (max > 0) {
-            this.var.set_max_cod_post(max);
+            VariablesGlobales.set_max_cod_post(max);
         }
         /** update */
     }
@@ -69,9 +59,9 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_max_entregas_fallidas(int max) {
+    public static void modificar_max_entregas_fallidas(int max) {
         if (max >= 0)
-            this.var.set_max_entregas_fallidas(max);
+            VariablesGlobales.set_max_entregas_fallidas(max);
     }
 
     /**
@@ -79,9 +69,9 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_max_volumen_prod(double max) {
+    public static void modificar_max_volumen_prod(double max) {
         if (max > 0)
-            this.var.set_max_volumen_prod(max);
+            VariablesGlobales.set_max_volumen_prod(max);
         ;
     }
 
@@ -90,9 +80,9 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_descuento(double max) {
+    public static void modificar_descuento(double max) {
         if (max > 0)
-            this.var.set_descuento(max);
+            VariablesGlobales.set_descuento(max);
     }
 
     /**
@@ -100,8 +90,8 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_tasa_alim(double max) {
-        this.var.set_tasa_alim(max);
+    public static void modificar_tasa_alim(double max) {
+        VariablesGlobales.set_tasa_alim(max);
     }
 
     /**
@@ -109,8 +99,8 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_tasa_frag(double max) {
-        this.var.set_tasa_frag(max);
+    public static void modificar_tasa_frag(double max) {
+        VariablesGlobales.set_tasa_frag(max);
     }
 
     /**
@@ -118,8 +108,8 @@ public class Operario extends Cuenta {
      * 
      * @param max
      */
-    public void modificar_tasa_aseg(double max) {
-        this.var.set_tasa_aseg(max);
+    public static void modificar_tasa_aseg(double max) {
+        VariablesGlobales.set_tasa_aseg(max);
     }
 
     /**

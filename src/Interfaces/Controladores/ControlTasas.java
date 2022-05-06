@@ -2,7 +2,7 @@ package Interfaces.Controladores;
 
 import java.awt.event.*;
 import Interfaces.vistas.*;
-import Usuarios.VariablesGlobales;
+import Usuarios.*;
 
 
 public class ControlTasas implements ActionListener{
@@ -17,15 +17,15 @@ public class ControlTasas implements ActionListener{
     @Override
 	public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vista.getBackButton()) {
-            VariablesGlobales.set_max_cod_post((int)vista.getMaxCodP().getValue());
-            VariablesGlobales.set_max_entregas_fallidas((int)vista.getMaxEF().getValue());
+            Operario.modificar_max_codpost((int)vista.getMaxCodP().getValue());
+            Operario.modificar_max_entregas_fallidas((int)vista.getMaxEF().getValue());
 
-            VariablesGlobales.set_max_volumen_prod((double)vista.getMaxVolum().getValue());
-            VariablesGlobales.set_descuento((double)vista.getDiscount().getValue());
+            Operario.modificar_max_volumen_prod((double)vista.getMaxVolum().getValue());
+            Operario.modificar_descuento((double)vista.getDiscount().getValue());
             
-            VariablesGlobales.set_tasa_alim((double)vista.getTasaAlim().getValue());
-            VariablesGlobales.set_tasa_frag((double)vista.getTasaFrag().getValue());
-            VariablesGlobales.set_tasa_aseg((double)vista.getTasaAseg().getValue());
+            Operario.modificar_tasa_alim((double)vista.getTasaAlim().getValue());
+            Operario.modificar_tasa_frag((double)vista.getTasaFrag().getValue());
+            Operario.modificar_tasa_aseg((double)vista.getTasaAseg().getValue());
             this.frame.mostrarPanel("operarioPanel"); 
         }
     }

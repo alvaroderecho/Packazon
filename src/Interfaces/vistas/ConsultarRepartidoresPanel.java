@@ -10,6 +10,9 @@ public class ConsultarRepartidoresPanel extends JPanel{
     private JLabel packazon;
     final private JButton botonVolver = new JButton("Volver");  /*Mismo eventListener en todos los q vuelvan */
     final private JPanel panelBtnVolver = new JPanel();
+    final private JButton botonRegistrar = new JButton("Registrar Repartidor");
+    final private JPanel panelRegistrar = new JPanel();
+
 
     public ConsultarRepartidoresPanel() {
         createPic();
@@ -36,15 +39,23 @@ public class ConsultarRepartidoresPanel extends JPanel{
 
     public void addComponents() {
         this.add(packazon);
+        panelRegistrar.add(botonRegistrar);
+        this.add(panelRegistrar);
+
         panelBtnVolver.add(botonVolver);
         this.add(panelBtnVolver);
     }
 
     public void setControlador(ActionListener c) {  
 		botonVolver.addActionListener(c);
+        botonRegistrar.addActionListener(c);
 	}
 
     public JButton getBackButton() {
         return botonVolver;
+    }
+
+    public JButton getRegistrar() {
+        return botonRegistrar;
     }
 }
