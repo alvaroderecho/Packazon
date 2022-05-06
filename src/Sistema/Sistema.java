@@ -63,29 +63,6 @@ public class Sistema implements Serializable{
 
     }
 
-    public static Cliente getClientByCIF(String cif) {
-        Iterator<Cliente> it = clientes.iterator();
-        boolean flag = true;
-        Cliente c;
-        while (it.hasNext() && flag) {
-            c = it.next();
-            if (c.getCif() == cif) {
-                return c;
-            }
-        }     
-        return null;   
-    }
-
-    public static void modifyClient(Cliente c, String nombre_empresa, String direc_fact, String email, String Num_tarjeta, String Nombre_usuario, String Contrasenia) {
-        if (!clientes.contains(c)) return;
-        for (Cliente cl: clientes) {
-            if (cl.equals(c)) {
-                cl.EditarPerfil(nombre_empresa, direc_fact, email, Num_tarjeta, Nombre_usuario, Contrasenia);
-                return;
-            }
-        }
-    }
-
     public static Sistema getInstance() {
 
         if(sist ==null) {
@@ -152,9 +129,6 @@ public class Sistema implements Serializable{
 
         //Compruebo que el cliente no exista y que sea correcto
         if(Sistema.clientes.contains(c)|| c==null) return Status.ERROR;
-        for (Cliente cli: Sistema.clientes) {
-            if (cli.getCif() == c.getCif()) return Status.ERROR;
-        }
 
         Sistema.clientes.add(c);
         return Status.OK;
