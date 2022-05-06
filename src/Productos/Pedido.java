@@ -6,7 +6,7 @@ import java.util.*;
 
 import Usuarios.*;
 import es.uam.eps.padsof.invoices.IInvoiceInfo;
-
+import es.uam.eps.padsof.invoices.IProductInfo;
 import es.uam.eps.padsof.invoices.InvoiceSystem;
 import es.uam.eps.padsof.invoices.NonExistentFileException;
 import es.uam.eps.padsof.invoices.UnsupportedImageTypeException;
@@ -38,6 +38,7 @@ public class Pedido implements IInvoiceInfo{
     private int ids_lotes = 1;
 
     private List<Producto> prods = new ArrayList<Producto>();
+    private List<IProductInfo> prodI = new ArrayList<IProductInfo>();
 
     private List<Lote> lotes = new ArrayList<Lote>();
     /**
@@ -209,6 +210,7 @@ public class Pedido implements IInvoiceInfo{
         Producto p = Pedido.createProducto(units, weight, identifier, secured, descri, vol, tipo);
         if (p != null)
             this.prods.add(p);
+            this.prodI.add(p);
     }
 
     /** Getters y Setters */
@@ -353,7 +355,8 @@ public class Pedido implements IInvoiceInfo{
      */
     public double getPrice() { return this.precio_total; }
 
-	//public List<IProductInfo> getProducts() { return this.prods;	}
+	public List<IProductInfo> getProducts() { return this.prodI;	}
     //NO NOS HA FUNCIONADO
+
 
 }
