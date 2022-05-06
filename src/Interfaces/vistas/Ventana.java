@@ -18,6 +18,8 @@ public class Ventana extends JFrame {
 	private RegisterPanel registerPanel = new RegisterPanel();
 	private TasasPanel tasasPanel = new TasasPanel();
 	private EditarPerfilPanel editarPerfilPanel = new EditarPerfilPanel();
+	private ConsultarRepartidoresPanel consultarRepartidoresPanel = new ConsultarRepartidoresPanel();
+	private ConsultarCamionesPanel consultarCamionesPanel = new ConsultarCamionesPanel();
 
 	private ControlLogin contLogin;
 	private ControlCliente contCliente;
@@ -28,6 +30,8 @@ public class Ventana extends JFrame {
 	private ControlRegister contRegister;
 	private ControlTasas contTasas;
 	private ControlEditarPerfil contEditarPerfil;
+	private ControlConsultarRepartidores contConsultarRepartidores;
+	private ControlConsultarCamiones contConsultarCamiones;
 
 	private JPanel contentPane;
 	
@@ -49,6 +53,8 @@ public class Ventana extends JFrame {
 		contentPane.add(registerPanel, "registerPanel");
 		contentPane.add(tasasPanel, "tasasPanel");
 		contentPane.add(editarPerfilPanel, "editarPerfilPanel");
+		contentPane.add(consultarRepartidoresPanel, "consultarRepartidoresPanel");
+		contentPane.add(consultarCamionesPanel, "consultarCamionesPanel");
 	}
 
 	public void setControlador(Controlador controlador) {
@@ -70,6 +76,10 @@ public class Ventana extends JFrame {
 		tasasPanel.setControlador(contTasas);
 		this.contEditarPerfil = controlador.getControlEditarPerfil();
 		editarPerfilPanel.setControlador(contEditarPerfil);
+		this.contConsultarRepartidores = controlador.getControlConsultarRepartidores();
+		consultarRepartidoresPanel.setControlador(contConsultarRepartidores);
+		this.contConsultarCamiones = controlador.getControlConsultarCamiones();
+		consultarCamionesPanel.setControlador(contConsultarCamiones);
 	}
 
 	public LoginPanel getGetVistaLoginPanel() {
@@ -106,6 +116,14 @@ public class Ventana extends JFrame {
 
 	public EditarPerfilPanel getGetVistEditarPerfilPanel() {
 		return this.editarPerfilPanel;
+	}
+
+	public ConsultarRepartidoresPanel getGetVistaConsultarRepartidoresPanel() {
+		return this.consultarRepartidoresPanel;
+	}
+
+	public ConsultarCamionesPanel getGetVistaConsultarCamionesPanel() {
+		return this.consultarCamionesPanel;
 	}
 	
 	
