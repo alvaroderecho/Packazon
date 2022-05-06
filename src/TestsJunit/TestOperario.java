@@ -43,7 +43,7 @@ public class TestOperario {
     public void consultarEstadoRepartidor1(){
         boolean flag;
         op = new Operario("PADSOF", "1234");
-        op.registrarRepartidor("1234567890");
+        op.registrarRepartidor("1234567890", "hola", "pass");
         flag = op.consultarEstadoRepartidor("1234567890");
         assertEquals(true, flag);
     }
@@ -51,7 +51,7 @@ public class TestOperario {
     public void consultarEstadoRepartidor2(){
         boolean flag;
         op = new Operario("PADSOF", "1234");
-        op.registrarRepartidor("1234567890");
+        op = new Operario("PADSOF", "1234");
         op.darBajaRepartidor("1234567890");
         flag = op.consultarEstadoRepartidor("1234567890");
         assertEquals(false, flag);

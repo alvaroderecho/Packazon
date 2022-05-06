@@ -176,7 +176,18 @@ public class Sistema implements Serializable{
         return Sistema.clientes;
 
     }
-    public Status addPedido(Pedido p ){
+    public static List<Repartidor> getRepartidores() {
+
+        return Sistema.repartidores;
+
+    }
+    public static List<Camion> getCamiones() {
+
+        return Sistema.camiones;
+
+    }
+
+    public static Status addPedido(Pedido p ){
         //compruebo que el pedido no este ya y que sea correcto
         if(Sistema.pedidos.contains(p) ==true||p == null) return Status.ERROR;
         Sistema.pedidos.add(p);
@@ -195,7 +206,7 @@ public class Sistema implements Serializable{
 
     }
 
-    public Status addRepartidor(Repartidor r){
+    public static Status addRepartidor(Repartidor r){
 
         //compruebo que el repartidor no exista y que no sea null
         if(Sistema.repartidores.contains(r) == true|| r == null) return Status.ERROR;
@@ -216,7 +227,7 @@ public class Sistema implements Serializable{
 
     }
 
-    public Status addCamion(Camion c){
+    public static Status addCamion(Camion c){
 
         //compruebo que el camion no este en la lista
         if(Sistema.camiones.contains(c)==true|| c == null) return Status.ERROR;

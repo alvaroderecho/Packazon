@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 public class ProductPanel extends JPanel{
 	final private JLabel descripcion = new JLabel("Descripción: ");
-	final private JTextField description = new JTextField("roja y brillante", 17);
+	final private JTextField description = new JTextField("manzana roja", 18);
 	final private JButton clear_description = new JButton("CLR");
 	final private JPanel desc = new JPanel();
 	final private JButton boton = new JButton("Añadir Producto");
@@ -20,9 +20,9 @@ public class ProductPanel extends JPanel{
 	final private JLabel units = new JLabel("Unidades:");
 	final private JSpinner spinn = new JSpinner(new SpinnerNumberModel(1,1,10000,1));
 	final private JLabel weight = new JLabel("Peso (kg):");
-	final private JSpinner spinn_weight = new JSpinner(new SpinnerNumberModel(0.0,0.0,50.0,0.1));
+	final private JSpinner spinn_weight = new JSpinner(new SpinnerNumberModel(0.1,0.1,50.0,0.1));
 	final private JLabel volumen = new JLabel("Volumen (cm3):");
-	final private JSpinner spinn_volum = new JSpinner(new SpinnerNumberModel(0.0,0.0,50.0,0.1));
+	final private JSpinner spinn_volum = new JSpinner(new SpinnerNumberModel(0.1,0.1,50.0,0.1));
 	final private ButtonGroup grupo = new ButtonGroup();
 	final private JPanel spinnerPanel = new JPanel(new FlowLayout());
 	final private JPanel fragil = new JPanel(new FlowLayout());
@@ -186,5 +186,13 @@ public class ProductPanel extends JPanel{
 
 	public JSpinner getVolumen() {
 		return this.spinn_volum;
+	}
+
+	public void reset() {
+		description.setText("manzana roja");
+		opcion1.setSelected(true);
+		spinn.setValue(1);
+		spinn_weight.setValue(0.1);
+		spinn_volum.setValue(0.1);
 	}
 }

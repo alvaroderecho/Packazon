@@ -17,6 +17,9 @@ public class ControlConsultarRepartidores implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vista.getBackButton()) {
             this.frame.mostrarPanel("operarioPanel"); 
+        } else if (e.getSource() == vista.getRegistrar()) {
+            this.frame.getGetVistaRegistrarRepartidorPanel().reset();
+            this.frame.mostrarPanel("registrarRepartidorPanel");
         }
     }
 }

@@ -14,12 +14,12 @@ public class TestRepartidor {
     
     @Test
     public void constructorRepartidor1(){
-        r = new Repartidor("900000000");
+        r = new Repartidor("900000000", "hla", "pass");
         assertEquals("900000000",r.getNumTelef());
     }
     @Test
     public void constructorRepartidor2(){
-        r = new Repartidor("900000000");
+        r = new Repartidor("900000000", "hla", "pass");
         assertEquals(true, r.getAlta());
     }
     @Test
@@ -27,7 +27,7 @@ public class TestRepartidor {
         List<Producto> prods = new ArrayList<Producto>();
         prods.add(Pedido.createProducto(5, 10, 1, false, "hola", 20, TipoProducto.ALIMENTARIO));
         Paquete p = new Paquete("Avenida Valdelasfuente", 50, prods,TipoPaquete.ALIMENTARIO);
-        r = new Repartidor("900000000");
+        r = new Repartidor("900000000", "hla", "pass");
 
         r.MarcarPaqueteEntregado(p);
         assertEquals(true, p.getEntregado());
@@ -40,7 +40,7 @@ public class TestRepartidor {
         List<Producto> prods = new ArrayList<Producto>();
         prods.add(Pedido.createProducto(5, 10, 1, false, "hola", 20, TipoProducto.ALIMENTARIO));
         Paquete p = new Paquete("Avenida Valdelasfuente", 50, prods,TipoPaquete.ALIMENTARIO);
-        r = new Repartidor("900000000");
+        r = new Repartidor("900000000", "hla", "pass");
         int nuevasEntregas = 1;
 
         r.MarcarPaqueteNoEntregado(p);

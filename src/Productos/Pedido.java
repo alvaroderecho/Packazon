@@ -329,7 +329,7 @@ public class Pedido implements IInvoiceInfo{
 
     public double getPrice() { return this.precio_total; }
 
-	// public List<IProductInfo> getProducts() { return this.prods;	}
+	//public List<IProductInfo> getProducts() { return this.prods;	}
     //NO NOS HA FUNCIONADO
 
 }

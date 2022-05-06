@@ -119,10 +119,10 @@ public class Operario extends Cuenta {
      * @param peso_max
      * @param tipo
      */
-    public void registrar_camion(String matricula, int peso_max, TipoCamion tipo) {
+    public static void registrar_camion(String matricula, int peso_max, TipoCamion tipo) {
         if (matricula != null && peso_max >= 0) {
             Camion c = new Camion(matricula, peso_max, tipo);
-            this.camiones.add(c);
+            Sistema.addCamion(c);
         }
     }
 
@@ -132,8 +132,8 @@ public class Operario extends Cuenta {
      * @param matricula
      * @return
      */
-    private Camion getCamionByPlate(String matricula) {
-        for (Camion c : this.camiones) {
+    public static Camion getCamionByPlate(String matricula) {
+        for (Camion c : Sistema.getCamiones()) {
             if (c.getMatricula() == matricula)
                 return c;
         }
@@ -209,10 +209,10 @@ public class Operario extends Cuenta {
      * 
      * @param num_telef
      */
-    public void registrarRepartidor(String num_telef) {
+    public static void registrarRepartidor(String num_telef, String nombre_usuario, String password) {
         if (num_telef != null) {
-            Repartidor r = new Repartidor(num_telef);
-            this.repartidores.add(r);
+            Repartidor r = new Repartidor(num_telef, nombre_usuario, password);
+            Sistema.addRepartidor(r);
         }
     }
 

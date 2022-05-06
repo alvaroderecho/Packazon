@@ -19,6 +19,7 @@ public class ControlPedido implements ActionListener{
         else if (e.getSource() == vista.getEndPedido()) {
             this.frame.mostrarPanel("operarioPanel"); 
         } else if (e.getSource() == vista.getAddProduct()) {
+            this.frame.getGetVistaProductPanel().reset();
             this.frame.mostrarPanel("productPanel");
         } 
     }

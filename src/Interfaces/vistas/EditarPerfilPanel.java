@@ -30,7 +30,6 @@ public class EditarPerfilPanel extends JPanel{
     final private JButton botonVolver = new JButton("Volver");
 
     final JPanel userPanel = new JPanel();
-    final JPanel passPanelValidar = new JPanel();
     final JPanel nombrePanel = new JPanel();
     final JPanel tarjetaPanel = new JPanel();
     final JPanel factPanel = new JPanel();

@@ -155,7 +155,7 @@ public  class Main {
         System.out.println("el estado del repartidor es: "+op.consultarEstadoRepartidor("633346328"));
      
         //Crear un Repartidor
-        Repartidor re = new Repartidor("633346328");
+        Repartidor re = new Repartidor("633346328", "hla", "pass");
         System.out.println("Creando un Repartidor");
 
         re.MarcarPaqueteEntregado(pq);

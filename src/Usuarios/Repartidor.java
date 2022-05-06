@@ -10,7 +10,7 @@ import java.util.*;
  * @author Alvaro Derecho
  * @author Salah
  */
-public class Repartidor {
+public class Repartidor extends Cuenta{
     private String NumTelefono;
     private Boolean Alta = true;
     private List<Paquete> paquetes = new ArrayList<Paquete>();
@@ -19,8 +19,8 @@ public class Repartidor {
      * constructor
      * @param NumTelefono
      */
-    public Repartidor(String NumTelefono) {
-
+    public Repartidor(String NumTelefono, String username, String password) {
+        super(username, password);
         this.NumTelefono = NumTelefono;
     }
     /**

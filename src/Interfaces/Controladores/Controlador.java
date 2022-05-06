@@ -15,6 +15,8 @@ public class Controlador {
 	private ControlEditarPerfil contEditarPerfil;
 	private ControlConsultarRepartidores contConsultarRepartidores;
 	private ControlConsultarCamiones contConsultarCamiones;
+	private ControlRegistrarRepartidor contRegistrarRepartidor;
+	private ControlRegistrarCamion contRegistrarCamion;
 
 	private Ventana frame;
 
@@ -31,6 +33,8 @@ public class Controlador {
 		this.contEditarPerfil = new ControlEditarPerfil(frame);
 		this.contConsultarRepartidores = new ControlConsultarRepartidores(frame);
 		this.contConsultarCamiones = new ControlConsultarCamiones(frame);
+		this.contRegistrarRepartidor = new ControlRegistrarRepartidor(frame);
+		this.contRegistrarCamion = new ControlRegistrarCamion(frame);
 	}
 
 	public ControlLogin getControlLogin() {
@@ -75,5 +79,13 @@ public class Controlador {
 
 	public ControlConsultarCamiones getControlConsultarCamiones() {
 		return this.contConsultarCamiones;
+	}
+
+	public ControlRegistrarRepartidor getControlRegistrarRepartidor() {
+		return this.contRegistrarRepartidor;
+	}
+
+	public ControlRegistrarCamion getControlRegistrarCamion() {
+		return this.contRegistrarCamion;
 	}
 }

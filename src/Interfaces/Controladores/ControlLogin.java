@@ -26,8 +26,7 @@ public class ControlLogin implements ActionListener {
 		if (e.getSource() == vista.getLoginButton()) {
 			if (tipoCuenta.equals("Cliente")) {
 				/**SOMOS UN CLIENTE */
-				List<Cliente> clientes = Sistema.getClientes();
-				for (Cliente c: clientes) {
+				for (Cliente c: Sistema.getClientes()) {
 					if (usuario.equals(c.GetNombreUsuario()) && password.equals(c.GetContrasenia())) {
 						this.frame.getGetVistaClientePanel().setCliente(c);
 						this.frame.mostrarPanel("clientePanel");
@@ -36,7 +35,11 @@ public class ControlLogin implements ActionListener {
 				return;
 			} else if (tipoCuenta.equals("Repartidor")) {
 				/**SOMOS UN REPARTIDOR */
-				this.frame.mostrarPanel("repartidorPanel");
+				for (Repartidor r: Sistema.getRepartidores()) {
+					if (usuario.equals(r.GetNombreUsuario()) && password.equals(r.GetContrasenia())) {
+						this.frame.mostrarPanel("repartidorPanel");
+					}
+				}
 				return;
 			} else {
 				/**SOMOS UN OPERARIO */

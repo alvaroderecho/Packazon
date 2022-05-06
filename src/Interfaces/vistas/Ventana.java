@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 
 public class Ventana extends JFrame {
-	
+	/**Vistas */
 	private LoginPanel loginPanel = new LoginPanel();
 	private ClientePanel clientePanel = new ClientePanel();
 	private RepartidorPanel repartidorPanel = new RepartidorPanel();
@@ -19,8 +19,11 @@ public class Ventana extends JFrame {
 	private TasasPanel tasasPanel = new TasasPanel();
 	private EditarPerfilPanel editarPerfilPanel = new EditarPerfilPanel();
 	private ConsultarRepartidoresPanel consultarRepartidoresPanel = new ConsultarRepartidoresPanel();
+	private RegistrarRepartidorPanel registrarRepartidorPanel = new RegistrarRepartidorPanel();
 	private ConsultarCamionesPanel consultarCamionesPanel = new ConsultarCamionesPanel();
+	private RegistrarCamionPanel registrarCamionPanel = new RegistrarCamionPanel();
 
+	/**Controladores */
 	private ControlLogin contLogin;
 	private ControlCliente contCliente;
 	private ControlRepartidor contRepartidor;
@@ -31,7 +34,9 @@ public class Ventana extends JFrame {
 	private ControlTasas contTasas;
 	private ControlEditarPerfil contEditarPerfil;
 	private ControlConsultarRepartidores contConsultarRepartidores;
+	private ControlRegistrarRepartidor contRegistrarRepartidor;
 	private ControlConsultarCamiones contConsultarCamiones;
+	private ControlRegistrarCamion contRegistrarCamion;
 
 	private JPanel contentPane;
 	
@@ -55,6 +60,8 @@ public class Ventana extends JFrame {
 		contentPane.add(editarPerfilPanel, "editarPerfilPanel");
 		contentPane.add(consultarRepartidoresPanel, "consultarRepartidoresPanel");
 		contentPane.add(consultarCamionesPanel, "consultarCamionesPanel");
+		contentPane.add(registrarRepartidorPanel, "registrarRepartidorPanel");
+		contentPane.add(registrarCamionPanel, "registrarCamionPanel");
 	}
 
 	public void setControlador(Controlador controlador) {
@@ -80,6 +87,10 @@ public class Ventana extends JFrame {
 		consultarRepartidoresPanel.setControlador(contConsultarRepartidores);
 		this.contConsultarCamiones = controlador.getControlConsultarCamiones();
 		consultarCamionesPanel.setControlador(contConsultarCamiones);
+		this.contRegistrarRepartidor = controlador.getControlRegistrarRepartidor();
+		registrarRepartidorPanel.setControlador(contRegistrarRepartidor);
+		this.contRegistrarCamion = controlador.getControlRegistrarCamion();
+		registrarCamionPanel.setControlador(contRegistrarCamion);
 	}
 
 	public LoginPanel getGetVistaLoginPanel() {
@@ -124,6 +135,14 @@ public class Ventana extends JFrame {
 
 	public ConsultarCamionesPanel getGetVistaConsultarCamionesPanel() {
 		return this.consultarCamionesPanel;
+	}
+
+	public RegistrarRepartidorPanel getGetVistaRegistrarRepartidorPanel() {
+		return this.registrarRepartidorPanel;
+	}
+
+	public RegistrarCamionPanel getGetVistaRegistrarCamionPanel() {
+		return this.registrarCamionPanel;
 	}
 	
 	
