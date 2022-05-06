@@ -20,6 +20,7 @@ public class ControlRegistrarRepartidor implements ActionListener{
             this.frame.mostrarPanel("consultarRepartidoresPanel"); 
         } else if (e.getSource() == vista.getRegisterButton()) {
             Operario.registrarRepartidor(vista.getTelef(), vista.getUser(), vista.getPassword());
+            this.frame.getGetVistaConsultarRepartidoresPanel().check();
             this.frame.mostrarPanel("consultarRepartidoresPanel"); 
         }
     }

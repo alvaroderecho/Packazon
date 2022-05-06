@@ -80,6 +80,29 @@ public class Sistema implements Serializable{
 
     }
 
+    public static Cliente getClientByCIF(String cif) {
+        Iterator<Cliente> it = clientes.iterator();
+        boolean flag = true;
+        Cliente c;
+        while (it.hasNext() && flag) {
+            c = it.next();
+            if (c.getCif() == cif) {
+                return c;
+            }
+        }     
+        return null;   
+    }
+
+    public static void modifyClient(Cliente c, String nombre_empresa, String direc_fact, String email, String Num_tarjeta, String Nombre_usuario, String Contrasenia) {
+        if (!clientes.contains(c)) return;
+        for (Cliente cl: clientes) {
+            if (cl.equals(c)) {
+                cl.EditarPerfil(nombre_empresa, direc_fact, email, Num_tarjeta, Nombre_usuario, Contrasenia);
+                return;
+            }
+        }
+    }
+
     /*Metodo que Crea una cuenta en el sistema */
 
 	public Status addCuenta(Cuenta c){
