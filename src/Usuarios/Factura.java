@@ -1,4 +1,13 @@
 package Usuarios;
+import Productos.Pedido;
+import java.util.Arrays;
+import java.util.List;
+
+import es.uam.eps.padsof.invoices.IInvoiceInfo;
+import es.uam.eps.padsof.invoices.IProductInfo;
+import es.uam.eps.padsof.invoices.InvoiceSystem;
+import es.uam.eps.padsof.invoices.NonExistentFileException;
+import es.uam.eps.padsof.invoices.UnsupportedImageTypeException;
 /**
  * Clase Factura
  * @author Joseba Arranz
@@ -38,4 +47,12 @@ public Double getPrecioTotal(Factura f) {
     if(f ==null ) return null;
     return f.PrecioTotal;
 }
+
+public void generarFactura()  throws NonExistentFileException, UnsupportedImageTypeException {
+    InvoiceSystem.createInvoice( 
+        new Pedido( true,  123, "calle ebro"),			    
+            "./tmp/" // Output folder
+          );    
 }
+} 
+
