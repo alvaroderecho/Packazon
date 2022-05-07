@@ -27,8 +27,6 @@ public class Sistema implements Serializable{
     //cuentas disponibles
     private static ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 
-    //array de los operarios
-    private static ArrayList<Operario> operarios = new ArrayList<Operario>();
 
     //array de los clientes
     private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
@@ -126,27 +124,6 @@ public class Sistema implements Serializable{
 		return Status.OK;
     }
 
-    /* Metodo para añadir operarios */
-
-    public Status addOperario(Operario o) {
-
-        if(Sistema.operarios.contains(o)==true || o == null) return Status.ERROR;
-        //añado operario al array de operarios
-        Sistema.operarios.add(o);
-        return Status.OK;
-
-    }
-
-    public static Status rmvOperario(Operario o){
-
-        //compruebo que el operario exista y que no sea null
-        if(Sistema.operarios.isEmpty()) return Status.ERROR;
-        if(Sistema.operarios.contains(o) == false || o == null ) return Status.ERROR;
-        //borro la cuenta del array de cuentas
-		Sistema.cuentas.remove(o); 
-		return Status.OK;
-
-    }
     
     public static Status addCliente(Cliente c) {
 
@@ -189,7 +166,9 @@ public class Sistema implements Serializable{
         return Sistema.pedidos;
 
     }
-
+    public static List<Paquete> getPaquetes(){
+        return Sistema.paquetes;
+    }
     public static void clearPedidos() {
         Sistema.pedidos.clear();
     }
@@ -379,7 +358,6 @@ public class Sistema implements Serializable{
 		Sistema.cuentas.clear();
 		Sistema.facturas.clear();
 		Sistema.lotes.clear();
-		Sistema.operarios.clear();
         Sistema.paquetes.clear();
 		Sistema.pedidos.clear();
         Sistema.repartidores.clear();

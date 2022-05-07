@@ -17,7 +17,10 @@ import Productos.*;
 public class Operario extends Cuenta {
 
     private List<Camion> camiones = new ArrayList<Camion>();
+    private List<Repartidor> repartidores = new ArrayList<Repartidor>();
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
     private List<Paquete> paquetes = new ArrayList<Paquete>();
+    private List<Cliente> clientes= new ArrayList<Cliente>();
     private static int n_pedido = 0;
     private static int n_producto = 0;
 
@@ -35,7 +38,7 @@ public class Operario extends Cuenta {
      * 
      * @return
      */
-    public int get_n_pedido() {
+    public static int get_n_pedido() {
         return Operario.n_pedido;
     }
 
@@ -167,7 +170,7 @@ public class Operario extends Cuenta {
      * @param matricula
      * @return
      */
-    public boolean consultarCamionEstropeado(String matricula) {
+    public static boolean consultarCamionEstropeado(String matricula) {
         Camion c = getCamionByPlate(matricula);
         if (c != null) {
             return c.getEstropeado();
@@ -180,7 +183,7 @@ public class Operario extends Cuenta {
      * 
      * @param matricula
      */
-    public void setCamionEstropeado(String matricula) {
+    public static void setCamionEstropeado(String matricula) {
         Camion c = getCamionByPlate(matricula);
         if (c != null) {
             c.setEstropeado();
@@ -192,7 +195,7 @@ public class Operario extends Cuenta {
      * 
      * @param matricula
      */
-    public void setCamionNoEstropeado(String matricula) {
+    public static void setCamionNoEstropeado(String matricula) {
         Camion c = getCamionByPlate(matricula);
         if (c != null) {
             c.setNoEstropeado();
@@ -232,7 +235,7 @@ public class Operario extends Cuenta {
      * 
      * @param num_telef
      */
-    public void darAltaRepartidor(String num_telef) {
+    public static void darAltaRepartidor(String num_telef) {
         Repartidor r = getRepartidorByTelef(num_telef);
         if (r != null) {
             r.setAlta();
@@ -244,7 +247,7 @@ public class Operario extends Cuenta {
      * 
      * @param num_telef
      */
-    public void darBajaRepartidor(String num_telef) {
+    public static void darBajaRepartidor(String num_telef) {
         Repartidor r = getRepartidorByTelef(num_telef);
         if (r != null) {
             r.setBaja();
@@ -257,7 +260,7 @@ public class Operario extends Cuenta {
      * @param num_telef
      * @return
      */
-    public boolean consultarEstadoRepartidor(String num_telef) {
+    public static boolean consultarEstadoRepartidor(String num_telef) {
         Repartidor r = getRepartidorByTelef(num_telef);
         if (r != null) {
             return r.getAlta();
@@ -291,11 +294,11 @@ public class Operario extends Cuenta {
          */
 
         if (dir_entr != null && CIF != null) {
-            Cliente c = Operario.getClientebyCIF(CIF);
+            Cliente c = getClientebyCIF(CIF);
             if (c != null) {
                 Pedido p = new Pedido(urgent, Operario.n_pedido, dir_entr);
                 p.set_cliente(c);
-                Sistema.addPedido(p);
+                Sistema.getPedidos().add(p);
                 Operario.n_pedido++;
             }
         }
@@ -307,7 +310,7 @@ public class Operario extends Cuenta {
      * @param id
      * @return
      */
-    public Pedido getPedidoById(int id) {
+    public static Pedido getPedidoById(int id) {
         if (id >= 0) {
             for (Pedido p : Sistema.getPedidos()) {
                 if (p.getID() == id) {
@@ -330,7 +333,7 @@ public class Operario extends Cuenta {
      * @param vol
      * @param tipo
      */
-    public void addProductoPedido(int id_pedido, int units, double weight, boolean secured,
+    public static void addProductoPedido(int id_pedido, int units, double weight, boolean secured,
             String descri, double vol, TipoProducto tipo) {
         Pedido p = getPedidoById(id_pedido);
         if (p != null) {
@@ -344,7 +347,7 @@ public class Operario extends Cuenta {
      * 
      * @param id_pedido
      */
-    public void addLotePedido(int id_pedido) {
+    public static void addLotePedido(int id_pedido) {
         Pedido p = getPedidoById(id_pedido);
         if (p != null) {
             p.addLote();
@@ -358,7 +361,7 @@ public class Operario extends Cuenta {
      * @param id_lote
      * @return
      */
-    public Lote getLotePedidoById(int id_pedido, int id_lote) {
+    public static Lote getLotePedidoById(int id_pedido, int id_lote) {
         Pedido p = getPedidoById(id_pedido);
         if (p != null) {
             return p.getLotebyId(id_lote);
@@ -372,11 +375,19 @@ public class Operario extends Cuenta {
      * @param id_pedido
      * @param id_lote
      */
-    public void addLoteLotePedido(int id_pedido, int id_lote) {
+    public static void addLoteLotePedido(int id_pedido, int id_lote) {
         Lote l = getLotePedidoById(id_pedido, id_lote);
         if (l != null) {
             l.addLoteLote();
         }
+    }
+    /**
+     * Añade un cliente
+     * @param c
+     */
+    public static void addCliente(Cliente c) {
+        if (c!= null)
+            Sistema.getClientes().add(c);
     }
 
     /**
@@ -392,7 +403,7 @@ public class Operario extends Cuenta {
      * @param vol
      * @param tipo
      */
-    public void addProductLotePedido(int id_pedido, int id_lote, int units, double weight, int identifier,
+    public static void addProductLotePedido(int id_pedido, int id_lote, int units, double weight, int identifier,
             boolean secured, String descri, double vol, TipoProducto tipo) {
         Lote l = getLotePedidoById(id_pedido, id_lote);
         l.addProductLote(units, weight, identifier, secured, descri, vol, tipo);
@@ -410,7 +421,7 @@ public class Operario extends Cuenta {
      * @param vol
      * @param tipo
      */
-    public void addProductoLoteLotePedido(int id_pedido, int id_lote,int id_lote_interno, int units, double weight, int identifier,
+    public static void addProductoLoteLotePedido(int id_pedido, int id_lote,int id_lote_interno, int units, double weight, int identifier,
     boolean secured, String descri, double vol, TipoProducto tipo){
         Lote l = getLotePedidoById(id_pedido, id_lote);
         Lote in = l.getLotebyId(id_lote_interno);
@@ -419,7 +430,7 @@ public class Operario extends Cuenta {
     /**
      * Algoritmo que realiza el empaquetado de los productos en al almacen
      */
-    public void realizarEmpaquetado() {
+    public static void realizarEmpaquetado() {
         String direccion;
         int flag_na = 1, flag_a = 1, flag_peso_correcto = 0,flag_r = 1,flag_c = 1;
         int indice_p;
@@ -440,17 +451,17 @@ public class Operario extends Cuenta {
                         Paquete paquete_fragil = new Paquete(direccion, pr.getPeso(), producto_fragil,
                                 TipoPaquete.FRAGIL);
                         producto_fragil.clear();
-                        this.paquetes.add(paquete_fragil);
+                        Sistema.getPaquetes().add(paquete_fragil);
                     }
                 }
 
                 else if (pr.isAlimentario()) {
                     /*si el producto es alimentario y congelado*/ 
                     if (pr.isCongelado()){
-                        indice_p = this.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO_CONGELADO, direccion, pr.calcularPesoTotal());
+                        indice_p = Operario.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO_CONGELADO, direccion, pr.calcularPesoTotal());
                         if (indice_p != -1) {
                         
-                            this.paquetes.get(indice_p).addProductoPaquete(pr);
+                            Sistema.getPaquetes().get(indice_p).addProductoPaquete(pr);
                         } else {
                             peso_alimentarios_congelados += pr.calcularPesoTotal();
                             if (peso_alimentarios_congelados < 60) {
@@ -461,7 +472,7 @@ public class Operario extends Cuenta {
                                 Paquete paquete_alimentario_congelado = new Paquete(direccion, peso_alimentarios_congelados,
                                         productos_alimentarios, TipoPaquete.ALIMENTARIO_CONGELADO);
                                 productos_alimentarios_cogelados.clear();
-                                this.paquetes.add(paquete_alimentario_congelado);
+                                Sistema.getPaquetes().add(paquete_alimentario_congelado);
                                 
                                 peso_alimentarios_congelados = 0;
                                 flag_c = 1;
@@ -471,7 +482,7 @@ public class Operario extends Cuenta {
                                 Paquete paquete_alimentario_congelado = new Paquete(direccion, peso_alimentarios_congelados,
                                         productos_alimentarios_cogelados, TipoPaquete.ALIMENTARIO_CONGELADO);
                                 productos_alimentarios_cogelados.clear();
-                                this.paquetes.add(paquete_alimentario_congelado);
+                                Sistema.getPaquetes().add(paquete_alimentario_congelado);
                                 
                                 peso_alimentarios_congelados = 0;
                                 productos_alimentarios_cogelados.add(pr);
@@ -482,10 +493,10 @@ public class Operario extends Cuenta {
                         }
                     }
                     else if (pr.isRefrigerado()){
-                        indice_p = this.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO_REFRIGERADO, direccion, pr.calcularPesoTotal());
+                        indice_p = Operario.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO_REFRIGERADO, direccion, pr.calcularPesoTotal());
                         if (indice_p != -1) {
                         
-                            this.paquetes.get(indice_p).addProductoPaquete(pr);
+                            Sistema.getPaquetes().get(indice_p).addProductoPaquete(pr);
                         } else {
                             peso_alimentarios_refrigerados += pr.calcularPesoTotal();
                             if (peso_alimentarios_refrigerados < 60) {
@@ -496,7 +507,7 @@ public class Operario extends Cuenta {
                                 Paquete paquete_alimentario_refrigerado = new Paquete(direccion, peso_alimentarios_refrigerados ,
                                         productos_alimentarios_refrigerados, TipoPaquete.ALIMENTARIO_REFRIGERADO);
                                 productos_alimentarios_refrigerados.clear();
-                                this.paquetes.add(paquete_alimentario_refrigerado);
+                                Sistema.getPaquetes().add(paquete_alimentario_refrigerado);
                                 
                                 peso_alimentarios_refrigerados = 0;
                                 flag_r = 1;
@@ -506,7 +517,7 @@ public class Operario extends Cuenta {
                                 Paquete paquete_alimentario_refrigerado = new Paquete(direccion, peso_alimentarios_refrigerados,
                                         productos_alimentarios_refrigerados, TipoPaquete.ALIMENTARIO_REFRIGERADO);
                                 productos_alimentarios_refrigerados.clear();
-                                this.paquetes.add(paquete_alimentario_refrigerado);
+                                Sistema.getPaquetes().add(paquete_alimentario_refrigerado);
                                 
                                 peso_alimentarios_refrigerados = 0;
                                 productos_alimentarios_refrigerados.add(pr);
@@ -517,10 +528,10 @@ public class Operario extends Cuenta {
                         }
                     }
                     else {
-                    indice_p = this.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO, direccion, pr.calcularPesoTotal());
+                    indice_p = Operario.buscarPaqueteConHueco(TipoPaquete.ALIMENTARIO, direccion, pr.calcularPesoTotal());
                     if (indice_p != -1) {
                         
-                        this.paquetes.get(indice_p).addProductoPaquete(pr);
+                        Sistema.getPaquetes().get(indice_p).addProductoPaquete(pr);
                     } else {
                         peso_alimentarios += pr.calcularPesoTotal();
                         if (peso_alimentarios < 60) {
@@ -531,7 +542,7 @@ public class Operario extends Cuenta {
                             Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios,
                                     productos_alimentarios, TipoPaquete.ALIMENTARIO);
                             productos_alimentarios.clear();
-                            this.paquetes.add(paquete_alimentario);
+                            Sistema.getPaquetes().add(paquete_alimentario);
                             
                             peso_alimentarios = 0;
                             flag_a = 1;
@@ -541,7 +552,7 @@ public class Operario extends Cuenta {
                             Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios,
                                     productos_alimentarios, TipoPaquete.ALIMENTARIO);
                             productos_alimentarios.clear();
-                            this.paquetes.add(paquete_alimentario);
+                            Sistema.getPaquetes().add(paquete_alimentario);
                             
                             peso_alimentarios = 0;
                             productos_alimentarios.add(pr);
@@ -555,9 +566,9 @@ public class Operario extends Cuenta {
                 }
 
                 else if (pr.isAlimentario() == false) {
-                    indice_p = this.buscarPaqueteConHueco(TipoPaquete.NOALIMENTARIO, direccion, pr.calcularPesoTotal());
+                    indice_p = Operario.buscarPaqueteConHueco(TipoPaquete.NOALIMENTARIO, direccion, pr.calcularPesoTotal());
                     if (indice_p != -1) {
-                        this.paquetes.get(indice_p).addProductoPaquete(pr);
+                        Sistema.getPaquetes().get(indice_p).addProductoPaquete(pr);
                         flag_na = 1;
                     } else {
                         peso += pr.calcularPesoTotal();
@@ -570,7 +581,7 @@ public class Operario extends Cuenta {
                         else if (peso == 60) {
                             Paquete paquete = new Paquete(direccion, peso, producto, TipoPaquete.NOALIMENTARIO);
                             producto.clear();
-                            this.paquetes.add(paquete);
+                            Sistema.getPaquetes().add(paquete);
                             peso = 0;
                             flag_na = 1;
                             flag_peso_correcto = 0;
@@ -578,7 +589,7 @@ public class Operario extends Cuenta {
                             peso = peso - pr.calcularPesoTotal();
                             Paquete paquete = new Paquete(direccion, peso, producto, TipoPaquete.NOALIMENTARIO);
                             producto.clear();
-                            this.paquetes.add(paquete);
+                            Sistema.getPaquetes().add(paquete);
                             peso = 0;
                             flag_na = 1;
                             flag_peso_correcto = 0;
@@ -593,38 +604,38 @@ public class Operario extends Cuenta {
             if (flag_na == 0) {
                 Paquete paquete = new Paquete(direccion, peso, producto, TipoPaquete.NOALIMENTARIO);
                 producto.clear();
-                this.paquetes.add(paquete);
+                Sistema.getPaquetes().add(paquete);
                 peso = 0;
             }
             if (flag_a == 0) {
                 Paquete paquete_alimentario = new Paquete(direccion, peso_alimentarios, productos_alimentarios,
                         TipoPaquete.ALIMENTARIO);
                 productos_alimentarios.clear();
-                this.paquetes.add(paquete_alimentario);
+                Sistema.getPaquetes().add(paquete_alimentario);
                 peso_alimentarios = 0;
             }
             if (flag_r == 0) {
                 Paquete paquete_alimentario_refrigerado = new Paquete(direccion, peso_alimentarios_refrigerados, productos_alimentarios_refrigerados,
                         TipoPaquete.ALIMENTARIO_REFRIGERADO);
                 productos_alimentarios_refrigerados.clear();
-                this.paquetes.add(paquete_alimentario_refrigerado);
+                Sistema.getPaquetes().add(paquete_alimentario_refrigerado);
                 peso_alimentarios_refrigerados = 0;
             }
             if (flag_c == 0) {
                 Paquete paquete_alimentario_conglelados = new Paquete(direccion, peso_alimentarios_congelados, productos_alimentarios_cogelados,
                         TipoPaquete.ALIMENTARIO_CONGELADO);
                 productos_alimentarios_cogelados.clear();
-                this.paquetes.add(paquete_alimentario_conglelados);
+                Sistema.getPaquetes().add(paquete_alimentario_conglelados);
                 peso_alimentarios_congelados = 0;
             }
             for (Lote l : p.getLotes()) {
                 paquetes_lote = l.crearPaquetesLote(direccion);
-                this.paquetes.addAll(paquetes_lote);
+                Sistema.getPaquetes().addAll(paquetes_lote);
                 paquetes_lote.clear();
             }
 
         }
-        Sistema.clearPedidos();
+        Sistema.getPedidos().clear();
     }
     /**
      * Busca un paquete en el array de paquetes que tenga hueco y que cumpla las condiciones impuestas
@@ -633,9 +644,9 @@ public class Operario extends Cuenta {
      * @param peso
      * @return
      */
-    public int buscarPaqueteConHueco(TipoPaquete tipo, String direccion, double peso) {
+    public static int buscarPaqueteConHueco(TipoPaquete tipo, String direccion, double peso) {
         int indice = 0;
-        for (Paquete pa : this.paquetes) {
+        for (Paquete pa : Sistema.getPaquetes()) {
             if (pa.getTipoPaquete() == tipo && pa.getDestino() == direccion && pa.getPesoRestante() >= peso) {
                 return indice;
             }
@@ -647,34 +658,34 @@ public class Operario extends Cuenta {
      * Devuelve la string a imprimir
      * @return 
      */
-    @Override
-    public String toString() {
-        return "\n" + "Lista paquetes:" + this.paquetes.toString() +"\n" + "Plan de Reparto:" + this.camiones.toString();
+    
+    public static String toStringPlan() {
+        return "\n" + "Lista paquetes:" + Sistema.getPaquetes().toString() +"\n" + "Plan de Reparto:" + Sistema.getCamiones().toString();
     }
     /**
      * Algoritmo que realiza el plan de reparto
      */
-    public void planDeReparto(){
+    public static void planDeReparto(){
         int index_c = 0;
 
-        for (Paquete p : this.paquetes){
+        for (Paquete p : Sistema.getPaquetes()){
 
             if (p.getTipoPaquete() == TipoPaquete.ALIMENTARIO_CONGELADO){
                 index_c = buscarCamionCongeladoConHueco(p.getPeso());
                 if (index_c != -1){
-                    this.camiones.get(index_c).addPaqueteCamion(p);
+                    Sistema.getCamiones().get(index_c).addPaqueteCamion(p);
                 }
             }
             else if(p.getTipoPaquete() == TipoPaquete.ALIMENTARIO_REFRIGERADO){
                 index_c = buscarCamionRefrigeradoConHueco(p.getPeso());
                 if (index_c != -1){
-                    this.camiones.get(index_c).addPaqueteCamion(p);
+                    Sistema.getCamiones().get(index_c).addPaqueteCamion(p);
                 }
             }
             else{
                 index_c = buscarCamionEstandarConHueco(p.getPeso());
                 if (index_c != -1){
-                    this.camiones.get(index_c).addPaqueteCamion(p);
+                    Sistema.getCamiones().get(index_c).addPaqueteCamion(p);
                 }
             }
 
@@ -689,10 +700,10 @@ public class Operario extends Cuenta {
      * @param peso
      * @return
      */
-    public int buscarCamionCongeladoConHueco(double peso){
+    public static int buscarCamionCongeladoConHueco(double peso){
         int indice = 0;
 
-        for (Camion c: this.camiones){
+        for (Camion c: Sistema.getCamiones()){
             if (c.getTipocCamion() == TipoCamion.CONGELADOS && c.getPesoRestante() >= peso){
                 return indice;
             }
@@ -705,10 +716,10 @@ public class Operario extends Cuenta {
      * @param peso
      * @return
      */
-    public int buscarCamionRefrigeradoConHueco(double peso){
+    public static int buscarCamionRefrigeradoConHueco(double peso){
         int indice = 0;
 
-        for (Camion c: this.camiones){
+        for (Camion c: Sistema.getCamiones()){
             if (c.getTipocCamion() == TipoCamion.REFRIGERADOS  && c.getPesoRestante() >= peso){
                 return indice;
             }
@@ -721,10 +732,10 @@ public class Operario extends Cuenta {
      * @param peso
      * @return
      */
-    public int buscarCamionEstandarConHueco(double peso){
+    public static int buscarCamionEstandarConHueco(double peso){
         int indice = 0;
 
-        for (Camion c: this.camiones){
+        for (Camion c: Sistema.getCamiones()){
             if (c.getTipocCamion() == TipoCamion.ESTANDAR  && c.getPesoRestante() >= peso){
                 return indice;
             }
@@ -737,10 +748,10 @@ public class Operario extends Cuenta {
      * @param peso
      * @return
      */
-    public int buscarCamionEspecialConHueco(double peso){
+    public static int buscarCamionEspecialConHueco(double peso){
         int indice = 0;
 
-        for (Camion c: this.camiones){
+        for (Camion c: Sistema.getCamiones()){
             if (c.getTipocCamion() == TipoCamion.ESPECIAL  && c.getPesoRestante() >= peso){
                 return indice;
             }
@@ -748,4 +759,12 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
+    /**
+     * Devuelve la lista de clientes
+     * @return
+     */
+    public static List<Cliente> getClientes(){
+        return Sistema.getClientes();
+    }
+
 }
