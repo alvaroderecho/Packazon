@@ -17,6 +17,7 @@ public class ControlRegistrarRepartidor implements ActionListener{
     @Override
 	public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vista.getBackButton()) {
+            this.frame.getGetVistaConsultarRepartidoresPanel().check();
             this.frame.mostrarPanel("consultarRepartidoresPanel"); 
         } else if (e.getSource() == vista.getRegisterButton()) {
             Operario.registrarRepartidor(vista.getTelef(), vista.getUser(), vista.getPassword());

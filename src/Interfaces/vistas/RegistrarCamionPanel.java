@@ -88,7 +88,7 @@ public class RegistrarCamionPanel extends JPanel{
 
     /**GETTERS */
     public String getMatricula() {
-        return matricula.getText();
+        return matriculaCampo.getText();
     }
 
     public JSpinner getMaxPeso() {

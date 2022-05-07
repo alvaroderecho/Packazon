@@ -20,8 +20,10 @@ public class ControlRegistrarCamion implements ActionListener{
         if (e.getSource() == vista.getBackButton()) {
             this.frame.mostrarPanel("consultarCamionesPanel"); 
         } else if (e.getSource() == vista.getRegisterButton()) {
-            if (Operario.getCamionByPlate(vista.getMatricula()) == null)
+            if (Operario.getCamionByPlate(vista.getMatricula()) == null) {
                 Operario.registrar_camion(vista.getMatricula(), (int)vista.getMaxPeso().getValue(), TipoCamion.getValor(vista.getTipoCamion()));
+            }
+            this.frame.getGetVistaConsultarCamionesPanel().check();
             this.frame.mostrarPanel("consultarCamionesPanel"); 
         }
     }

@@ -26,6 +26,7 @@ public class ControlOperario implements ActionListener{
             this.frame.getGetVistaConsultarRepartidoresPanel().check();
             this.frame.mostrarPanel("consultarRepartidoresPanel");
         } else if (e.getSource() == vista.getCamiones()) {
+            this.frame.getGetVistaConsultarCamionesPanel().check();
             this.frame.mostrarPanel("consultarCamionesPanel");
         }
     }
