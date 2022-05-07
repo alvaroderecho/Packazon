@@ -184,6 +184,16 @@ public class Sistema implements Serializable{
 
     }
 
+    public static List<Pedido> getPedidos() {
+
+        return Sistema.pedidos;
+
+    }
+
+    public static void clearPedidos() {
+        Sistema.pedidos.clear();
+    }
+
     public static Status addPedido(Pedido p ){
         //compruebo que el pedido no este ya y que sea correcto
         if(Sistema.pedidos.contains(p) ==true||p == null) return Status.ERROR;

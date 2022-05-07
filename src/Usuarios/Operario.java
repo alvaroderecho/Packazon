@@ -17,10 +17,7 @@ import Productos.*;
 public class Operario extends Cuenta {
 
     private List<Camion> camiones = new ArrayList<Camion>();
-    private List<Repartidor> repartidores = new ArrayList<Repartidor>();
-    private List<Pedido> pedidos = new ArrayList<Pedido>();
     private List<Paquete> paquetes = new ArrayList<Paquete>();
-    private List<Cliente> clientes= new ArrayList<Cliente>();
     private static int n_pedido = 0;
     private static int n_producto = 0;
 
@@ -145,7 +142,7 @@ public class Operario extends Cuenta {
      * 
      * @param matricula
      */
-    public void darAltaCamion(String matricula) {
+    public static void darAltaCamion(String matricula) {
         Camion c = getCamionByPlate(matricula);
         if (c != null) {
             c.setAlta();
@@ -157,7 +154,7 @@ public class Operario extends Cuenta {
      * 
      * @param matricula
      */
-    public void darBajaCamion(String matricula) {
+    public static void darBajaCamion(String matricula) {
         Camion c = getCamionByPlate(matricula);
         if (c != null) {
             c.setBaja();
@@ -222,8 +219,8 @@ public class Operario extends Cuenta {
      * @param num_telef
      * @return
      */
-    public Repartidor getRepartidorByTelef(String num_telef) {
-        for (Repartidor r : this.repartidores) {
+    public static Repartidor getRepartidorByTelef(String num_telef) {
+        for (Repartidor r : Sistema.getRepartidores()) {
             if (r.getNumTelef() == num_telef)
                 return r;
         }
@@ -268,8 +265,8 @@ public class Operario extends Cuenta {
         return false;
     }
 
-    public Cliente getClientebyCIF(String CIF) {
-        for (Cliente c : this.getClientes()) {
+    public static Cliente getClientebyCIF(String CIF) {
+        for (Cliente c : Sistema.getClientes()) {
             if (c.getCif() == CIF) {
                 return c;
             }
@@ -286,7 +283,7 @@ public class Operario extends Cuenta {
      * @param c
      * @param urgent
      */
-    public void darAltaPedido(String dir_entr, String CIF, boolean urgent) {
+    public static void darAltaPedido(String dir_entr, String CIF, boolean urgent) {
 
         /**
          * Tenemos que meter el CIF del cliente, y buscar ese cliente entre un array de
@@ -294,11 +291,11 @@ public class Operario extends Cuenta {
          */
 
         if (dir_entr != null && CIF != null) {
-            Cliente c = getClientebyCIF(CIF);
+            Cliente c = Operario.getClientebyCIF(CIF);
             if (c != null) {
                 Pedido p = new Pedido(urgent, Operario.n_pedido, dir_entr);
                 p.set_cliente(c);
-                this.pedidos.add(p);
+                Sistema.addPedido(p);
                 Operario.n_pedido++;
             }
         }
@@ -312,7 +309,7 @@ public class Operario extends Cuenta {
      */
     public Pedido getPedidoById(int id) {
         if (id >= 0) {
-            for (Pedido p : this.pedidos) {
+            for (Pedido p : Sistema.getPedidos()) {
                 if (p.getID() == id) {
                     return p;
                 }
@@ -381,14 +378,6 @@ public class Operario extends Cuenta {
             l.addLoteLote();
         }
     }
-    /**
-     * Añade un cliente
-     * @param c
-     */
-    public  void addCliente(Cliente c) {
-        if (c!= null)
-            this.clientes.add(c);
-    }
 
     /**
      * Busca un lote dentro de un pedido y le añade un producto
@@ -441,7 +430,7 @@ public class Operario extends Cuenta {
         List<Producto> productos_alimentarios_cogelados = new ArrayList<Producto>();
         List<Producto> productos_alimentarios_refrigerados = new ArrayList<Producto>();
         double peso = 0, peso_alimentarios = 0,peso_alimentarios_congelados = 0,peso_alimentarios_refrigerados = 0;
-        for (Pedido p : this.pedidos) {
+        for (Pedido p : Sistema.getPedidos()) {
             peso = 0;
             direccion = p.getDirecEntrega();
             for (Producto pr : p.getProductos()) {
@@ -635,7 +624,7 @@ public class Operario extends Cuenta {
             }
 
         }
-        this.pedidos.clear();
+        Sistema.clearPedidos();
     }
     /**
      * Busca un paquete en el array de paquetes que tenga hueco y que cumpla las condiciones impuestas
@@ -759,12 +748,4 @@ public class Operario extends Cuenta {
         }
         return -1;
     }
-    /**
-     * Devuelve la lista de clientes
-     * @return
-     */
-    public List<Cliente> getClientes(){
-        return this.clientes;
-    }
-
 }
