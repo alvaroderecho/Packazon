@@ -16,11 +16,7 @@ import Productos.*;
  */
 public class Operario extends Cuenta {
 
-    private List<Camion> camiones = new ArrayList<Camion>();
-    private List<Repartidor> repartidores = new ArrayList<Repartidor>();
-    private List<Pedido> pedidos = new ArrayList<Pedido>();
-    private List<Paquete> paquetes = new ArrayList<Paquete>();
-    private List<Cliente> clientes= new ArrayList<Cliente>();
+    
     private static int n_pedido = 0;
     private static int n_producto = 0;
 
