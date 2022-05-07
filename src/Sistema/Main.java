@@ -149,7 +149,6 @@ public  class Main {
         //crear un operario
         Operario op = new Operario("Juan_pd", "contra1234");
         System.out.println("Creando un operario...");
-        sist.addOperario(op);
         System.out.println("Consultando el estado del camion: ");
         System.out.println("El estado del camion es: "+ op.consultarCamionEstropeado("2342") );
         System.out.println("el estado del repartidor es: "+op.consultarEstadoRepartidor("633346328"));
