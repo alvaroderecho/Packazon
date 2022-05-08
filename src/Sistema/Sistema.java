@@ -173,6 +173,16 @@ public class Sistema implements Serializable{
         Sistema.pedidos.clear();
     }
 
+    public static List<Pedido> getPedidosByCIF(String cif) {
+    List<Pedido> l = new ArrayList<>();
+        for (Pedido p: Sistema.pedidos) {
+            if (p.getClientCif() == cif) {
+                l.add(p);
+            }
+        }
+    return l;
+    }
+
     public static Status addPedido(Pedido p ){
         //compruebo que el pedido no este ya y que sea correcto
         if(Sistema.pedidos.contains(p) ==true||p == null) return Status.ERROR;

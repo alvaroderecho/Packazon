@@ -2,14 +2,18 @@ package Interfaces.vistas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
+import Productos.Producto;
+import java.util.List;
 
 public class PedidoPanel extends JPanel{
     JLabel packazon;
   	final private JLabel direcc_Destino = new JLabel("Dirección de destino: ");
 	  final private JTextField Destino_campo = new JTextField("Av de la Sierra", 15);
-    final private JLabel dniCliente = new JLabel("DNI Cliente: ");
-    final private JTextField dniCampo = new JTextField("XXXYYYZZZA", 10);
+    final private JLabel cifCliente = new JLabel("CIF Cliente: ");
+    final private JTextField cifCampo = new JTextField("XXXYYYZZZA", 10);
     final private JPanel dest = new JPanel();
     final private JLabel Urgente = new JLabel("Urgente: ");
     final private JCheckBox esUrgente = new JCheckBox();
@@ -23,6 +27,7 @@ public class PedidoPanel extends JPanel{
     final private JButton botonVolver = new JButton("Volver");
     final private JPanel panelBtnVolver = new JPanel();
 
+    private List<Producto> products = new ArrayList<>();
 
     public PedidoPanel() {
       createPic();
@@ -47,8 +52,8 @@ public class PedidoPanel extends JPanel{
       this.add(dest);
 
       /**DNI del cliente */
-      cliente.add(dniCliente);
-      cliente.add(dniCampo);
+      cliente.add(cifCliente);
+      cliente.add(cifCampo);
       this.add(cliente);
 
       /**Urgente */
@@ -87,5 +92,25 @@ public class PedidoPanel extends JPanel{
     public JButton getAddLote() {
       return this.botonAddLote;
     }
+
+    public String getDestino() {
+      return Destino_campo.getText();
+    }
+
+    public String getCIF() {
+      return cifCampo.getText();
+    }
+
+    public boolean isUrgent() {
+      return esUrgente.isSelected();
+    }
+
+    public void addProduct(Producto p) {
+      if (p!=null)
+        products.add(p);
+    }
 	
+    public List<Producto> getProductos() {
+      return this.products;
+    }
 }

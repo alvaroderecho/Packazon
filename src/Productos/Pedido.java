@@ -213,6 +213,14 @@ public class Pedido implements IInvoiceInfo{
             this.prodI.add(p);
     }
 
+    /**
+     * Añade un producto ya creado a un pedido
+     * @param p
+     */
+    public void addProduct(Producto p) {
+        if (p!= null) this.prods.add(p);
+    }
+
     /** Getters y Setters */
 
     /**
@@ -313,6 +321,10 @@ public class Pedido implements IInvoiceInfo{
         return pesototal;
     }
 
+    public int getCantidadProds() {
+        return prods.size();
+    }
+
     /**INVOICE METHODS */
     /**
      * Devuelve el logo de la compañía
@@ -353,7 +365,10 @@ public class Pedido implements IInvoiceInfo{
      * Devuelve el precio del pedido
      * @return
      */
-    public double getPrice() { return this.precio_total; }
+    public double getPrice() { 
+        calcularPrecioPedido();
+        return this.precio_total; 
+    }
 
 	public List<IProductInfo> getProducts() { return this.prodI;	}
     //NO NOS HA FUNCIONADO

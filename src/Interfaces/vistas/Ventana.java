@@ -22,6 +22,7 @@ public class Ventana extends JFrame {
 	private RegistrarRepartidorPanel registrarRepartidorPanel = new RegistrarRepartidorPanel();
 	private ConsultarCamionesPanel consultarCamionesPanel = new ConsultarCamionesPanel();
 	private RegistrarCamionPanel registrarCamionPanel = new RegistrarCamionPanel();
+	private VerPedidosPanel verPedidosPanel = new VerPedidosPanel();
 
 	/**Controladores */
 	private ControlLogin contLogin;
@@ -37,6 +38,7 @@ public class Ventana extends JFrame {
 	private ControlRegistrarRepartidor contRegistrarRepartidor;
 	private ControlConsultarCamiones contConsultarCamiones;
 	private ControlRegistrarCamion contRegistrarCamion;
+	private ControlVerPedidos contVerPedidos;
 
 	private JPanel contentPane;
 	
@@ -62,6 +64,7 @@ public class Ventana extends JFrame {
 		contentPane.add(consultarCamionesPanel, "consultarCamionesPanel");
 		contentPane.add(registrarRepartidorPanel, "registrarRepartidorPanel");
 		contentPane.add(registrarCamionPanel, "registrarCamionPanel");
+		contentPane.add(verPedidosPanel, "verPedidosPanel");
 	}
 
 	public void setControlador(Controlador controlador) {
@@ -91,6 +94,8 @@ public class Ventana extends JFrame {
 		registrarRepartidorPanel.setControlador(contRegistrarRepartidor);
 		this.contRegistrarCamion = controlador.getControlRegistrarCamion();
 		registrarCamionPanel.setControlador(contRegistrarCamion);
+		this.contVerPedidos = controlador.getControlVerPedidos();
+		verPedidosPanel.setControlador(contVerPedidos);
 	}
 
 	public LoginPanel getGetVistaLoginPanel() {
@@ -143,6 +148,10 @@ public class Ventana extends JFrame {
 
 	public RegistrarCamionPanel getGetVistaRegistrarCamionPanel() {
 		return this.registrarCamionPanel;
+	}
+
+	public VerPedidosPanel getGetVistaVerPedidosPanel() {
+		return this.verPedidosPanel;
 	}
 	
 	

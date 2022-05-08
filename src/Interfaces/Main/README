@@ -1,0 +1,21 @@
+################################
+        LOGIN
+################################
+
+Para poder usar la aplicación podemos registrarnos como Cliente,
+pulsando el botón Registrarse del Panel Login. 
+También podemos comenzar iniciando sesión como Operario con los parámetros: 
+    Username: operario
+    Password: 12345
+
+################################
+    FUNCIONALIDAD
+################################
+
+Como cliente podemos visualizar nuestros pedidos y editar nuestro perfil.
+Como operario podemos modificar tasas y máximos, consultar y registrar tanto
+camiones como repartidores, y podemos dar de alta pedidos. 
+Los algoritmos de realizar el plan de reparto con su empaquetado están codificados,
+pero no aplicados a la interfaz. Por falta de tiempo, ya que todas las interfaces con 
+sus controladores los ha hecho Álvaro Derecho.
+Como repartidor, además de loguearnos no se ha implementado más funcionalidad.

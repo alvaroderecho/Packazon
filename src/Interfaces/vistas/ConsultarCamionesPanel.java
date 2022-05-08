@@ -15,7 +15,7 @@ public class ConsultarCamionesPanel extends JPanel{
     final private JButton botonRegistrar = new JButton("Registrar Camión");
     final private JPanel panelRegistrar = new JPanel();
     final private JLabel lista = new JLabel("Lista de camiones:");
-final private Object[] titulos = {"Camiones", "Estado"/*, "Alta/Baja"*/};
+    final private Object[] titulos = {"Camiones", "Estado"/*, "Alta/Baja"*/};
     private DefaultTableModel modeloTabla = new DefaultTableModel(1, titulos.length);
     private JTable tabla;
     final private JPanel tablaPanel = new JPanel();

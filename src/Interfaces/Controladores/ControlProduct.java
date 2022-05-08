@@ -51,6 +51,7 @@ public class ControlProduct implements ActionListener {
             Producto p = Pedido.createProducto((int) vista.getUnidades().getValue(), (double) vista.getPeso().getValue(), 1,
                     asegu, vista.getDescription().getText(), (double) vista.getVolumen().getValue(), tp);
             JOptionPane.showMessageDialog(vista, p.toString() + salida);
+            frame.getGetVistaPedidoPanel().addProduct(p);
             frame.mostrarPanel("pedidoPanel");
         }
     }
