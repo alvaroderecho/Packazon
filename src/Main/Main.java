@@ -1,5 +1,4 @@
-package Interfaces.Main;
-
+package Main;
 import java.awt.EventQueue;
 import Interfaces.Controladores.*;
 import Interfaces.vistas.*;
