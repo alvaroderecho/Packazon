@@ -218,7 +218,8 @@ public class Pedido implements IInvoiceInfo{
      * @param p
      */
     public void addProduct(Producto p) {
-        if (p!= null) this.prods.add(p);
+        if(p!=null) this.prods.add(p);
+    
     }
 
     /** Getters y Setters */
@@ -321,6 +322,10 @@ public class Pedido implements IInvoiceInfo{
         return pesototal;
     }
 
+    /**
+     * funcion que devuelve la cantidad de productos
+     * @return
+     */
     public int getCantidadProds() {
         return prods.size();
     }
@@ -365,10 +370,7 @@ public class Pedido implements IInvoiceInfo{
      * Devuelve el precio del pedido
      * @return
      */
-    public double getPrice() { 
-        calcularPrecioPedido();
-        return this.precio_total; 
-    }
+    public double getPrice() { return this.precio_total; }
 
 	public List<IProductInfo> getProducts() { return this.prodI;	}
     //NO NOS HA FUNCIONADO
