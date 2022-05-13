@@ -24,18 +24,19 @@ public class PruebaEmpaquetado {
         Operario.darAltaCamion("3");
         Operario.darAltaPedido("UAM", "53853085", false);
         Operario.darAltaPedido("UAM", "53853085", false);
-        Operario.addLotePedido(0);
+        
+        Operario.addLotePedido(1);
        
-        Operario.addLoteLotePedido(0, 1);
-        Operario.addProductLotePedido(0,1, 1, 20, 1, false, "producto3", 10, TipoProducto.ALIMENTARIO);
-        Operario.addProductLotePedido(0,1, 1, 20, 1, false, "producto4", 10, TipoProducto.ALIMENTARIO);
-        Operario.addProductoLoteLotePedido(0, 1, 100,  1, 20, 1, false, "producto5", 10, TipoProducto.ESTANDAR);
-        Operario.addProductoPedido(0, 5, 10, false, "producto1", 10, TipoProducto.ESTANDAR);
-        Operario.addProductoPedido(1, 1, 20, false, "producto2", 10, TipoProducto.ESTANDAR);
-        Operario.addProductoPedido(1, 10, 4, false, "producto_fragil1", 10, TipoProducto.FRAGIL);
-        Operario.addProductoPedido(1, 1, 20, false, "producto congelado", 10, TipoProducto.CONGELADO);
-        Operario.addProductoPedido(1, 1, 20, false, "producto refrigerado", 10, TipoProducto.REFRIGERADO);
-
+        Operario.addLoteLotePedido(1, 1);
+        Operario.addProductLotePedido(1,1, 1, 20, 1, false, "producto3", 10, TipoProducto.ALIMENTARIO);
+        Operario.addProductLotePedido(1,1, 1, 20, 1, false, "producto4", 10, TipoProducto.ALIMENTARIO);
+        Operario.addProductoLoteLotePedido(1, 1, 100,  1, 20, 1, false, "producto5", 10, TipoProducto.ESTANDAR);
+        Operario.addProductoPedido(1, 5, 10, false, "producto1", 10, TipoProducto.ESTANDAR);
+        Operario.addProductoPedido(2, 1, 20, false, "producto2", 10, TipoProducto.ESTANDAR);
+        Operario.addProductoPedido(2, 10, 4, false, "producto_fragil1", 10, TipoProducto.FRAGIL);
+        Operario.addProductoPedido(2, 1, 20, false, "producto congelado", 10, TipoProducto.CONGELADO);
+        Operario.addProductoPedido(2, 1, 20, false, "producto refrigerado", 10, TipoProducto.REFRIGERADO);
+        System.out.println(Sistema.getPedidos().toString());
         Operario.realizarEmpaquetado();
         System.out.println(Operario.toStringPlan());
         Operario.darAltaPedido("UAM1", "53853085", false);
